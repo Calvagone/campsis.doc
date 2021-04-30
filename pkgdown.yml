@@ -1,0 +1,17 @@
+pandoc: 2.11.2
+pkgdown: 1.6.1
+pkgdown_sha: ~
+articles:
+  pmxsim: pmxsim.html
+  v01_dataset: v01_dataset.html
+  v02_uncertainties: v02_uncertainties.html
+  v03_covariates: v03_covariates.html
+  v04_bioavailability: v04_bioavailability.html
+  v05_lag_time: v05_lag_time.html
+  v06_infusions: v06_infusions.html
+  v07_iov: v07_iov.html
+  v08_initial_conditions: v08_initial_conditions.html
+  v09_replicate_study: v09_replicate_study.html
+  v10_scenarios: v10_scenarios.html
+last_built: 2021-04-30T13:37Z
+
