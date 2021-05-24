@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.2</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
       </span>
     </div>
 
@@ -127,11 +127,19 @@
     <li>
       <a href="../articles/v10_scenarios.html">Scenarios</a>
     </li>
+    <li>
+      <a href="../articles/v11_events.html">Events</a>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Calvagone/pmxsim/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -146,7 +154,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Simulate function.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate.R'><code>R/simulate.R</code></a></small>
     <div class="hidden name"><code>simulate.Rd</code></div>
     </div>
 
@@ -154,32 +162,67 @@
     <p>Simulate function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>simulate</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>dataset</span>, <span class='va'>dest</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>model</th>
-      <td><p>generic model</p></td>
+      <td><p>generic PMX model</p></td>
     </tr>
     <tr>
       <th>dataset</th>
-      <td><p>generic dataset</p></td>
+      <td><p>PMX dataset or 2-dimensional table</p></td>
     </tr>
     <tr>
       <th>dest</th>
-      <td><p>destination simulation engine</p></td>
+      <td><p>destination simulation engine, default is 'RxODE'</p></td>
+    </tr>
+    <tr>
+      <th>events</th>
+      <td><p>interruption events</p></td>
+    </tr>
+    <tr>
+      <th>tablefun</th>
+      <td><p>function or lambda formula to apply on exported 2-dimensional dataset</p></td>
+    </tr>
+    <tr>
+      <th>outvars</th>
+      <td><p>variables to output in resulting dataframe</p></td>
+    </tr>
+    <tr>
+      <th>outfun</th>
+      <td><p>function or lambda formula to apply on resulting dataframe after each replicate</p></td>
+    </tr>
+    <tr>
+      <th>seed</th>
+      <td><p>seed value</p></td>
+    </tr>
+    <tr>
+      <th>replicates</th>
+      <td><p>number of replicates, default is 1</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>optional arguments</p></td>
+      <td><p>optional arguments like declare</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>specific object depending on given destination</p>
+    <p>dataframe with all results</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

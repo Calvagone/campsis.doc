@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.2</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
       </span>
     </div>
 
@@ -126,11 +126,19 @@
     <li>
       <a href="../articles/v10_scenarios.html">Scenarios</a>
     </li>
+    <li>
+      <a href="../articles/v11_events.html">Events</a>
+    </li>
   </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Calvagone/pmxsim/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -184,7 +192,7 @@
         <td>
           <p><code><a href="Covariate.html">Covariate()</a></code> </p>
         </td>
-        <td><p>Create a covariate.</p></td>
+        <td><p>Create a fixed covariate.</p></td>
       </tr><tr>
         
         <td>
@@ -216,6 +224,12 @@
         </td>
         <td><p>Create an observations list. Please note that the provided 'times' will 
 automatically be sorted. Duplicated times will be removed.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="TimeVaryingCovariate.html">TimeVaryingCovariate()</a></code> </p>
+        </td>
+        <td><p>Create a time-varying covariate.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -296,6 +310,31 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
           <p><code><a href="UniformDistribution.html">UniformDistribution()</a></code> </p>
         </td>
         <td><p>Create an uniform distribution.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-events" class="hasAnchor"><a href="#section-events" class="anchor"></a>Events</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="Event.html">Event()</a></code> </p>
+        </td>
+        <td><p>Create an interruption event.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Events.html">Events()</a></code> </p>
+        </td>
+        <td><p>Create a list of interruption events.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -455,13 +494,25 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
         <td>
           <p><code><a href="getCovariateNames.html">getCovariateNames()</a></code> </p>
         </td>
-        <td><p>Get covariate names.</p></td>
+        <td><p>Get all covariate names (fixed covariates + time-varying covariates).</p></td>
       </tr><tr>
         
         <td>
           <p><code><a href="getIOVNames.html">getIOVNames()</a></code> </p>
         </td>
         <td><p>Get IOV names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getTimes.html">getTimes()</a></code> </p>
+        </td>
+        <td><p>Get all distinct times across the events list.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getTimeVaryingCovariateNames.html">getTimeVaryingCovariateNames()</a></code> </p>
+        </td>
+        <td><p>Get all time-varying covariate names.</p></td>
       </tr><tr>
         
         <td>

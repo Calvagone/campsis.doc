@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.2</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
       </span>
     </div>
 
@@ -86,10 +86,20 @@
     <li>
       <a href="../articles/v10_scenarios.html">Scenarios</a>
     </li>
+    <li>
+      <a href="../articles/v11_events.html">Events</a>
+    </li>
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Calvagone/pmxsim/">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,13 +109,13 @@
 
       
 
-      </header><script src="v01_dataset_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
+      </header><script src="v01_dataset_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Create your dataset</h1>
             
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/Calvagone/pmxsim/blob/master/vignettes/v01_dataset.Rmd"><code>vignettes/v01_dataset.Rmd</code></a></small>
       <div class="hidden name"><code>v01_dataset.Rmd</code></div>
 
     </div>
@@ -128,8 +138,10 @@
 <p>See all methods that can be applied on a dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] add               export            getCovariateNames getIOVNames      
-## [5] length            simulate         
+<pre><code>## [1] add                          export                      
+## [3] getCovariateNames            getIOVNames                 
+## [5] getTimeVaryingCovariateNames length                      
+## [7] simulate                    
 ## see '?methods' for accessing help and source code</code></pre>
 <p>Let’s take a closer look at the <code>add</code> method. The following method shows all classes that can be added to a dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
