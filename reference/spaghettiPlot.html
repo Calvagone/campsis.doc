@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pre-process events. — preprocessEvents • pmxsim</title>
+<title>Spaghetti plot. — spaghettiPlot • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Pre-process events. — preprocessEvents" />
-<meta property="og:description" content="Pre-process events." />
+<meta property="og:title" content="Spaghetti plot. — spaghettiPlot" />
+<meta property="og:description" content="Spaghetti plot." />
 
 
 
@@ -153,26 +153,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pre-process events.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate_preprocess.R'><code>R/simulate_preprocess.R</code></a></small>
-    <div class="hidden name"><code>preprocessEvents.Rd</code></div>
+    <h1>Spaghetti plot.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/default_plot.R'><code>R/default_plot.R</code></a></small>
+    <div class="hidden name"><code>spaghettiPlot.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pre-process events.</p>
+    <p>Spaghetti plot.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>preprocessEvents</span><span class='op'>(</span><span class='va'>events</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>spaghettiPlot</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>output</span>, scenarios <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>events</th>
-      <td><p>interruption events</p></td>
+      <th>x</th>
+      <td><p>data frame</p></td>
+    </tr>
+    <tr>
+      <th>output</th>
+      <td><p>variable to show</p></td>
+    </tr>
+    <tr>
+      <th>scenarios</th>
+      <td><p>scenarios</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>plot</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

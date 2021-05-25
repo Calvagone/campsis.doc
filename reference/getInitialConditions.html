@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pre-process events. — preprocessEvents • pmxsim</title>
+<title>Get initial conditions at simulation start-up. — getInitialConditions • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Pre-process events. — preprocessEvents" />
-<meta property="og:description" content="Pre-process events." />
+<meta property="og:title" content="Get initial conditions at simulation start-up. — getInitialConditions" />
+<meta property="og:description" content="Get initial conditions at simulation start-up." />
 
 
 
@@ -153,26 +153,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pre-process events.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate_preprocess.R'><code>R/simulate_preprocess.R</code></a></small>
-    <div class="hidden name"><code>preprocessEvents.Rd</code></div>
+    <h1>Get initial conditions at simulation start-up.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate.R'><code>R/simulate.R</code></a></small>
+    <div class="hidden name"><code>getInitialConditions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pre-process events.</p>
+    <p>Get initial conditions at simulation start-up.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>preprocessEvents</span><span class='op'>(</span><span class='va'>events</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>getInitialConditions</span><span class='op'>(</span><span class='va'>subdataset</span>, <span class='va'>iteration</span>, <span class='va'>cmtNames</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>events</th>
-      <td><p>interruption events</p></td>
+      <th>subdataset</th>
+      <td><p>subdataset to simulate</p></td>
+    </tr>
+    <tr>
+      <th>iteration</th>
+      <td><p>current iteration</p></td>
+    </tr>
+    <tr>
+      <th>cmtNames</th>
+      <td><p>compartment names</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>named numeric vector with the new initial conditions</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

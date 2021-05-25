@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Pre-process events. — preprocessEvents • pmxsim</title>
+<title>Preprocess arguments of the simulate method. — processSimulateArguments • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Pre-process events. — preprocessEvents" />
-<meta property="og:description" content="Pre-process events." />
+<meta property="og:title" content="Preprocess arguments of the simulate method. — processSimulateArguments" />
+<meta property="og:description" content="Preprocess arguments of the simulate method." />
 
 
 
@@ -153,26 +153,45 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Pre-process events.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate_preprocess.R'><code>R/simulate_preprocess.R</code></a></small>
-    <div class="hidden name"><code>preprocessEvents.Rd</code></div>
+    <h1>Preprocess arguments of the simulate method.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate.R'><code>R/simulate.R</code></a></small>
+    <div class="hidden name"><code>processSimulateArguments.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Pre-process events.</p>
+    <p>Preprocess arguments of the simulate method.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>preprocessEvents</span><span class='op'>(</span><span class='va'>events</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>processSimulateArguments</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>dataset</span>, <span class='va'>dest</span>, <span class='va'>outvars</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>events</th>
-      <td><p>interruption events</p></td>
+      <th>model</th>
+      <td><p>PMX model</p></td>
+    </tr>
+    <tr>
+      <th>dataset</th>
+      <td><p>dataset, data.frame form</p></td>
+    </tr>
+    <tr>
+      <th>dest</th>
+      <td><p>destination engine</p></td>
+    </tr>
+    <tr>
+      <th>outvars</th>
+      <td><p>outvars</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>all other arguments</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a simulation configuration</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
