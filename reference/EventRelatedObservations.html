@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get all distinct times for the specified object. — getTimes • pmxsim</title>
+<title>Create an event-related observations list. Please note that the provided 'times' will 
+automatically be sorted. Duplicated times will be removed. — EventRelatedObservations • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="Get all distinct times for the specified object. — getTimes" />
-<meta property="og:description" content="Get all distinct times for the specified object." />
+<meta property="og:title" content="Create an event-related observations list. Please note that the provided 'times' will 
+automatically be sorted. Duplicated times will be removed. — EventRelatedObservations" />
+<meta property="og:description" content="Create an event-related observations list. Please note that the provided 'times' will 
+automatically be sorted. Duplicated times will be removed." />
 
 
 
@@ -153,29 +156,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get all distinct times for the specified object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/generic.R'><code>R/generic.R</code></a></small>
-    <div class="hidden name"><code>getTimes.Rd</code></div>
+    <h1>Create an event-related observations list. Please note that the provided 'times' will 
+automatically be sorted. Duplicated times will be removed.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/observations.R'><code>R/observations.R</code></a></small>
+    <div class="hidden name"><code>EventRelatedObservations.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get all distinct times for the specified object.</p>
+    <p>Create an event-related observations list. Please note that the provided 'times' will 
+automatically be sorted. Duplicated times will be removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getTimes</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>EventRelatedObservations</span><span class='op'>(</span><span class='va'>times</span>, compartment <span class='op'>=</span> <span class='cn'>NA</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>any object</p></td>
+      <th>times</th>
+      <td><p>observation times, numeric vector</p></td>
+    </tr>
+    <tr>
+      <th>compartment</th>
+      <td><p>compartment index, integer</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>numeric vector with all unique times, sorted</p>
+    <p>observations</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
