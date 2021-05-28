@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an event iteration object. — EventIteration • pmxsim</title>
+<title>Remove initial conditions. — removeInitialConditions • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create an event iteration object. — EventIteration" />
-<meta property="og:description" content="Create an event iteration object." />
+<meta property="og:title" content="Remove initial conditions. — removeInitialConditions" />
+<meta property="og:description" content="Remove initial conditions." />
 
 
 
@@ -153,45 +153,29 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an event iteration object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/event_logic.R'><code>R/event_logic.R</code></a></small>
-    <div class="hidden name"><code>EventIteration.Rd</code></div>
+    <h1>Remove initial conditions.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/simulate.R'><code>R/simulate.R</code></a></small>
+    <div class="hidden name"><code>removeInitialConditions.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create an event iteration object.</p>
+    <p>Remove initial conditions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>EventIteration</span><span class='op'>(</span><span class='va'>index</span>, <span class='va'>start</span>, <span class='va'>end</span>, inits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span>, multiple <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>removeInitialConditions</span><span class='op'>(</span><span class='va'>model</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>index</th>
-      <td><p>iteration index, starts at 1</p></td>
-    </tr>
-    <tr>
-      <th>start</th>
-      <td><p>iteration start time</p></td>
-    </tr>
-    <tr>
-      <th>end</th>
-      <td><p>iteration end time</p></td>
-    </tr>
-    <tr>
-      <th>inits</th>
-      <td><p>initial values for all subjects, data frame</p></td>
-    </tr>
-    <tr>
-      <th>multiple</th>
-      <td><p>TRUE if multiple iterations (i.e. simulation needs to stopped at least once), FALSE otherwise</p></td>
+      <th>model</th>
+      <td><p>PMX model</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an event iteration object</p>
+    <p>same model without initial conditions</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
