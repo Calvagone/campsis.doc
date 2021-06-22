@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
 
       
 
-      </header><script src="v01_dataset_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="v01_dataset_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Create your dataset</h1>
@@ -140,8 +140,9 @@
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] add                          export                      
 ## [3] getCovariateNames            getIOVNames                 
-## [5] getTimes                     getTimeVaryingCovariateNames
-## [7] length                       simulate                    
+## [5] getOccasionNames             getTimes                    
+## [7] getTimeVaryingCovariateNames length                      
+## [9] simulate                    
 ## see '?methods' for accessing help and source code</code></pre>
 <p>Let’s take a closer look at the <code>add</code> method. The following method shows all classes that can be added to a dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -152,6 +153,7 @@
 ## object="dataset", x="dataset_config"
 ## object="dataset", x="list"
 ## object="dataset", x="observations"
+## object="dataset", x="occasion"
 ## object="dataset", x="treatment_entry"
 ## object="dataset", x="treatment_iov"</code></pre>
 <p>In the next sections we’ll see how we can add boluses and infusions, which are both treatment entries:</p>
@@ -191,19 +193,21 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
 <span class="va">table</span></code></pre></div>
-<pre><code>##    ID ARM TIME EVID MDV  AMT CMT RATE DOSENO
-## 1   1   0  0.0    1   1 1000   1    0      1
-## 2   1   0  0.5    0   0   NA   1    0     NA
-## 3   1   0  0.5    1   1 1000   1   NA      2
-## 4   1   0  1.0    0   0   NA   1    0     NA
-## 5   2   0  0.0    1   1 1000   1    0      1
-## 6   2   0  0.5    0   0   NA   1    0     NA
-## 7   2   0  0.5    1   1 1000   1   NA      2
-## 8   2   0  1.0    0   0   NA   1    0     NA
-## 9   3   0  0.0    1   1 1000   1    0      1
-## 10  3   0  0.5    0   0   NA   1    0     NA
-## 11  3   0  0.5    1   1 1000   1   NA      2
-## 12  3   0  1.0    0   0   NA   1    0     NA</code></pre>
+<pre><code>## # A tibble: 12 x 9
+##       ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
+##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;
+##  1     1     0   0       1     1  1000     1     0      1
+##  2     1     0   0.5     0     0    NA     1     0     NA
+##  3     1     0   0.5     1     1  1000     1    NA      2
+##  4     1     0   1       0     0    NA     1     0     NA
+##  5     2     0   0       1     1  1000     1     0      1
+##  6     2     0   0.5     0     0    NA     1     0     NA
+##  7     2     0   0.5     1     1  1000     1    NA      2
+##  8     2     0   1       0     0    NA     1     0     NA
+##  9     3     0   0       1     1  1000     1     0      1
+## 10     3     0   0.5     0     0    NA     1     0     NA
+## 11     3     0   0.5     1     1  1000     1    NA      2
+## 12     3     0   1       0     0    NA     1     0     NA</code></pre>
 <p>A few explanations need to be given here regarding the following column names:</p>
 <ul>
 <li>ID: this is the subject ID, it always starts at 1. ID’s are consecutive in <code>pmxsim</code>
@@ -240,22 +244,24 @@
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
 <span class="va">table</span></code></pre></div>
-<pre><code>##    ID ARM TIME EVID MDV  AMT CMT RATE DOSENO
-## 1   1   1  0.0    1   1 1000   1    0      1
-## 2   1   1  0.5    0   0   NA   1    0     NA
-## 3   1   1  1.0    0   0   NA   1    0     NA
-## 4   2   1  0.0    1   1 1000   1    0      1
-## 5   2   1  0.5    0   0   NA   1    0     NA
-## 6   2   1  1.0    0   0   NA   1    0     NA
-## 7   3   2  0.0    1   1 2000   1    0      1
-## 8   3   2  1.0    0   0   NA   1    0     NA
-## 9   3   2  1.5    0   0   NA   1    0     NA
-## 10  4   2  0.0    1   1 2000   1    0      1
-## 11  4   2  1.0    0   0   NA   1    0     NA
-## 12  4   2  1.5    0   0   NA   1    0     NA
-## 13  5   2  0.0    1   1 2000   1    0      1
-## 14  5   2  1.0    0   0   NA   1    0     NA
-## 15  5   2  1.5    0   0   NA   1    0     NA</code></pre>
+<pre><code>## # A tibble: 15 x 9
+##       ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
+##    &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;
+##  1     1     1   0       1     1  1000     1     0      1
+##  2     1     1   0.5     0     0    NA     1     0     NA
+##  3     1     1   1       0     0    NA     1     0     NA
+##  4     2     1   0       1     1  1000     1     0      1
+##  5     2     1   0.5     0     0    NA     1     0     NA
+##  6     2     1   1       0     0    NA     1     0     NA
+##  7     3     2   0       1     1  2000     1     0      1
+##  8     3     2   1       0     0    NA     1     0     NA
+##  9     3     2   1.5     0     0    NA     1     0     NA
+## 10     4     2   0       1     1  2000     1     0      1
+## 11     4     2   1       0     0    NA     1     0     NA
+## 12     4     2   1.5     0     0    NA     1     0     NA
+## 13     5     2   0       1     1  2000     1     0      1
+## 14     5     2   1       0     0    NA     1     0     NA
+## 15     5     2   1.5     0     0    NA     1     0     NA</code></pre>
 </div>
   </div>
 

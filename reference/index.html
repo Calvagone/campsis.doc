@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -224,6 +224,13 @@
         </td>
         <td><p>Create an observations list. Please note that the provided 'times' will 
 automatically be sorted. Duplicated times will be removed.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="Occasion.html">Occasion()</a></code> </p>
+        </td>
+        <td><p>Create an occasion mapping. Occasions can only be defined at treatment times, via
+the dose numbers.</p></td>
       </tr><tr>
         
         <td>
@@ -449,6 +456,12 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="occasion-class.html">occasion-class</a></code> </p>
+        </td>
+        <td><p>Occasion class.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="protocol-class.html">protocol-class</a></code> </p>
         </td>
         <td><p>Protocol class.</p></td>
@@ -504,6 +517,12 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="getOccasionNames.html">getOccasionNames()</a></code> </p>
+        </td>
+        <td><p>Get all occasion names.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="getTimes.html">getTimes()</a></code> </p>
         </td>
         <td><p>Get all distinct times for the specified object.</p></td>
@@ -519,6 +538,37 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
           <p><code><a href="retrieveParameterValue.html">retrieveParameterValue()</a></code> </p>
         </td>
         <td><p>Retrieve the parameter value (standardised) for the specified parameter name.</p></td>
+      </tr>
+    </tbody><tbody>
+      <tr>
+        <th colspan="2">
+          <h2 id="section-seed-utilities" class="hasAnchor"><a href="#section-seed-utilities" class="anchor"></a>Seed utilities</h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="getSeedForDatasetExport.html">getSeedForDatasetExport()</a></code> </p>
+        </td>
+        <td><p>Get seed for dataset export.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getSeedForIteration.html">getSeedForIteration()</a></code> </p>
+        </td>
+        <td><p>Get seed for iteration.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getSeedForParametersSampling.html">getSeedForParametersSampling()</a></code> </p>
+        </td>
+        <td><p>Get seed for parameter uncertainty sampling.</p></td>
       </tr>
     </tbody><tbody>
       <tr>

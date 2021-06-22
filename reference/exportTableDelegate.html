@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -162,7 +162,16 @@
     <p>Export table delegate.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>exportTableDelegate</span><span class='op'>(</span><span class='va'>model</span>, <span class='va'>dataset</span>, <span class='va'>dest</span>, <span class='va'>events</span>, <span class='va'>seed</span>, <span class='va'>tablefun</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>exportTableDelegate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  <span class='va'>dest</span>,
+  <span class='va'>events</span>,
+  <span class='va'>seed</span>,
+  <span class='va'>tablefun</span>,
+  <span class='va'>nocb</span>,
+  <span class='va'>nocbvars</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,6 +199,10 @@
     <tr>
       <th>tablefun</th>
       <td><p>function or lambda formula to apply on exported 2-dimensional dataset</p></td>
+    </tr>
+    <tr>
+      <th>nocb</th>
+      <td><p>next-observation carried backward mode (NOCB), default value is TRUE for mrgsolve, FALSE for RxODE</p></td>
     </tr>
     </table>
 

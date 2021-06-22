@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -172,6 +172,7 @@
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
   seed <span class='op'>=</span> <span class='cn'>NULL</span>,
   replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
   <span class='va'>...</span>
 <span class='op'>)</span></pre>
 
@@ -213,6 +214,10 @@
     <tr>
       <th>replicates</th>
       <td><p>number of replicates, default is 1</p></td>
+    </tr>
+    <tr>
+      <th>nocb</th>
+      <td><p>next-observation carried backward mode (NOCB), default value is TRUE for mrgsolve, FALSE for RxODE</p></td>
     </tr>
     <tr>
       <th>...</th>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -109,7 +109,7 @@
 
       
 
-      </header><script src="v04_bioavailability_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
+      </header><script src="v04_bioavailability_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Bioavailability</h1>
@@ -226,13 +226,15 @@
 <p>Let’s have a look at the dataset, in its table form, and if we look at the doses only:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">EVID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code>##   ID ARM TIME EVID MDV      AMT CMT RATE DOSENO
-## 1  1   0    0    1   1 804.4110   1    0      1
-## 2  2   0    0    1   1 963.1035   1    0      1
-## 3  3   0    0    1   1 621.1300   1    0      1
-## 4  4   0    0    1   1 707.1470   1    0      1
-## 5  5   0    0    1   1 632.1011   1    0      1
-## 6  6   0    0    1   1 719.1559   1    0      1</code></pre>
+<pre><code>## # A tibble: 6 x 9
+##      ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
+##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;
+## 1     1     0     0     1     1  705.     1     0      1
+## 2     2     0     0     1     1  764.     1     0      1
+## 3     3     0     0     1     1  690.     1     0      1
+## 4     4     0     0     1     1  879.     1     0      1
+## 5     5     0     0     1     1  775.     1     0      1
+## 6     6     0     0     1     1  691.     1     0      1</code></pre>
 <p>Finally, we can simulate the original model using this new dataset.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_f1</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>

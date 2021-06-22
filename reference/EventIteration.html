@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.3</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
       </span>
     </div>
 
@@ -162,7 +162,7 @@
     <p>Create an event iteration object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>EventIteration</span><span class='op'>(</span><span class='va'>index</span>, <span class='va'>start</span>, <span class='va'>end</span>, inits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span>, multiple <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>EventIteration</span><span class='op'>(</span><span class='va'>index</span>, <span class='va'>start</span>, <span class='va'>end</span>, inits <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>maxIndex</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,8 +184,8 @@
       <td><p>initial values for all subjects, data frame</p></td>
     </tr>
     <tr>
-      <th>multiple</th>
-      <td><p>TRUE if multiple iterations (i.e. simulation needs to stopped at least once), FALSE otherwise</p></td>
+      <th>maxIndex</th>
+      <td><p>the last iteration index</p></td>
     </tr>
     </table>
 
