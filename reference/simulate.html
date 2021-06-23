@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -163,6 +163,81 @@
     </div>
 
     <pre class="usage"><span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,dataset,character,events,`function`,character,`function`,integer,integer,logical</span>
+<span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,tbl_df,character,events,`function`,character,`function`,integer,integer,logical</span>
+<span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,data.frame,character,events,`function`,character,`function`,integer,integer,logical</span>
+<span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,tbl_df,rxode_engine,events,`function`,character,`function`,integer,integer,logical</span>
+<span class='fu'>simulate</span><span class='op'>(</span>
+  <span class='va'>model</span>,
+  <span class='va'>dataset</span>,
+  dest <span class='op'>=</span> <span class='cn'>NULL</span>,
+  events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
+  outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
+  seed <span class='op'>=</span> <span class='cn'>NULL</span>,
+  replicates <span class='op'>=</span> <span class='fl'>1</span>,
+  nocb <span class='op'>=</span> <span class='cn'>NULL</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,tbl_df,mrgsolve_engine,events,`function`,character,`function`,integer,integer,logical</span>
+<span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,

@@ -6,7 +6,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create IOV. — IOV • pmxsim</title>
+<title>Define inter-occasion variability (IOV) into the dataset. A new variable of name
+'colname' will be output into the dataset and will vary at each dose number
+according to the given distribution. — IOV • pmxsim</title>
 
 
 <!-- jquery -->
@@ -39,8 +41,12 @@
 
 
 
-<meta property="og:title" content="Create IOV. — IOV" />
-<meta property="og:description" content="Create IOV." />
+<meta property="og:title" content="Define inter-occasion variability (IOV) into the dataset. A new variable of name
+'colname' will be output into the dataset and will vary at each dose number
+according to the given distribution. — IOV" />
+<meta property="og:description" content="Define inter-occasion variability (IOV) into the dataset. A new variable of name
+'colname' will be output into the dataset and will vary at each dose number
+according to the given distribution." />
 
 
 
@@ -72,7 +78,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -153,16 +159,20 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create IOV.</h1>
+    <h1>Define inter-occasion variability (IOV) into the dataset. A new variable of name
+'colname' will be output into the dataset and will vary at each dose number
+according to the given distribution.</h1>
     <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/treatment_iov.R'><code>R/treatment_iov.R</code></a></small>
     <div class="hidden name"><code>IOV.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create IOV.</p>
+    <p>Define inter-occasion variability (IOV) into the dataset. A new variable of name
+'colname' will be output into the dataset and will vary at each dose number
+according to the given distribution.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>IOV</span><span class='op'>(</span><span class='va'>colname</span>, <span class='va'>distribution</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>IOV</span><span class='op'>(</span><span class='va'>colname</span>, <span class='va'>distribution</span>, doseNumbers <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -174,6 +184,10 @@
     <tr>
       <th>distribution</th>
       <td><p>distribution</p></td>
+    </tr>
+    <tr>
+      <th>doseNumbers</th>
+      <td><p>dose numbers, if provided, IOV is generated at these doses only. By default, IOV is generated for all doses.</p></td>
     </tr>
     </table>
 

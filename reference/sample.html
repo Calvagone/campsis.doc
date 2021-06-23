@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.5</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
       </span>
     </div>
 
@@ -154,7 +154,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sample generic object.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/generic.R'><code>R/generic.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/pmxsim/blob/master/R/generic.R'><code>R/generic.R</code></a>, <a href='https://github.com/Calvagone/pmxsim/blob/master/R/distribution.R'><code>R/distribution.R</code></a>, <a href='https://github.com/Calvagone/pmxsim/blob/master/R/treatment_entry.R'><code>R/treatment_entry.R</code></a>, and 3 more</small>
     <div class="hidden name"><code>sample.Rd</code></div>
     </div>
 
@@ -162,7 +162,34 @@
     <p>Sample generic object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for constant_distribution,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span>
+
+<span class='co'># S4 method for fixed_distribution,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span>
+
+<span class='co'># S4 method for function_distribution,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span>
+
+<span class='co'># S4 method for bootstrap_distribution,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span>
+
+<span class='co'># S4 method for bolus,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for infusion,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for observations,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S4 method for covariate,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span>
+
+<span class='co'># S4 method for pmx_model,integer</span>
+<span class='fu'>sample</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>n</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
