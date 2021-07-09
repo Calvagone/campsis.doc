@@ -2,7 +2,7 @@ pandoc: 2.11.4
 pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
-  pmxsim: pmxsim.html
+  campsis: campsis.html
   v01_dataset: v01_dataset.html
   v02_uncertainties: v02_uncertainties.html
   v03_covariates: v03_covariates.html
@@ -14,5 +14,5 @@ articles:
   v09_replicate_study: v09_replicate_study.html
   v10_scenarios: v10_scenarios.html
   v11_events: v11_events.html
-last_built: 2021-06-23T13:57Z
+last_built: 2021-07-09T08:00Z
 

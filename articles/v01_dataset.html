@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Create your dataset • pmxsim</title>
+<title>Create your dataset • campsis</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Create your dataset">
-<meta property="og:description" content="pmxsim">
+<meta property="og:description" content="campsis">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -30,8 +30,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
+        <a class="navbar-link" href="../index.html">campsis</a>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/pmxsim.html">Get started</a>
+  <a href="../articles/campsis.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -94,7 +94,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Calvagone/pmxsim/">
+  <a href="https://github.com/Calvagone/campsis/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -115,7 +115,7 @@
       <h1 data-toc-skip>Create your dataset</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/Calvagone/pmxsim/blob/master/vignettes/v01_dataset.Rmd"><code>vignettes/v01_dataset.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Calvagone/campsis/blob/master/vignettes/v01_dataset.Rmd"><code>vignettes/v01_dataset.Rmd</code></a></small>
       <div class="hidden name"><code>v01_dataset.Rmd</code></div>
 
     </div>
@@ -147,7 +147,7 @@
 <p>Let’s take a closer look at the <code>add</code> method. The following method shows all classes that can be added to a dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">showMethods</span><span class="op">(</span><span class="st">"add"</span>, classes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## Function: add (package pmxmod)
+<pre><code>## Function: add (package campsismod)
 ## object="dataset", x="arm"
 ## object="dataset", x="covariate"
 ## object="dataset", x="dataset_config"
@@ -163,7 +163,7 @@
 <a href="#add-a-bolus" class="anchor"></a>Add a bolus</h3>
 <p>A bolus can be created using the constructor <code>Bolus</code> and added to the dataset:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>By default, it will be injected into the first compartment (CMT=1). If another compartment needs to be used, the <code>compartment</code> argument may be used as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, compartment<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
@@ -174,7 +174,7 @@
 <a href="#add-an-infusion" class="anchor"></a>Add an infusion</h3>
 <p>An infusion can be created using the constructor <code>Infusion</code> and added to the dataset:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0.5</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0.5</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>As previously, the default compartment is the first compartment.</p>
 <p>Infusion rate (<code>rate</code> argument) or duration (<code>duration</code> argument), bioavailabilities (<code>f</code> argument) and lag times (<code>lag</code> argument) can be implemented as well, in the dataset. This will be illustrated in other vignettes.</p>
 </div>
@@ -183,7 +183,7 @@
 <a href="#add-observations" class="anchor"></a>Add observations</h3>
 <p>Observations can be created using the constructor <code>Observations</code> and added to the dataset:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>The default compartment is the first one. Although the compartment number is not useful for simulations (as simulation engines are able to look at all <code>DV</code> at once), it can still be useful when exporting a table for a modeling tool.</p>
 </div>
 <div id="export-dataset" class="section level3">
@@ -191,7 +191,7 @@
 <a href="#export-dataset" class="anchor"></a>Export dataset</h3>
 <p>So far so good! The dataset contains 5 subjects, 1 bolus and 1 infusion. We are going to export it to a 2-dimensional table. This step is done AUTOMATICALLY by <code>pmxsim</code> when you simulate your model.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">export</span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
 <span class="va">table</span></code></pre></div>
 <pre><code>## # A tibble: 12 x 9
 ##       ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
@@ -227,22 +227,22 @@
 <span class="va">arm2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Arm.html">Arm</a></span><span class="op">(</span>id<span class="op">=</span><span class="fl">2</span>, subjects<span class="op">=</span><span class="fl">3</span><span class="op">)</span></code></pre></div>
 <p>Let’s create 2 different treatments:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">arm1</span> <span class="op">&lt;-</span> <span class="va">arm1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
-<span class="va">arm2</span> <span class="op">&lt;-</span> <span class="va">arm2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">2000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">arm1</span> <span class="op">&lt;-</span> <span class="va">arm1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
+<span class="va">arm2</span> <span class="op">&lt;-</span> <span class="va">arm2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">2000</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Observations may also differ:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">arm1</span> <span class="op">&lt;-</span> <span class="va">arm1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="va">arm2</span> <span class="op">&lt;-</span> <span class="va">arm2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">arm1</span> <span class="op">&lt;-</span> <span class="va">arm1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">arm2</span> <span class="op">&lt;-</span> <span class="va">arm2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Let’s now add these 2 arms into a fresh dataset:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>We can check how many subjects are part of this dataset:</p>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## [1] 5</code></pre>
 <p>The resulting exported table is as follows:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">export</span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span>
 <span class="va">table</span></code></pre></div>
 <pre><code>## # A tibble: 15 x 9
 ##       ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO

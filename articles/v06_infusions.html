@@ -5,14 +5,14 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Infusions • pmxsim</title>
+<title>Infusions • campsis</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
 <script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Infusions">
-<meta property="og:description" content="pmxsim">
+<meta property="og:description" content="campsis">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -30,8 +30,8 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">pmxsim</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.6</span>
+        <a class="navbar-link" href="../index.html">campsis</a>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7</span>
       </span>
     </div>
 
@@ -44,7 +44,7 @@
   </a>
 </li>
 <li>
-  <a href="../articles/pmxsim.html">Get started</a>
+  <a href="../articles/campsis.html">Get started</a>
 </li>
 <li>
   <a href="../reference/index.html">Reference</a>
@@ -94,7 +94,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Calvagone/pmxsim/">
+  <a href="https://github.com/Calvagone/campsis/">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -115,7 +115,7 @@
       <h1 data-toc-skip>Infusions</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/Calvagone/pmxsim/blob/master/vignettes/v06_infusions.Rmd"><code>vignettes/v06_infusions.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Calvagone/campsis/blob/master/vignettes/v06_infusions.Rmd"><code>vignettes/v06_infusions.Rmd</code></a></small>
       <div class="hidden name"><code>v06_infusions.Rmd</code></div>
 
     </div>
@@ -137,14 +137,14 @@
 <p>For this example, we’re going to define a lag time <code>D1</code> for this absorption compartment.</p>
 <p>First let’s create a new parameter <code>D1</code>, log-normally distributed with a median of 5 hours and 20% CV.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/Theta.html">Theta</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"D1"</span>, value<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/Omega.html">Omega</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"D1"</span>, value<span class="op">=</span><span class="fl">20</span>, type<span class="op">=</span><span class="st">"cv%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">Theta</span><span class="op">(</span>name<span class="op">=</span><span class="st">"D1"</span>, value<span class="op">=</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>
+<span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">Omega</span><span class="op">(</span>name<span class="op">=</span><span class="st">"D1"</span>, value<span class="op">=</span><span class="fl">20</span>, type<span class="op">=</span><span class="st">"cv%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now, let’s add an equation to the drug model to define <code>D1</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/addEquation.html">addEquation</a></span><span class="op">(</span><span class="st">"D1"</span>, rhs<span class="op">=</span><span class="st">"THETA_D1*exp(ETA_D1)"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">addEquation</span><span class="op">(</span><span class="st">"D1"</span>, rhs<span class="op">=</span><span class="st">"THETA_D1*exp(ETA_D1)"</span><span class="op">)</span></code></pre></div>
 <p>Finally, we need to tell <code>pmxsim</code> that <code>D1</code> corresponds the infusion duration for the first compartment.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/InfusionDuration.html">InfusionDuration</a></span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"D1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">InfusionDuration</span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"D1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Our persisted drug model would look like this:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span></code></pre></div>
@@ -197,8 +197,8 @@
 <p>Now, let’s infuse 1000 mg and run the simulation.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
-<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_d1</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_d1</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
@@ -215,11 +215,11 @@
 <p>Then, we can inject them into the dataset.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
-<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, duration<span class="op">=</span><span class="va">d1Values</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/add.html">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, duration<span class="op">=</span><span class="va">d1Values</span><span class="op">)</span><span class="op">)</span>
+<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Here is an overview of the dataset in its table form if we filter on the doses:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/pkg/pmxmod/man/export.html">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">EVID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">export</span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">EVID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 9
 ##      ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
 ##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;
