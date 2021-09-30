@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create an infusion. — Infusion • campsis</title>
+<title>Create one or several infusion(s). — Infusion • campsis</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Create an infusion. — Infusion" />
-<meta property="og:description" content="Create an infusion." />
+<meta property="og:title" content="Create one or several infusion(s). — Infusion" />
+<meta property="og:description" content="Create one or several infusion(s)." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -122,13 +122,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -153,13 +156,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create an infusion.</h1>
+    <h1>Create one or several infusion(s).</h1>
     <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/treatment_entry.R'><code>R/treatment_entry.R</code></a></small>
     <div class="hidden name"><code>Infusion.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create an infusion.</p>
+    <p>Create one or several infusion(s).</p>
     </div>
 
     <pre class="usage"><span class='fu'>Infusion</span><span class='op'>(</span>
@@ -169,7 +172,9 @@
   f <span class='op'>=</span> <span class='cn'>NULL</span>,
   lag <span class='op'>=</span> <span class='cn'>NULL</span>,
   duration <span class='op'>=</span> <span class='cn'>NULL</span>,
-  rate <span class='op'>=</span> <span class='cn'>NULL</span>
+  rate <span class='op'>=</span> <span class='cn'>NULL</span>,
+  ii <span class='op'>=</span> <span class='cn'>NULL</span>,
+  addl <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -177,7 +182,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>time</th>
-      <td><p>treatment time, numeric</p></td>
+      <td><p>treatment time(s), numeric value or vector. First treatment time if used together with ii and addl.</p></td>
     </tr>
     <tr>
       <th>amount</th>
@@ -203,11 +208,19 @@
       <th>rate</th>
       <td><p>infusion rate, distribution</p></td>
     </tr>
+    <tr>
+      <th>ii</th>
+      <td><p>interdose interval, requires argument 'time' to be a single numeric value</p></td>
+    </tr>
+    <tr>
+      <th>addl</th>
+      <td><p>number of additional doses, requires argument 'time' to be a single integer value</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an infusion.</p>
+    <p>a single infusion or a list of infusions.</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

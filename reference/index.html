@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -121,13 +121,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -186,7 +189,7 @@
         <td>
           <p><code><a href="Bolus.html">Bolus()</a></code> </p>
         </td>
-        <td><p>Create a bolus.</p></td>
+        <td><p>Create one or several bolus(es).</p></td>
       </tr><tr>
         
         <td>
@@ -209,9 +212,15 @@ are the default depot and observed compartments.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="DoseAdaptation.html">DoseAdaptation()</a></code> </p>
+        </td>
+        <td><p>Create a dose adaptation.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="Infusion.html">Infusion()</a></code> </p>
         </td>
-        <td><p>Create an infusion.</p></td>
+        <td><p>Create one or several infusion(s).</p></td>
       </tr><tr>
         
         <td>
@@ -508,6 +517,18 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="dose_adaptation-class.html">dose_adaptation-class</a></code> </p>
+        </td>
+        <td><p>Dose adaptation class.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="dose_adaptations-class.html">dose_adaptations-class</a></code> </p>
+        </td>
+        <td><p>Dose adaptations class.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="event-class.html">event-class</a></code> </p>
         </td>
         <td><p>Event class.</p></td>
@@ -637,6 +658,12 @@ distribution. This is because S4 objects do not accept NULL values.</p></td>
       <tr>
         
         <td>
+          <p><code><a href="dosingOnly.html">dosingOnly()</a></code> </p>
+        </td>
+        <td><p>Filter CAMPSIS output on dosing rows.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="generateIIV.html">generateIIV()</a></code> </p>
         </td>
         <td><p>Generate IIV.</p></td>
@@ -676,6 +703,12 @@ distribution. This is because S4 objects do not accept NULL values.</p></td>
           <p><code><a href="getTimeVaryingCovariateNames.html">getTimeVaryingCovariateNames()</a></code> </p>
         </td>
         <td><p>Get all time-varying covariate names.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="obsOnly.html">obsOnly()</a></code> </p>
+        </td>
+        <td><p>Filter CAMPSIS output on observation rows.</p></td>
       </tr><tr>
         
         <td>

@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -122,13 +122,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -162,18 +165,22 @@
     <p>Create a treatment arm.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>Arm</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fl'>1</span>, subjects <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>Arm</span><span class='op'>(</span>id <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span>, subjects <span class='op'>=</span> <span class='fl'>1</span>, label <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/character.html'>as.character</a></span><span class='op'>(</span><span class='cn'>NA</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>id</th>
-      <td><p>arm unique ID, integer</p></td>
+      <td><p>unique identifier for this arm (available trough dataset), integer. If NA (default), this identifier is auto-incremented.</p></td>
     </tr>
     <tr>
       <th>subjects</th>
       <td><p>number of subjects in arm, integer</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>arm label, single character string. If set, this label will be output in the ARM column of CAMPSIS instead of the identifier.</p></td>
     </tr>
     </table>
 

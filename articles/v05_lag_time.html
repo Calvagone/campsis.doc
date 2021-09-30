@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -81,13 +81,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -109,7 +112,7 @@
 
       
 
-      </header><script src="v05_lag_time_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="v05_lag_time_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Lag time</h1>
@@ -141,7 +144,7 @@
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">Omega</span><span class="op">(</span>name<span class="op">=</span><span class="st">"ALAG1"</span>, value<span class="op">=</span><span class="fl">20</span>, type<span class="op">=</span><span class="st">"cv%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Now, let’s add an equation to the drug model to define <code>ALAG1</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">addEquation</span><span class="op">(</span><span class="st">"ALAG1"</span>, rhs<span class="op">=</span><span class="st">"THETA_ALAG1*exp(ETA_ALAG1)"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">Equation</span><span class="op">(</span><span class="st">"ALAG1"</span>, <span class="st">"THETA_ALAG1*exp(ETA_ALAG1)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Finally, we need to tell <code>pmxsim</code> that <code>ALAG1</code> corresponds to a lag time.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">LagTime</span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"ALAG1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>

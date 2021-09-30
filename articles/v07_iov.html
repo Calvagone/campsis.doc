@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -81,13 +81,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -109,7 +112,7 @@
 
       
 
-      </header><script src="v07_iov_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="v07_iov_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Inter-occasion variability</h1>
@@ -131,7 +134,7 @@
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
 <p>We’re going to add a term <code>IOV_KA</code> on <code>KA</code>. This can be done as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">replaceEquation</span><span class="op">(</span><span class="st">"KA"</span>, rhs<span class="op">=</span><span class="st">"THETA_KA*exp(ETA_KA + IOV_KA)"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/base/replace.html">replace</a></span><span class="op">(</span><span class="fu">Equation</span><span class="op">(</span><span class="st">"KA"</span>, <span class="st">"THETA_KA*exp(ETA_KA + IOV_KA)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>This model will not run unless we give some values for <code>IOV_KA</code>. This can achieved by adding <code>IOV</code> to the dataset. The following function will create a simple dataset with or without <code>IOV</code> on demand.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">getDataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">iov</span><span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span>

@@ -11,8 +11,9 @@ articles:
   v06_infusions: v06_infusions.html
   v07_iov: v07_iov.html
   v08_initial_conditions: v08_initial_conditions.html
-  v09_replicate_study: v09_replicate_study.html
-  v10_scenarios: v10_scenarios.html
-  v11_events: v11_events.html
-last_built: 2021-07-13T13:42Z
+  v09_dose_adaptation: v09_dose_adaptation.html
+  v10_replicate_study: v10_replicate_study.html
+  v11_scenarios: v11_scenarios.html
+  v12_events: v12_events.html
+last_built: 2021-09-30T10:36Z
 

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.7.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
       </span>
     </div>
 
@@ -81,13 +81,16 @@
       <a href="../articles/v08_initial_conditions.html">Initial conditions</a>
     </li>
     <li>
-      <a href="../articles/v09_replicate_study.html">Replicate your study</a>
+      <a href="../articles/v09_dose_adaptation.html">Simple dose adaptations</a>
     </li>
     <li>
-      <a href="../articles/v10_scenarios.html">Scenarios</a>
+      <a href="../articles/v10_replicate_study.html">Replicate your study</a>
     </li>
     <li>
-      <a href="../articles/v11_events.html">Events</a>
+      <a href="../articles/v11_scenarios.html">Scenarios</a>
+    </li>
+    <li>
+      <a href="../articles/v12_events.html">Events</a>
     </li>
   </ul>
 </li>
@@ -109,7 +112,7 @@
 
       
 
-      </header><script src="v01_dataset_files/header-attrs-2.8/header-attrs.js"></script><div class="row">
+      </header><script src="v01_dataset_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Create your dataset</h1>
@@ -138,24 +141,22 @@
 <p>See all methods that can be applied on a dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>## [1] add                          export                      
-## [3] getCovariateNames            getIOVNames                 
-## [5] getOccasionNames             getTimes                    
-## [7] getTimeVaryingCovariateNames length                      
-## [9] simulate                    
+<pre><code>##  [1] add                          contains                    
+##  [3] delete                       export                      
+##  [5] find                         getCovariateNames           
+##  [7] getIOVNames                  getOccasionNames            
+##  [9] getTimes                     getTimeVaryingCovariateNames
+## [11] length                       replace                     
+## [13] simulate                    
 ## see '?methods' for accessing help and source code</code></pre>
 <p>Let’s take a closer look at the <code>add</code> method. The following method shows all classes that can be added to a dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">showMethods</span><span class="op">(</span><span class="st">"add"</span>, classes<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <pre><code>## Function: add (package campsismod)
 ## object="dataset", x="arm"
-## object="dataset", x="covariate"
 ## object="dataset", x="dataset_config"
 ## object="dataset", x="list"
-## object="dataset", x="observations"
-## object="dataset", x="occasion"
-## object="dataset", x="treatment_entry"
-## object="dataset", x="treatment_iov"</code></pre>
+## object="dataset", x="pmx_element"</code></pre>
 <p>In the next sections we’ll see how we can add boluses and infusions, which are both treatment entries:</p>
 </div>
 <div id="add-a-bolus" class="section level3">
