@@ -130,11 +130,8 @@
 <a href="#simulate-with-all-uncertainties" class="anchor"></a>Simulate with all uncertainties</h3>
 <p>Let’s use a simple 1-compartment model with absorption compartment to illustrate the different levels of uncertainties.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">getModel</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">model_library</span><span class="op">$</span><span class="va">advan2_trans2</span>
-<span class="op">}</span>
-<span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">getModel</span><span class="op">(</span><span class="op">)</span>
-<span class="va">model</span></code></pre></div>
+<code class="sourceCode R"><span class="va">refModel</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan2_trans2</span>
+<span class="va">refModel</span></code></pre></div>
 <pre><code>## [MAIN]
 ## KA=THETA_KA*exp(ETA_KA)
 ## CL=THETA_CL*exp(ETA_CL)
@@ -174,16 +171,12 @@
 ## A_OUTPUT (CMT=3)</code></pre>
 <p>We’re going to use a very basic dataset. 1000 mg QD shall be administered for a week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">getDataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span>
-  <span class="kw">for</span> <span class="op">(</span><span class="va">day</span> <span class="kw">in</span> <span class="fl">0</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">{</span>
-    <span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="va">day</span><span class="op">*</span><span class="fl">24</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
-  <span class="op">}</span>
-  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span><span class="op">*</span><span class="fl">7</span>,by<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span><span class="op">*</span><span class="fl">7</span>,by<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>All subjects are different due to IIV and RUV.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="fu">getDataset</span><span class="op">(</span><span class="op">)</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
 <p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
@@ -192,7 +185,7 @@
 <a href="#simulate-without-ruv" class="anchor"></a>Simulate without RUV</h3>
 <p>Disabling RUV is done as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">getModel</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">disable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op">%&gt;%</span> <span class="fu">disable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">model</span><span class="op">@</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## THETA's:
 ##   name index value   fix
@@ -210,7 +203,7 @@
 ## No variance-covariance matrix</code></pre>
 <p>In that case, Y (the observed concentration) is identical as CP (the model-simulated plasma concentration).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="fu">getDataset</span><span class="op">(</span><span class="op">)</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## i zero 'sigma', no unexplained variability
 ## i zero 'sigma', no unexplained variability
 ## i zero 'sigma', no unexplained variability
@@ -228,7 +221,7 @@
 <a href="#simulate-without-ruv-and-iiv" class="anchor"></a>Simulate without RUV and IIV</h3>
 <p>Disabling RUV and IIV is done as follows:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu">getModel</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">disable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"IIV"</span>, <span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op">%&gt;%</span> <span class="fu">disable</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"IIV"</span>, <span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">model</span><span class="op">@</span><span class="va">parameters</span></code></pre></div>
 <pre><code>## THETA's:
 ##   name index value   fix
@@ -246,7 +239,7 @@
 ## No variance-covariance matrix</code></pre>
 <p>Now, the typical profile is shown for all subjects.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="fu">getDataset</span><span class="op">(</span><span class="op">)</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <pre><code>## i zero 'sigma', no unexplained variability
 ## i zero 'sigma', no unexplained variability
 ## i zero 'sigma', no unexplained variability

@@ -125,7 +125,7 @@
 
     
     
-<p>This vignette shows how initial conditions may be used in <code>campsis</code>.</p>
+<p>This vignette shows how initial conditions may be used in CAMPSIS.</p>
 <div id="init-central-compartment" class="section level3">
 <h3 class="hasAnchor">
 <a href="#init-central-compartment" class="anchor"></a>Init central compartment</h3>
@@ -184,14 +184,11 @@ This can be achieved as follows.</p>
 ## A_OUTPUT (CMT=3)</code></pre>
 <p>Let’s now create a dataset with observations-only.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">getDataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
-  <span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">72</span>, by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
-  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">72</span>, by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>We can now simulate this model:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="fu">getDataset</span><span class="op">(</span><span class="op">)</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
 <p><img src="v08_initial_conditions_files/figure-html/initial_condition%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>

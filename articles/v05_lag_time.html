@@ -125,12 +125,12 @@
 
     
     
-<p>There are 2 ways to implement a lag time in <code>pmxsim</code>:</p>
+<p>There are 2 ways to implement a lag time in CAMPSIS:</p>
 <ul>
 <li>in the model: lag time is defined for each compartment</li>
 <li>in the dataset: lag time is defined for each bolus or infusion</li>
 </ul>
-<p>In the first case, the simulation engine will take care of the lag time In the second case, <code>pmxsim</code> will adapt automatically the time of the dose(s)</p>
+<p>In the first case, the simulation engine will take care of the lag time In the second case, CAMPSIS will adapt automatically the time of the dose(s)</p>
 <div id="lag-time-implemented-in-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#lag-time-implemented-in-model" class="anchor"></a>Lag time implemented in model</h3>
@@ -145,7 +145,7 @@
 <p>Now, let’s add an equation to the drug model to define <code>ALAG1</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">Equation</span><span class="op">(</span><span class="st">"ALAG1"</span>, <span class="st">"THETA_ALAG1*exp(ETA_ALAG1)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Finally, we need to tell <code>pmxsim</code> that <code>ALAG1</code> corresponds to a lag time.</p>
+<p>Finally, we need to tell CAMPSIS that <code>ALAG1</code> corresponds to a lag time.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu">LagTime</span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"ALAG1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Our persisted drug model would look like this:</p>
@@ -204,9 +204,9 @@
 ## A_OUTPUT (CMT=4)</code></pre>
 <p>Now, let’s now give a simple bolus and simulate with and without <code>ALAG1</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
-<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ds1</span> <span class="op">&lt;-</span> <span class="va">ds1</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results_alag</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="va">results_no_alag</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
@@ -223,12 +223,12 @@
 <span class="va">alagValues</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">distribution</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">@</span><span class="va">sampled_values</span></code></pre></div>
 <p>Then, we can inject them into the dataset.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span>
-<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, lag<span class="op">=</span><span class="va">alagValues</span><span class="op">)</span><span class="op">)</span>
-<span class="va">ds2</span> <span class="op">&lt;-</span> <span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, lag<span class="op">=</span><span class="va">alagValues</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Here is an overview of the dataset in its table form if we filter on the doses:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">export</span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">EVID</span><span class="op">==</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">ds2</span> <span class="op">%&gt;%</span> <span class="fu">export</span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/dosingOnly.html">dosingOnly</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code>## # A tibble: 6 x 9
 ##      ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO
 ##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt;  &lt;int&gt;
