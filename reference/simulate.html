@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.8.0</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">0.9.0</span>
       </span>
     </div>
 
@@ -170,6 +170,7 @@
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -180,12 +181,13 @@
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for campsis_model,dataset,character,events,`function`,character,`function`,integer,integer,logical,logical</span>
+<span class='co'># S4 method for campsis_model,dataset,character,events,scenarios,`function`,character,`function`,integer,integer,logical,logical</span>
 <span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -196,12 +198,13 @@
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for campsis_model,tbl_df,character,events,`function`,character,`function`,integer,integer,logical,logical</span>
+<span class='co'># S4 method for campsis_model,tbl_df,character,events,scenarios,`function`,character,`function`,integer,integer,logical,logical</span>
 <span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -212,12 +215,13 @@
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for campsis_model,data.frame,character,events,`function`,character,`function`,integer,integer,logical,logical</span>
+<span class='co'># S4 method for campsis_model,data.frame,character,events,scenarios,`function`,character,`function`,integer,integer,logical,logical</span>
 <span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -228,12 +232,13 @@
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for campsis_model,tbl_df,rxode_engine,events,`function`,character,`function`,integer,integer,logical,logical</span>
+<span class='co'># S4 method for campsis_model,tbl_df,rxode_engine,events,scenarios,`function`,character,`function`,integer,integer,logical,logical</span>
 <span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -244,12 +249,13 @@
   <span class='va'>...</span>
 <span class='op'>)</span>
 
-<span class='co'># S4 method for campsis_model,tbl_df,mrgsolve_engine,events,`function`,character,`function`,integer,integer,logical,logical</span>
+<span class='co'># S4 method for campsis_model,tbl_df,mrgsolve_engine,events,scenarios,`function`,character,`function`,integer,integer,logical,logical</span>
 <span class='fu'>simulate</span><span class='op'>(</span>
   <span class='va'>model</span>,
   <span class='va'>dataset</span>,
   dest <span class='op'>=</span> <span class='cn'>NULL</span>,
   events <span class='op'>=</span> <span class='cn'>NULL</span>,
+  scenarios <span class='op'>=</span> <span class='cn'>NULL</span>,
   tablefun <span class='op'>=</span> <span class='cn'>NULL</span>,
   outvars <span class='op'>=</span> <span class='cn'>NULL</span>,
   outfun <span class='op'>=</span> <span class='cn'>NULL</span>,
@@ -278,6 +284,10 @@
     <tr>
       <th>events</th>
       <td><p>interruption events</p></td>
+    </tr>
+    <tr>
+      <th>scenarios</th>
+      <td><p>list of scenarios to be simulated</p></td>
     </tr>
     <tr>
       <th>tablefun</th>
