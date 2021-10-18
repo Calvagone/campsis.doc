@@ -300,7 +300,7 @@
 <code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">irm_kout_inhibition</span>
 <span class="va">pd</span></code></pre></div>
 <pre><code>## [MAIN]
-## IC50=THETA_EC50*exp(ETA_IC50)
+## IC50=THETA_IC50*exp(ETA_IC50)
 ## KIN=THETA_KIN*exp(ETA_KIN)
 ## KOUT=THETA_KOUT*exp(ETA_KOUT)
 ## 
@@ -315,7 +315,7 @@
 ## 
 ## THETA's:
 ##   name index value   fix
-## 1 EC50     1 15.00 FALSE
+## 1 IC50     1 15.00 FALSE
 ## 2  KIN     2  0.05 FALSE
 ## 3 KOUT     3  0.01 FALSE
 ## OMEGA's:
