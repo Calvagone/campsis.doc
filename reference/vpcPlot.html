@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -171,14 +171,14 @@
     <p>VPC plot (1 plot per scenario).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vpcPlot</span><span class='op'>(</span><span class='va'>x</span>, scenarios <span class='op'>=</span> <span class='cn'>NULL</span>, level <span class='op'>=</span> <span class='fl'>0.9</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>vpcPlot</span><span class='op'>(</span><span class='va'>x</span>, scenarios <span class='op'>=</span> <span class='cn'>NULL</span>, level <span class='op'>=</span> <span class='fl'>0.9</span>, alpha <span class='op'>=</span> <span class='fl'>0.15</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>data frame, output of pmxsim with replicates</p></td>
+      <td><p>data frame, output of CAMPSIS with replicates</p></td>
     </tr>
     <tr>
       <th>scenarios</th>
@@ -187,6 +187,10 @@
     <tr>
       <th>level</th>
       <td><p>PI level, default is 0.9 (90% PI)</p></td>
+    </tr>
+    <tr>
+      <th>alpha</th>
+      <td><p>alpha parameter (transparency) given to geom_ribbon</p></td>
     </tr>
     </table>
 

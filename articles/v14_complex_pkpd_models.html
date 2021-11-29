@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
       </span>
     </div>
 
@@ -135,9 +135,9 @@
 <div id="filgrastim-pkpd-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#filgrastim-pkpd-model" class="anchor"></a>Filgrastim PK/PD model</h3>
-<p>Load the filgrastim PK/PD model from the model library as follows. Please note that this model was translated from NONMEM code. The original model file can be found <a href="http://repository.ddmore.eu/model/DDMODEL00000077">here</a> on the DDMORE repository.</p>
+<p>Load the filgrastim PK/PD model from the model library as follows. Please note that this model was translated from NONMEM code. The original model file can be found <a href="http://repository.ddmore.eu/model/DDMODEL00000077">here</a> on the DDMORE repository. Eventually, this model was updated with the final parameters from the corresponding publication (<a href="https://pubmed.ncbi.nlm.nih.gov/20881223/">Krzyzanski et al., 2010</a>).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pkpd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">filgrastim_pkpd_model</span>
+<code class="sourceCode R"><span class="va">pkpd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">filgrastim_pkpd_krzyzanski</span>
 <span class="va">pkpd</span></code></pre></div>
 <pre><code>## [MAIN]
 ## FF=THETA_FF
@@ -243,44 +243,37 @@
 ## A_13=BM90
 ## A_14=NB0
 ## 
-## [ERROR]
-## ZNB=A_14
-## ZNT=A_10 + A_11 + A_12 + A_13 + A_14 + A_5 + A_6 + A_7 + A_8 + A_9
-## RRTOT=KSI*ZNT
-## BBB=-A_2/VD + KD + RRTOT
-## ZCP=-0.5*BBB + 0.5*sqrt(4*A_2*KD/VD + pow(BBB, 2))
-## 
 ## 
 ## THETA's:
 ##    name index    value   fix
-## 1    FF     1  0.66600 FALSE
-## 2   KA1     2  0.51200 FALSE
+## 1    FF     1  0.60200 FALSE
+## 2   KA1     2  0.65100 FALSE
 ## 3    FR     3  1.00000  TRUE
-## 4    D2     4  6.77000  TRUE
-## 5   KEL     5  0.21200 FALSE
-## 6    VD     6  2.98000 FALSE
-## 7    KD     7  0.10400 FALSE
-## 8  KINT     8  0.09030 FALSE
-## 9   KSI     9  0.02200 FALSE
+## 4    D2     4  0.50000  TRUE
+## 5   KEL     5  0.15200 FALSE
+## 6    VD     6  2.42000 FALSE
+## 7    KD     7  1.44000 FALSE
+## 8  KINT     8  0.10500 FALSE
+## 9   KSI     9  0.18100 FALSE
 ## 10 KOFF    10  0.00000  TRUE
-## 11  KMT    11  0.07500 FALSE
+## 11  KMT    11  0.07280 FALSE
 ## 12 KBB1    12  0.00000  TRUE
-## 13  KTT    13  0.00421 FALSE
-## 14  NB0    14  2.07000 FALSE
-## 15  SC1    15  1.86000 FALSE
-## 16  SM1    16 28.50000 FALSE
-## 17  SM2    17 19.80000 FALSE
+## 13  KTT    13  0.00862 FALSE
+## 14  NB0    14  1.55000 FALSE
+## 15  SC1    15  3.15000 FALSE
+## 16  SM1    16 34.70000 FALSE
+## 17  SM2    17 32.20000 FALSE
 ## 18  SM3    18  0.00000  TRUE
 ## OMEGA's:
-##   name index index2  value   fix type same
-## 1  NB0     1      1 0.0869 FALSE  var   NA
-## 2  KEL     2      2 0.0100 FALSE  var   NA
-## 3   VD     3      3 0.0100 FALSE  var   NA
-## 4  KA1     4      4 0.0000  TRUE  var   NA
-## 5  KSI     5      5 0.0100 FALSE  var   NA
-## 6  SC1     6      6 0.0100 FALSE  var   NA
-## 7  SM1     7      7 0.0100 FALSE  var   NA
-## 8  SM2     8      8 0.0000  TRUE  var   NA
+##   name index index2    value   fix type same
+## 1  NB0     1      1 0.109000 FALSE  var   NA
+## 2  KEL     2      2 0.194000 FALSE  var   NA
+## 3   VD     3      3 0.138000 FALSE  var   NA
+## 4  KA1     4      4 0.000000  TRUE  var   NA
+## 5  KSI     5      5 0.058700 FALSE  var   NA
+## 6  SC1     6      6 0.764000 FALSE  var   NA
+## 7  SM1     7      7 0.000188 FALSE  var   NA
+## 8  SM2     8      8 0.000000  TRUE  var   NA
 ## SIGMA's:
 ## # A tibble: 0 x 0
 ## No variance-covariance matrix
@@ -300,201 +293,40 @@
 ## A_12 (CMT=12)
 ## A_13 (CMT=13)
 ## A_14 (CMT=14)</code></pre>
-<p>Let’s create a fictive cohort of 25 subjects receiving filgrastim 10 μg/kg for a week following subcutaneous administration.</p>
+<p>Let’s create a simple demonstration dataset of 250 subjects:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">10</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">10</span>, compartment<span class="op">=</span><span class="fl">2</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">168</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"ROUT"</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+<code class="sourceCode R"><span class="va">baseDataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">250</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BAS"</span>, <span class="fl">0.02</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span><span class="fl">60</span>,<span class="fl">80</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/DoseAdaptation.html">DoseAdaptation</a></span><span class="op">(</span><span class="st">"WT*AMT"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>A quick simulation gives us the plasma concentration of filgrastim, as well as the absolute neutrophil count (ANC):</p>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span><span class="fl">50</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/DoseAdaptation.html">DoseAdaptation</a></span><span class="op">(</span><span class="st">"WT*AMT"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># per kilo dosing</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">216</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"ROUT"</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># subcutaneous route (SC)</span></code></pre></div>
+<p>Assume we want to compare the following subcutaneous administrations of filgrastim:</p>
+<ul>
+<li>2.5 μg/kg QD for a week</li>
+<li>5 μg/kg QD for a week</li>
+<li>10 μg/kg QD for a week</li>
+</ul>
+<p>We define the following scenarios:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"ZCP"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"G-CSF Serum Concentration (ng/mL)"</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"ZNB"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"ANC (10^3 cells/μL)"</span><span class="op">)</span>
-
-<span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v14_complex_pkpd_models_files/figure-html/filgrastim_pkpd_model-1.png" width="768" style="display: block; margin: auto;"></p>
-</div>
-<div id="target-mediated-drug-disposition-model-of-cphpc" class="section level3">
-<h3 class="hasAnchor">
-<a href="#target-mediated-drug-disposition-model-of-cphpc" class="anchor"></a>Target mediated drug disposition Model of CPHPC</h3>
-<p>Load the target mediated drug disposition Model of CPHPC from the model library as follows. Please note that this model was translated from NONMEM code. The original model file can be found <a href="http://repository.ddmore.foundation/model/DDMODEL00000262">here</a> on the DDMORE repository.</p>
+<code class="sourceCode R"><span class="va">scenarios</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Scenarios.html">Scenarios</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"2.5 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">2.5</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"5 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">5</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"10 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">10</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<p>A quick simulation gives us the plasma concentration of filgrastim, as well as the absolute neutrophil count (ANC):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pkpd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">cphpc_pkpd_model</span>
-<span class="va">pkpd</span></code></pre></div>
-<pre><code>## [MAIN]
-## MOLSAP=125000000
-## MOLCPH=340370.0
-## THRESH=80
-## CRCL2=CRCL
-## if (CRCL &gt; THRESH) CRCL2=THRESH
-## CRCLEFF=THETA_CRCLCOV*(CRCL2 - THRESH) + 1
-## TVCL=CRCLEFF*exp(THETA_CL)
-## MU_2=log(TVCL)
-## CL=exp(ETA_CL + MU_2)
-## TVV=exp(THETA_V)
-## MU_3=log(TVV)
-## V=exp(ETA_V + MU_3)
-## TVQ=exp(THETA_Q)
-## MU_4=log(TVQ)
-## Q=exp(ETA_Q + MU_4)
-## TVV2=exp(THETA_V2)
-## MU_5=log(TVV2)
-## V2=exp(ETA_V2 + MU_5)
-## TVK12=Q/V
-## K12=TVK12
-## TVK21=Q/V2
-## K21=TVK21
-## K10=CL/V
-## TVV3=V
-## V3=TVV3
-## TVV4=exp(THETA_V4)
-## MU_10=log(TVV4)
-## V4=exp(ETA_V4 + MU_10)
-## TVSAP10=exp(THETA_SAP10)
-## MU_6=log(TVSAP10)
-## SAP10=exp(ETA_SAP10 + MU_6)
-## TVKOUT=exp(THETA_KOUT)
-## MU_1=log(TVKOUT)
-## KOUT=exp(ETA_KOUT + MU_1)
-## TVKON=exp(THETA_KON)
-## MU_7=log(TVKON)
-## KON=exp(ETA_KON + MU_7)
-## KD=1.0/100000000.0
-## TVKOFF=KD*TVKON
-## KOFF=TVKOFF
-## TVKINT=THETA_KINT
-## MU_8=log(TVKINT)
-## KINT=exp(ETA_KINT + MU_8)
-## TVQ4=exp(THETA_Q4)
-## MU_9=log(TVQ4)
-## Q4=exp(ETA_Q4 + MU_9)
-## TVK34=Q4/V3
-## K34=TVK34
-## TVK43=Q4/V4
-## K43=TVK43
-## KIN=KOUT*SAP10*V3
-## AM3=SAP10/MOLSAP
-## AM4=SAP10/MOLSAP
-## F1=1
-## F5=THETA_FSC
-## TVKSC=exp(THETA_KASC)
-## MU_11=log(TVKSC)
-## KSC=exp(ETA_KSC + MU_11)
-## S1=(1.0/1000.0)*V
-## S3=(1.0/1000.0)/MOLSAP
-## 
-## [ODE]
-## A1=A_1
-## A3=A_3
-## A2=A_2
-## A4=A_4
-## A5=A_5
-## A6=A_6
-## C1=A1/(MOLCPH*V)
-## C3=A3
-## C3C1=A6
-## C3C1_STD=C3C1*MOLCPH*V3
-## A1F=A1 - C3C1_STD
-## C3F=C3 - C3C1
-## C1F=A1F/(MOLCPH*V)
-## DADT1=-A1F*K10 - A1F*K12 + A2*K21 + A5*KSC - C3C1*KINT*MOLCPH*V
-## DADT2=A1F*K12 - A2*K21
-## DADT3=A4*K43*V4/V3 - C3C1*KINT - C3F*K34 - C3F*KOUT + KIN/(MOLSAP*V3)
-## DADT4=-A4*K43 + C3F*K34*V3/V4
-## DADT5=-A5*KSC
-## DADT6=C1F*C3F*KON - C3C1*KINT
-## d/dt(A_1)=DADT1
-## d/dt(A_2)=DADT2
-## d/dt(A_3)=DADT3
-## d/dt(A_4)=DADT4
-## d/dt(A_5)=DADT5
-## d/dt(A_6)=DADT6
-## 
-## [F]
-## A_1=F1
-## A_5=F5
-## 
-## [INIT]
-## A_3=AM3
-## A_4=AM4
-## 
-## 
-## THETA's:
-##       name index   value   fix
-## 1     KOUT     1 -3.0700 FALSE
-## 2       CL     2  1.9200 FALSE
-## 3        V     3  2.7600 FALSE
-## 4        Q     4  0.5950 FALSE
-## 5       V2     5  2.8400 FALSE
-## 6    SAP10     6  3.3700 FALSE
-## 7      KON     7 14.6000 FALSE
-## 8     KINT     8  5.7100 FALSE
-## 9   PROPPK     9  0.2860 FALSE
-## 10   ADDPK    10  0.0000  TRUE
-## 11 PROPSAP    11  0.2680 FALSE
-## 12  ADDSAP    12  0.0000  TRUE
-## 13     FSC    13  1.0000  TRUE
-## 14    KASC    14  0.4055  TRUE
-## 15 CRCLCOV    15  0.0152 FALSE
-## 16      V4    16  3.4700 FALSE
-## 17      Q4    17  1.4900 FALSE
-## OMEGA's:
-##     name index index2  value   fix type same
-## 1   KOUT     1      1 0.1250 FALSE  var   NA
-## 2     CL     2      2 0.0474 FALSE  var   NA
-## 3      V     3      3 0.0836 FALSE  var   NA
-## 4      Q     4      4 0.0225  TRUE  var   NA
-## 5     V2     5      5 0.0225  TRUE  var   NA
-## 6  SAP10     6      6 0.0625 FALSE  var   NA
-## 7    KON     7      7 0.0225  TRUE  var   NA
-## 8   KINT     8      8 0.0225  TRUE  var   NA
-## 9     Q4     9      9 1.1100 FALSE  var   NA
-## 10    V4    10     10 2.0500 FALSE  var   NA
-## 11   KSC    11     11 0.0225  TRUE  var   NA
-## SIGMA's:
-##   name index index2 value  fix type
-## 1 &lt;NA&gt;     1      1     1 TRUE  var
-## 2 &lt;NA&gt;     2      2     1 TRUE  var
-## No variance-covariance matrix
-## 
-## Compartments:
-## A_1 (CMT=1)
-## A_2 (CMT=2)
-## A_3 (CMT=3)
-## A_4 (CMT=4)
-## A_5 (CMT=5)
-## A_6 (CMT=6)</code></pre>
-<p>Let’s create 3 fictive cohorts of 25 subjects each, all receiving a 1-hour infusion of 10 mg CPHPC.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">arm</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Arm.html">Arm</a></span><span class="op">(</span>subjects<span class="op">=</span><span class="fl">25</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">10</span>, duration<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.1</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org">ggplot2</a></span><span class="op">)</span>
 
-<span class="va">arm1</span> <span class="op">&lt;-</span> <span class="va">arm</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"CRCL"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span><span class="fl">80</span>,<span class="fl">120</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/setLabel.html">setLabel</a></span><span class="op">(</span><span class="st">"Normal renal function"</span><span class="op">)</span>
-<span class="va">arm2</span> <span class="op">&lt;-</span> <span class="va">arm</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"CRCL"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">80</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/setLabel.html">setLabel</a></span><span class="op">(</span><span class="st">"Mild renal impairment"</span><span class="op">)</span>
-<span class="va">arm3</span> <span class="op">&lt;-</span> <span class="va">arm</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"CRCL"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span><span class="fl">30</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/setLabel.html">setLabel</a></span><span class="op">(</span><span class="st">"Moderate renal impairment"</span><span class="op">)</span>
-<span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu">add</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span>, <span class="va">arm3</span><span class="op">)</span><span class="op">)</span> </code></pre></div>
-<p>A quick simulation gives us the concentration of CPHPC over 24 hours, as well as the concentration in serum amyloid P (SAP), for each cohort:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">baseDataset</span>, scenarios<span class="op">=</span><span class="va">scenarios</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>SCENARIO<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">SCENARIO</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">SCENARIO</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
-<span class="co"># Reorder ARM labels</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ARM<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">ARM</span>, levels<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Normal renal function"</span>, <span class="st">"Mild renal impairment"</span>, <span class="st">"Moderate renal impairment"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">SCENARIO</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span>breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">.01</span>,<span class="fl">.1</span>,<span class="fl">1</span>,<span class="fl">10</span>,<span class="fl">100</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"G-CSF Serum Concentration (ng/mL)"</span><span class="op">)</span>
+<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_14"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">SCENARIO</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"ANC (10^3 cells/μL)"</span><span class="op">)</span>
 
-<span class="co"># Unit conversion</span>
-<span class="va">results</span> <span class="op">&lt;-</span> <span class="va">results</span> <span class="op">%&gt;%</span> <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>C1<span class="op">=</span><span class="va">C1</span><span class="op">*</span><span class="fl">340.37</span><span class="op">*</span><span class="fl">1e6</span>, C3<span class="op">=</span><span class="va">C3</span><span class="op">*</span><span class="fl">5</span><span class="op">*</span><span class="fl">25000</span><span class="op">*</span><span class="fl">1e3</span><span class="op">)</span>
-  
-<span class="va">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"C1"</span>, <span class="st">"ARM"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"CPHPC (ng/mL)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">ARM</span><span class="op">)</span>
-<span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"C3"</span>, <span class="st">"ARM"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span><span class="op">(</span><span class="st">"SAP (mg/L)"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_log10</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">ARM</span><span class="op">)</span>
-
-<span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v14_complex_pkpd_models_files/figure-html/cphpc_sas_pkpd_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></code></pre></div>
+<p><img src="v14_complex_pkpd_models_files/figure-html/filgrastim_pkpd_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
   </div>
 
