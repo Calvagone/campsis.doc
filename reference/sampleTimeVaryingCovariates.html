@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>VPC plot delegate. — vpcPlotDelegate • campsis</title>
+<title>Sample time-varying covariates. — sampleTimeVaryingCovariates • campsis</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="VPC plot delegate. — vpcPlotDelegate" />
-<meta property="og:description" content="VPC plot delegate." />
+<meta property="og:title" content="Sample time-varying covariates. — sampleTimeVaryingCovariates" />
+<meta property="og:description" content="Sample time-varying covariates." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.0</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -131,13 +131,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -162,29 +165,37 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>VPC plot delegate.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/default_plot.R'><code>R/default_plot.R</code></a></small>
-    <div class="hidden name"><code>vpcPlotDelegate.Rd</code></div>
+    <h1>Sample time-varying covariates.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/covariate.R'><code>R/covariate.R</code></a></small>
+    <div class="hidden name"><code>sampleTimeVaryingCovariates.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>VPC plot delegate.</p>
+    <p>Sample time-varying covariates.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>vpcPlotDelegate</span><span class='op'>(</span><span class='va'>summary</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>sampleTimeVaryingCovariates</span><span class='op'>(</span><span class='va'>object</span>, <span class='va'>armID</span>, <span class='va'>needsDV</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>summary</th>
-      <td><p>from vpcPlot</p></td>
+      <th>object</th>
+      <td><p>time-varying covariates, data.frame form</p></td>
+    </tr>
+    <tr>
+      <th>armID</th>
+      <td><p>treatment arm ID</p></td>
+    </tr>
+    <tr>
+      <th>needsDV</th>
+      <td><p>append extra column DV, logical value</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>plot</p>
+    <p>a data.frame</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

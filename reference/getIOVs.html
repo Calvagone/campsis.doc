@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get column name. — getColumnName • campsis</title>
+<title>Get all IOV objects. — getIOVs • campsis</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get column name. — getColumnName" />
-<meta property="og:description" content="Get column name." />
+<meta property="og:title" content="Get all IOV objects. — getIOVs" />
+<meta property="og:description" content="Get all IOV objects." />
 
 
 
@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -131,13 +131,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -162,35 +165,38 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get column name.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/generic.R'><code>R/generic.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/occasion.R'><code>R/occasion.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/treatment_iov.R'><code>R/treatment_iov.R</code></a></small>
-    <div class="hidden name"><code>getColumnName.Rd</code></div>
+    <h1>Get all IOV objects.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/generic.R'><code>R/generic.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/arm.R'><code>R/arm.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/arms.R'><code>R/arms.R</code></a>, and 1 more</small>
+    <div class="hidden name"><code>getIOVs.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get column name.</p>
+    <p>Get all IOV objects.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getColumnName</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+    <pre class="usage"><span class='fu'>getIOVs</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
-<span class='co'># S4 method for occasion</span>
-<span class='fu'>getColumnName</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span>
+<span class='co'># S4 method for arm</span>
+<span class='fu'>getIOVs</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
 
-<span class='co'># S4 method for treatment_iov</span>
-<span class='fu'>getColumnName</span><span class='op'>(</span><span class='va'>x</span><span class='op'>)</span></pre>
+<span class='co'># S4 method for arms</span>
+<span class='fu'>getIOVs</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
+
+<span class='co'># S4 method for dataset</span>
+<span class='fu'>getIOVs</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>x</th>
+      <th>object</th>
       <td><p>any object</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>column name</p>
+    <p>all IOV's from object</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

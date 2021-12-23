@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -130,13 +130,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -224,6 +227,13 @@ are the default depot and observed compartments.</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="EventCovariate.html">EventCovariate()</a></code> </p>
+        </td>
+        <td><p>Create an event covariate. These covariates can be modified further in the
+interruption events.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="Infusion.html">Infusion()</a></code> </p>
         </td>
         <td><p>Create one or several infusion(s).</p></td>
@@ -254,8 +264,8 @@ A new column will automatically be created in the exported dataset.</p></td>
         <td>
           <p><code><a href="TimeVaryingCovariate.html">TimeVaryingCovariate()</a></code> </p>
         </td>
-        <td><p>Create a time-varying covariate. These covariates can be modified further in the
-interruption events.</p></td>
+        <td><p>Create a time-varying covariate. This covariate will be implemented using 
+EVID=2 rows in the exported dataset and will not use interruption events.</p></td>
       </tr>
     </tbody><tbody>
       <tr>
@@ -566,9 +576,21 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</p></td>
       </tr><tr>
         
         <td>
+          <p><code><a href="event_covariate-class.html">event_covariate-class</a></code> </p>
+        </td>
+        <td><p>Event covariate class.</p></td>
+      </tr><tr>
+        
+        <td>
           <p><code><a href="events-class.html">events-class</a></code> </p>
         </td>
         <td><p>Events class.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="fixed_covariate-class.html">fixed_covariate-class</a></code> </p>
+        </td>
+        <td><p>Fixed covariate class.</p></td>
       </tr><tr>
         
         <td>
@@ -707,27 +729,33 @@ distribution. This is because S4 objects do not accept NULL values.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getColumnName.html">getColumnName()</a></code> </p>
+          <p><code><a href="getCovariates.html">getCovariates()</a></code> </p>
         </td>
-        <td><p>Get column name.</p></td>
+        <td><p>Get all covariates (fixed / time-varying / event covariates).</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getCovariateNames.html">getCovariateNames()</a></code> </p>
+          <p><code><a href="getEventCovariates.html">getEventCovariates()</a></code> </p>
         </td>
-        <td><p>Get all covariate names (fixed covariates + time-varying covariates).</p></td>
+        <td><p>Get all event-related covariates.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getIOVNames.html">getIOVNames()</a></code> </p>
+          <p><code><a href="getFixedCovariates.html">getFixedCovariates()</a></code> </p>
         </td>
-        <td><p>Get IOV names.</p></td>
+        <td><p>Get all fixed covariates.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getOccasionNames.html">getOccasionNames()</a></code> </p>
+          <p><code><a href="getIOVs.html">getIOVs()</a></code> </p>
         </td>
-        <td><p>Get all occasion names.</p></td>
+        <td><p>Get all IOV objects.</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="getOccasions.html">getOccasions()</a></code> </p>
+        </td>
+        <td><p>Get all occasions.</p></td>
       </tr><tr>
         
         <td>
@@ -737,9 +765,9 @@ distribution. This is because S4 objects do not accept NULL values.</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="getTimeVaryingCovariateNames.html">getTimeVaryingCovariateNames()</a></code> </p>
+          <p><code><a href="getTimeVaryingCovariates.html">getTimeVaryingCovariates()</a></code> </p>
         </td>
-        <td><p>Get all time-varying covariate names.</p></td>
+        <td><p>Get all time-varying covariates.</p></td>
       </tr><tr>
         
         <td>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -90,13 +90,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -147,13 +150,12 @@
 <p>See all methods that can be applied on a dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/methods.html">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<pre><code>##  [1] add                          contains                    
-##  [3] delete                       export                      
-##  [5] find                         getCovariateNames           
-##  [7] getIOVNames                  getOccasionNames            
-##  [9] getTimes                     getTimeVaryingCovariateNames
-## [11] length                       replace                     
-## [13] setSubjects                  simulate                    
+<pre><code>##  [1] add                      contains                 delete                  
+##  [4] export                   find                     getCovariates           
+##  [7] getEventCovariates       getFixedCovariates       getIOVs                 
+## [10] getOccasions             getTimes                 getTimeVaryingCovariates
+## [13] length                   replace                  setSubjects             
+## [16] show                     simulate                
 ## see '?methods' for accessing help and source code</code></pre>
 <p>Oh, this looks cool. There are plenty of functions to play with.<br>
 These functions will be illustrated little by little in the other vignettes.</p>

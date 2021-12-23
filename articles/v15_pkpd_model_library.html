@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -90,13 +90,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -118,14 +121,14 @@
 
       
 
-      </header><script src="v13_pkpd_model_library_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
+      </header><script src="v15_pkpd_model_library_files/header-attrs-2.10/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>PK/PD model library</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/Calvagone/campsis/blob/master/vignettes/v13_pkpd_model_library.Rmd"><code>vignettes/v13_pkpd_model_library.Rmd</code></a></small>
-      <div class="hidden name"><code>v13_pkpd_model_library.Rmd</code></div>
+      <small class="dont-index">Source: <a href="https://github.com/Calvagone/campsis/blob/master/vignettes/v15_pkpd_model_library.Rmd"><code>vignettes/v15_pkpd_model_library.Rmd</code></a></small>
+      <div class="hidden name"><code>v15_pkpd_model_library.Rmd</code></div>
 
     </div>
 
@@ -183,7 +186,7 @@
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v13_pkpd_model_library_files/figure-html/direct_effect_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v15_pkpd_model_library_files/figure-html/direct_effect_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div id="effect-compartment-model" class="section level3">
 <h3 class="hasAnchor">
@@ -225,7 +228,7 @@
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v13_pkpd_model_library_files/figure-html/effect_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v15_pkpd_model_library_files/figure-html/effect_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div id="transit-compartment-model" class="section level3">
 <h3 class="hasAnchor">
@@ -293,7 +296,7 @@
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_CIRC"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v13_pkpd_model_library_files/figure-html/transit_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v15_pkpd_model_library_files/figure-html/transit_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div id="indirect-response-model" class="section level3">
 <h3 class="hasAnchor">
@@ -345,7 +348,7 @@
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<p><img src="v13_pkpd_model_library_files/figure-html/indirect_response_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v15_pkpd_model_library_files/figure-html/indirect_response_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
   </div>
 

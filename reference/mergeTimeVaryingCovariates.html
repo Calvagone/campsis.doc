@@ -6,7 +6,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get all occasion names. — getOccasionNames • campsis</title>
+<title>Merge time-varying covariates into a single data frame. This last data frame
+will be merged afterwards with all treatment and observation rows. — mergeTimeVaryingCovariates • campsis</title>
 
 
 <!-- jquery -->
@@ -39,8 +40,10 @@
 
 
 
-<meta property="og:title" content="Get all occasion names. — getOccasionNames" />
-<meta property="og:description" content="Get all occasion names." />
+<meta property="og:title" content="Merge time-varying covariates into a single data frame. This last data frame
+will be merged afterwards with all treatment and observation rows. — mergeTimeVaryingCovariates" />
+<meta property="og:description" content="Merge time-varying covariates into a single data frame. This last data frame
+will be merged afterwards with all treatment and observation rows." />
 
 
 
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">campsis</a>
-        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.0.1</span>
+        <span class="version label label-warning" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -131,13 +134,16 @@
       <a href="../articles/v11_scenarios.html">Scenarios</a>
     </li>
     <li>
-      <a href="../articles/v12_events.html">Events</a>
+      <a href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     </li>
     <li>
-      <a href="../articles/v13_pkpd_model_library.html">PK/PD model library</a>
+      <a href="../articles/v13_events.html">Interruption events</a>
     </li>
     <li>
       <a href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    </li>
+    <li>
+      <a href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
     </li>
   </ul>
 </li>
@@ -162,38 +168,35 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get all occasion names.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/generic.R'><code>R/generic.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/arm.R'><code>R/arm.R</code></a>, <a href='https://github.com/Calvagone/campsis/blob/master/R/arms.R'><code>R/arms.R</code></a>, and 1 more</small>
-    <div class="hidden name"><code>getOccasionNames.Rd</code></div>
+    <h1>Merge time-varying covariates into a single data frame. This last data frame
+will be merged afterwards with all treatment and observation rows.</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Calvagone/campsis/blob/master/R/covariate.R'><code>R/covariate.R</code></a></small>
+    <div class="hidden name"><code>mergeTimeVaryingCovariates.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get all occasion names.</p>
+    <p>Merge time-varying covariates into a single data frame. This last data frame
+will be merged afterwards with all treatment and observation rows.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>getOccasionNames</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for arm</span>
-<span class='fu'>getOccasionNames</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for arms</span>
-<span class='fu'>getOccasionNames</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span>
-
-<span class='co'># S4 method for dataset</span>
-<span class='fu'>getOccasionNames</span><span class='op'>(</span><span class='va'>object</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>mergeTimeVaryingCovariates</span><span class='op'>(</span><span class='va'>covariates</span>, <span class='va'>ids</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>object</th>
-      <td><p>any object</p></td>
+      <th>covariates</th>
+      <td><p>covariates, only time-varying covariates will be extracted</p></td>
+    </tr>
+    <tr>
+      <th>ids</th>
+      <td><p>simulation ID's</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>character vector</p>
+    <p>a data.frame</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

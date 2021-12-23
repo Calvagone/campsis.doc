@@ -14,8 +14,9 @@ articles:
   v09_dose_adaptation: v09_dose_adaptation.html
   v10_replicate_study: v10_replicate_study.html
   v11_scenarios: v11_scenarios.html
-  v12_events: v12_events.html
-  v13_pkpd_model_library: v13_pkpd_model_library.html
+  v12_time_varying_covariates: v12_time_varying_covariates.html
+  v13_events: v13_events.html
   v14_complex_pkpd_models: v14_complex_pkpd_models.html
-last_built: 2021-11-30T14:44Z
+  v15_pkpd_model_library: v15_pkpd_model_library.html
+last_built: 2021-12-23T14:05Z
 
