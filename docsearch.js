@@ -74,11 +74,12 @@ function updateHitURL(hit) {
 
   var words = matchedWords(hit);
   var url = "";
+  const regex = /calvagone\.github\.io\//;
 
   if (hit.anchor) {
-    url = hit.url_without_anchor + '?q=' + escape(words.join(" ")) + '#' + hit.anchor;
+    url = hit.url_without_anchor.replace(regex, 'calvagone.github.io/campsismod.doc/') + '?q=' + escape(words.join(" ")) + '#' + hit.anchor;
   } else {
-    url = hit.url + '?q=' + escape(words.join(" "));
+    url = hit.url.replace(regex, 'calvagone.github.io/campsismod.doc/') + '?q=' + escape(words.join(" "));
   }
 
   return url;
