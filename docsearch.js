@@ -76,9 +76,9 @@ function updateHitURL(hit) {
   var url = "";
 
   if (hit.anchor) {
-    url = 'campsis.doc/' + hit.url_without_anchor + '?q=' + escape(words.join(" ")) + '#' + hit.anchor;
+    url = hit.url_without_anchor + '?q=' + escape(words.join(" ")) + '#' + hit.anchor;
   } else {
-    url = 'campsis.doc/' + hit.url + '?q=' + escape(words.join(" "));
+    url = hit.url + '?q=' + escape(words.join(" "));
   }
 
   return url;
