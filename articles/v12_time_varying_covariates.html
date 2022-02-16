@@ -64,9 +64,12 @@
     <a class="dropdown-item" href="../articles/v11_scenarios.html">Scenarios</a>
     <a class="dropdown-item" href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     <a class="dropdown-item" href="../articles/v13_events.html">Interruption events</a>
-    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a>
     <a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -132,7 +135,7 @@
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span>,
                         <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"BW"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="v12_time_varying_covariates_files/figure-html/event_bw_as_time_varying_covariate_scenarios-1.png" width="768" style="display: block; margin: auto;"></p>
-<p>Finally, time-varying covariates can also be individualised by specifying an ID column:</p>
+<p>Finally, time-varying covariates can also be individualized by specifying an ID column:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>

@@ -64,9 +64,12 @@
     <a class="dropdown-item" href="../articles/v11_scenarios.html">Scenarios</a>
     <a class="dropdown-item" href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     <a class="dropdown-item" href="../articles/v13_events.html">Interruption events</a>
-    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a>
     <a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -148,7 +151,7 @@
 <code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
     <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, rate<span class="op">=</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
     <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>To visualise clearly the effect of the covariates, we will disable the inter-individual variability on the model.</p>
+<p>To visualize clearly the effect of the covariates, we will disable the inter-individual variability on the model.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="st">"IIV"</span><span class="op">)</span></code></pre></div>
 </div>
@@ -159,7 +162,7 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fl">70</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>All simulated subjects will be exacty the same, as IIV was removed.</p>
+<p>All simulated subjects will be exactly the same, as IIV was removed.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"mrgsolve"</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## Building model ... done.</span></code></pre>
@@ -230,7 +233,7 @@
 <p><img src="v03_covariates_files/figure-html/covariates_lognormal_distribution%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
-<h3 id="boostrap">Boostrap<a class="anchor" aria-label="anchor" href="#boostrap"></a>
+<h3 id="bootstrap">Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"></a>
 </h3>
 <p>Body weight can also be bootstrapped from a real dataset. Let’s create a fictive one:</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">

@@ -64,9 +64,12 @@
     <a class="dropdown-item" href="../articles/v11_scenarios.html">Scenarios</a>
     <a class="dropdown-item" href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     <a class="dropdown-item" href="../articles/v13_events.html">Interruption events</a>
-    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a>
     <a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul>
 <form class="form-inline my-2 my-lg-0" role="search">
@@ -175,30 +178,25 @@
   <span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="va">day</span><span class="op">*</span><span class="fl">24</span>, amount<span class="op">=</span><span class="fl">1000</span>, compartment<span class="op">=</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span>
 <span class="op">}</span>
 <span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">7</span><span class="op">*</span><span class="fl">24</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Let’s now simulate this model with or without parameter uncertainty.<br>
-Argument <code>replicates</code> specifies how many times the simulation will be replicated.<br>
+<p>Let’s now simulate this model with parameter uncertainty.<br>
+Argument <code>replicates</code> specifies how many times the simulation is replicated.<br>
 Argument <code>outfun</code> is a function that is going to be called after each simulation on the output data frame.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results_with_varcov</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, replicates<span class="op">=</span><span class="fl">50</span>, outfun<span class="op">=</span><span class="op">~</span><span class="fu"><a href="../reference/PI.html">PI</a></span><span class="op">(</span><span class="va">.x</span>, output<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">results_with_varcov</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, replicates<span class="op">=</span><span class="fl">10</span>, outfun<span class="op">=</span><span class="op">~</span><span class="fu"><a href="../reference/PI.html">PI</a></span><span class="op">(</span><span class="va">.x</span>, output<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">results</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 x 4</span></span>
 <span class="co">##   replicate  TIME metric value</span>
 <span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>         1     0 med     0   </span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>         1     0 low     0   </span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>         1     0 up      0   </span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>         1     1 med     2.37</span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>         1     1 low     1.63</span>
-<span class="co">## <span style="color: #BCBCBC;">6</span>         1     1 up      3.06</span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results_without_varcov</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="st">"VARCOV"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, replicates<span class="op">=</span><span class="fl">50</span>, outfun<span class="op">=</span><span class="op">~</span><span class="fu"><a href="../reference/PI.html">PI</a></span><span class="op">(</span><span class="va">.x</span>, output<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
+<span class="co">## <span style="color: #BCBCBC;">4</span>         1     1 med     2.23</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>         1     1 low     1.69</span>
+<span class="co">## <span style="color: #BCBCBC;">6</span>         1     1 up      3.11</span></code></pre>
 <p>Function <code>vpcPlot</code> allows to quickly visualize such results.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/vpcPlot.html">vpcPlot</a></span><span class="op">(</span><span class="va">results_with_varcov</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="../reference/vpcPlot.html">vpcPlot</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
 <p><img src="v10_replicate_study_files/figure-html/replicate_your_study_varcov%20-1.png" width="768" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/vpcPlot.html">vpcPlot</a></span><span class="op">(</span><span class="va">results_without_varcov</span><span class="op">)</span></code></pre></div>
-<p><img src="v10_replicate_study_files/figure-html/replicate_your_study_no_varcov%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main>
 </div>

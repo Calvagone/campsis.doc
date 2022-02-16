@@ -40,9 +40,12 @@
     <a class="dropdown-item" href="../articles/v11_scenarios.html">Scenarios</a>
     <a class="dropdown-item" href="../articles/v12_time_varying_covariates.html">Time-varying covariates</a>
     <a class="dropdown-item" href="../articles/v13_events.html">Interruption events</a>
-    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from litterature</a>
+    <a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a>
     <a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a>
   </div>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -88,7 +91,7 @@
           
           <code><a href="Covariate.html">Covariate()</a></code> 
         </dt>
-        <dd>Create a fixed covariate.</dd>
+        <dd>Create a non time-varying (fixed) covariate.</dd>
       </dl><dl><dt>
           
           <code><a href="Dataset.html">Dataset()</a></code> 
@@ -109,7 +112,7 @@ are the default depot and observed compartments.</dd>
           
           <code><a href="EventCovariate.html">EventCovariate()</a></code> 
         </dt>
-        <dd>Create an event covariate. These covariates can be modified further in the
+        <dd>Create an event covariate. These covariates can be modified further in
 interruption events.</dd>
       </dl><dl><dt>
           
@@ -156,7 +159,7 @@ EVID=2 rows in the exported dataset and will not use interruption events.</dd>
           
           <code><a href="BootstrapDistribution.html">BootstrapDistribution()</a></code> 
         </dt>
-        <dd>Create a bootstrap distribution. During function sampling, PMXsim will generate
+        <dd>Create a bootstrap distribution. During function sampling, CAMPSIS will generate
 values depending on the given data and arguments.</dd>
       </dl><dl><dt>
           
@@ -173,7 +176,7 @@ values depending on the given data and arguments.</dd>
           <code><a href="EtaDistribution.html">EtaDistribution()</a></code> 
         </dt>
         <dd>Create an ETA distribution. The resulting distribution is a
-normal distribution, with mean=0 and sd=sqrt(OMEGA)</dd>
+normal distribution, with mean=0 and sd=sqrt(OMEGA).</dd>
       </dl><dl><dt>
           
           <code><a href="FixedDistribution.html">FixedDistribution()</a></code> 
@@ -307,7 +310,7 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</dd>
           
           <code><a href="vpcPlot.html">vpcPlot()</a></code> 
         </dt>
-        <dd>VPC plot (1 plot per scenario).</dd>
+        <dd>VPC plot.</dd>
       </dl></div><div class="section level2">
       <h2 id="simulate">Simulate<a class="anchor" aria-label="anchor" href="#simulate"></a></h2>
       
@@ -379,7 +382,7 @@ log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</dd>
           
           <code><a href="dataset_config-class.html">dataset_config-class</a></code> 
         </dt>
-        <dd>Dataset config class.</dd>
+        <dd>Dataset configuration class.</dd>
       </dl><dl><dt>
           
           <code><a href="distribution-class.html">distribution-class</a></code> 
@@ -582,7 +585,7 @@ distribution. This is because S4 objects do not accept NULL values.</dd>
           
           <code><a href="retrieveParameterValue.html">retrieveParameterValue()</a></code> 
         </dt>
-        <dd>Retrieve the parameter value (standardised) for the specified parameter name.</dd>
+        <dd>Retrieve the parameter value (standardized) for the specified parameter name.</dd>
       </dl><dl><dt>
           
           <code><a href="setLabel.html">setLabel()</a></code> 

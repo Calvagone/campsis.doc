@@ -67,6 +67,9 @@
     <loc>https://calvagone.github.io/campsis.doc/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/news/index.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/applyCompartmentCharacteristics.html</loc>
   </url>
   <url>
@@ -335,6 +338,9 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessArmColumn.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/preprocessDest.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessDosing.html</loc>
