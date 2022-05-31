@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,22 +109,29 @@
 <li>in the model: lag time is defined for each compartment</li>
 <li>in the dataset: lag time is defined for each bolus or infusion</li>
 </ul>
-<p>In the first case, the simulation engine will take care of the lag time In the second case, CAMPSIS will adapt automatically the time of the dose(s)</p>
+<p>In the first case, the simulation engine will take care of the lag
+time In the second case, CAMPSIS will adapt automatically the time of
+the dose(s)</p>
 <div class="section level3">
 <h3 id="lag-time-implemented-in-model">Lag time implemented in model<a class="anchor" aria-label="anchor" href="#lag-time-implemented-in-model"></a>
 </h3>
-<p>Let’s use a 2-compartment model with absorption compartment to illustrate how this can be achieved.</p>
+<p>Let’s use a 2-compartment model with absorption compartment to
+illustrate how this can be achieved.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
-<p>For this example, we’re going to define a lag time <code>ALAG1</code> for this absorption compartment.</p>
-<p>First let’s create a new parameter <code>ALAG1</code>, log-normally distributed with a median of 2 hours and 20% CV.</p>
+<p>For this example, we’re going to define a lag time <code>ALAG1</code>
+for this absorption compartment.</p>
+<p>First let’s create a new parameter <code>ALAG1</code>, log-normally
+distributed with a median of 2 hours and 20% CV.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/Theta.html" class="external-link">Theta</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"ALAG1"</span>, value<span class="op">=</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span>
 <span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/Omega.html" class="external-link">Omega</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"ALAG1"</span>, value<span class="op">=</span><span class="fl">20</span>, type<span class="op">=</span><span class="st">"cv%"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Now, let’s add an equation to the drug model to define <code>ALAG1</code>.</p>
+<p>Now, let’s add an equation to the drug model to define
+<code>ALAG1</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/Equation.html" class="external-link">Equation</a></span><span class="op">(</span><span class="st">"ALAG1"</span>, <span class="st">"THETA_ALAG1*exp(ETA_ALAG1)"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Finally, we need to tell CAMPSIS that <code>ALAG1</code> corresponds to a lag time.</p>
+<p>Finally, we need to tell CAMPSIS that <code>ALAG1</code> corresponds
+to a lag time.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/LagTime.html" class="external-link">LagTime</a></span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"ALAG1"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>Our persisted drug model would look like this:</p>
@@ -181,22 +188,25 @@
 <span class="co">## A_CENTRAL (CMT=2)</span>
 <span class="co">## A_PERIPHERAL (CMT=3)</span>
 <span class="co">## A_OUTPUT (CMT=4)</span></code></pre>
-<p>Now, let’s now give a simple bolus and simulate with and without <code>ALAG1</code>.</p>
+<p>Now, let’s now give a simple bolus and simulate with and without
+<code>ALAG1</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results_alag</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="va">results_no_alag</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results_alag</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="va">results_no_alag</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_alag</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_no_alag</span>, <span class="st">"CP"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
 <p><img src="v05_lag_time_files/figure-html/lag_time_model%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="lag-time-implemented-in-dataset">Lag time implemented in dataset<a class="anchor" aria-label="anchor" href="#lag-time-implemented-in-dataset"></a>
 </h3>
-<p>The same simulation can be performed by defining a lag time to the bolus in the dataset.</p>
-<p>For this, we need to sample <code>ALAG1</code> values. This can be done as follows:</p>
+<p>The same simulation can be performed by defining a lag time to the
+bolus in the dataset.</p>
+<p>For this, we need to sample <code>ALAG1</code> values. This can be
+done as follows:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ParameterDistribution.html">ParameterDistribution</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, theta<span class="op">=</span><span class="st">"ALAG1"</span>, omega<span class="op">=</span><span class="st">"ALAG1"</span><span class="op">)</span>
 <span class="va">alagValues</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">distribution</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">@</span><span class="va">sampled_values</span></code></pre></div>
@@ -205,10 +215,11 @@
 <code class="sourceCode R"><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, lag<span class="op">=</span><span class="va">alagValues</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Here is an overview of the dataset in its table form if we filter on the doses:</p>
+<p>Here is an overview of the dataset in its table form if we filter on
+the doses:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds2</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/export.html" class="external-link">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/dosingOnly.html">dosingOnly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 x 9</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 9</span></span>
 <span class="co">##      ID   ARM  TIME  EVID   MDV   AMT   CMT  RATE DOSENO</span>
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>     1     0  1.77     1     1  <span style="text-decoration: underline;">1</span>000     1     0      1</span>
@@ -219,7 +230,7 @@
 <span class="co">## <span style="color: #BCBCBC;">6</span>     6     0  1.70     1     1  <span style="text-decoration: underline;">1</span>000     1     0      1</span></code></pre>
 <p>Let’s now simulate this dataset using the original model.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results_alag</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results_alag</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_alag</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
 <p><img src="v05_lag_time_files/figure-html/lag_time_dataset%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
@@ -235,7 +246,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

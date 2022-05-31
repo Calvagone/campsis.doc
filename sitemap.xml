@@ -61,9 +61,6 @@
     <loc>https://calvagone.github.io/campsis.doc/index.html</loc>
   </url>
   <url>
-    <loc>https://calvagone.github.io/campsis.doc/LICENSE-text.html</loc>
-  </url>
-  <url>
     <loc>https://calvagone.github.io/campsis.doc/LICENSE.html</loc>
   </url>
   <url>
@@ -107,6 +104,9 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/checkIIandADDL.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/computeIncrementalProgress.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/ConstantDistribution.html</loc>
@@ -274,6 +274,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/getTimeVaryingCovariates.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/getTimeVaryingVariables.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/importCampsismodToNamespace.html</loc>
   </url>
   <url>
@@ -358,6 +361,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessNocb.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/preprocessNocbvars.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessOutvars.html</loc>
   </url>
   <url>
@@ -370,6 +376,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessSlices.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/preprocessTSLDAndTDOSColumn.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/processArmLabels.html</loc>
   </url>
   <url>
@@ -377,6 +386,9 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/processSimulateArguments.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/processTSLDAndTDOSColumn.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/protocol-class.html</loc>
@@ -442,7 +454,13 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/simulateScenarios.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/SimulationProgress.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/simulation_engine-class.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/simulation_progress-class.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/spaghettiPlot.html</loc>

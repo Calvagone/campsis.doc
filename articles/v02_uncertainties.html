@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -107,7 +107,8 @@
 <div class="section level3">
 <h3 id="simulate-with-all-uncertainties">Simulate with all uncertainties<a class="anchor" aria-label="anchor" href="#simulate-with-all-uncertainties"></a>
 </h3>
-<p>Let’s use a simple 1-compartment model with absorption compartment to illustrate the different levels of uncertainties.</p>
+<p>Let’s use a simple 1-compartment model with absorption compartment to
+illustrate the different levels of uncertainties.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">refModel</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan2_trans2</span>
 <span class="va">refModel</span></code></pre></div>
@@ -148,14 +149,15 @@
 <span class="co">## A_DEPOT (CMT=1)</span>
 <span class="co">## A_CENTRAL (CMT=2)</span>
 <span class="co">## A_OUTPUT (CMT=3)</span></code></pre>
-<p>We’re going to use a very basic dataset. 1000 mg QD shall be administered for a week.</p>
+<p>We’re going to use a very basic dataset. 1000 mg QD shall be
+administered for a week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span><span class="op">*</span><span class="fl">7</span>,by<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
 <p>All subjects are different due to IIV and RUV.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
 <p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
@@ -180,18 +182,13 @@
 <span class="co">##   name index index2 value   fix type</span>
 <span class="co">## 1 PROP     1      1     0 FALSE  var</span>
 <span class="co">## No variance-covariance matrix</span></code></pre>
-<p>In that case, Y (the observed concentration) is identical as CP (the model-simulated plasma concentration).</p>
+<p>In that case, Y (the observed concentration) is identical as CP (the
+model-simulated plasma concentration).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
 <p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png" width="768" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
 <p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
@@ -199,7 +196,7 @@
 <h3 id="simulate-without-ruv-and-iiv">Simulate without RUV and IIV<a class="anchor" aria-label="anchor" href="#simulate-without-ruv-and-iiv"></a>
 </h3>
 <p>Disabling RUV and IIV is done as follows:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IIV"</span>, <span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span>
 <span class="va">model</span><span class="op">@</span><span class="va">parameters</span></code></pre></div>
 <pre><code><span class="co">## THETA's:</span>
@@ -217,15 +214,9 @@
 <span class="co">## 1 PROP     1      1     0 FALSE  var</span>
 <span class="co">## No variance-covariance matrix</span></code></pre>
 <p>Now, the typical profile is shown for all subjects.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, dest<span class="op">=</span><span class="st">"RxODE"</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span>
-<span class="co">## <span style="color: #00BBBB;">i</span> zero 'sigma', no unexplained variability</span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"Y"</span><span class="op">)</span></code></pre></div>
 <p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main>
@@ -240,7 +231,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

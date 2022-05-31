@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.2.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.3.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,40 +104,49 @@
 
     
     
-<p>This vignette shows how simple dose adaptations can be implemented.</p>
+<p>This vignette shows how simple dose adaptations can be
+implemented.</p>
 <div class="section level3">
 <h3 id="adapt-the-dose-based-on-a-covariate">Adapt the dose based on a covariate<a class="anchor" aria-label="anchor" href="#adapt-the-dose-based-on-a-covariate"></a>
 </h3>
-<p>Assume that your drug needs to be dosed according to the subject’s weight, for instance 0.5 mg per kg. To illustrate this, let’s use our 2-compartment PK model with absorption compartment.</p>
+<p>Assume that your drug needs to be dosed according to the subject’s
+weight, for instance 0.5 mg per kg. To illustrate this, let’s use our
+2-compartment PK model with absorption compartment.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
-<p>We’re going to create a dataset with 4 individuals, weighing respectively 40, 60, 80 and 100 kg.</p>
+<p>We’re going to create a dataset with 4 individuals, weighing
+respectively 40, 60, 80 and 100 kg.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">4</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="co"># 0.5mg / kg</span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">24</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span>
   <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"WT"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">60</span>, <span class="fl">80</span>, <span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Our dataset is almost ready. We just have to define the dose adaptation formula. This is done as follows:</p>
+<p>Our dataset is almost ready. We just have to define the dose
+adaptation formula. This is done as follows:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/DoseAdaptation.html">DoseAdaptation</a></span><span class="op">(</span><span class="st">"AMT*WT"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
-<p>Let’s simulate this simple dataset. In order to check that the dose adaptation formula was well applied, we set the argument <code>dosing</code> to TRUE. Dosing rows will then be returned.</p>
+<p>Let’s simulate this simple dataset. In order to check that the dose
+adaptation formula was well applied, we set the argument
+<code>dosing</code> to TRUE. Dosing rows will then be returned.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="st">"IIV"</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, dosing<span class="op">=</span><span class="cn">TRUE</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span>, <span class="st">"ID"</span><span class="op">)</span></code></pre></div>
 <p><img src="v09_dose_adaptation_files/figure-html/dose_adaptation_bw%20-1.png" width="768" style="display: block; margin: auto;"></p>
-<p>Let’s now have a look at the dosing information which is returned.</p>
+<p>Let’s now have a look at the dosing information which is
+returned.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/dosingOnly.html">dosingOnly</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 x 20</span></span>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 4 × 20</span></span>
 <span class="co">##      ID  EVID   CMT   AMT  TIME   ARM    KA    CL    V2    V3     Q    S2     F</span>
 <span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
 <span class="co">## <span style="color: #BCBCBC;">1</span>     1     1     1    20     0     0     1     5    80    20     4    80     0</span>
 <span class="co">## <span style="color: #BCBCBC;">2</span>     2     1     1    30     0     0     1     5    80    20     4    80     0</span>
 <span class="co">## <span style="color: #BCBCBC;">3</span>     3     1     1    40     0     0     1     5    80    20     4    80     0</span>
 <span class="co">## <span style="color: #BCBCBC;">4</span>     4     1     1    50     0     0     1     5    80    20     4    80     0</span>
-<span class="co">## <span style="color: #949494;"># ... with 7 more variables: CP &lt;dbl&gt;, OBS_CP &lt;dbl&gt;, Y &lt;dbl&gt;, A_DEPOT &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;"># … with 7 more variables: CP &lt;dbl&gt;, OBS_CP &lt;dbl&gt;, Y &lt;dbl&gt;, A_DEPOT &lt;dbl&gt;,</span></span>
 <span class="co">## <span style="color: #949494;">#   A_CENTRAL &lt;dbl&gt;, A_PERIPHERAL &lt;dbl&gt;, A_OUTPUT &lt;dbl&gt;</span></span></code></pre>
-<p>This looks great! The respective amounts that were given are indeed 20, 30, 40 and 50 mg!</p>
+<p>This looks great! The respective amounts that were given are indeed
+20, 30, 40 and 50 mg!</p>
 </div>
   </main>
 </div>
@@ -151,7 +160,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
     </footer>

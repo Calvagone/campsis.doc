@@ -1,5 +1,5 @@
-pandoc: 2.14.0.3
-pkgdown: 2.0.2
+pandoc: 2.17.1.1
+pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   campsis: campsis.html
@@ -18,7 +18,7 @@ articles:
   v13_events: v13_events.html
   v14_complex_pkpd_models: v14_complex_pkpd_models.html
   v15_pkpd_model_library: v15_pkpd_model_library.html
-last_built: 2022-02-16T09:34Z
+last_built: 2022-05-31T12:58Z
 urls:
   reference: https://calvagone.github.io/campsis.doc/reference
   article: https://calvagone.github.io/campsis.doc/articles
