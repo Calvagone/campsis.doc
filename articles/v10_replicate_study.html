@@ -112,7 +112,7 @@
 model without absorption compartment which has been fitted on some
 data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">my_model1</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">other</span><span class="op">$</span><span class="va">my_model1</span></code></pre></div>
 <p>It contains a variance-covariance matrix with the uncertainty on all
 the estimated parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -140,35 +140,19 @@ the estimated parameters.</p>
 <span class="co">## </span>
 <span class="co">## </span>
 <span class="co">## THETA's:</span>
-<span class="co">##   name index    value   fix</span>
-<span class="co">## 1   CL     1  4.76756 FALSE</span>
-<span class="co">## 2   V1     2 82.64090 FALSE</span>
-<span class="co">## 3   V2     3 19.53960 FALSE</span>
-<span class="co">## 4    Q     4  3.81451 FALSE</span>
+<span class="co">##   name index    value   fix        se      rse%</span>
+<span class="co">## 1   CL     1  4.76756 FALSE 0.1163899  2.441288</span>
+<span class="co">## 2   V1     2 82.64090 FALSE 1.9256999  2.330202</span>
+<span class="co">## 3   V2     3 19.53960 FALSE 1.5382328  7.872386</span>
+<span class="co">## 4    Q     4  3.81451 FALSE 0.4726151 12.389929</span>
 <span class="co">## OMEGA's:</span>
-<span class="co">##   name index index2     value   fix type same</span>
-<span class="co">## 1   CL     1      1 0.0222955 FALSE  var   NA</span>
-<span class="co">## 2   V1     2      2 0.0182225 FALSE  var   NA</span>
+<span class="co">##   name index index2     value   fix type same          se     rse%</span>
+<span class="co">## 1   CL     1      1 0.0222955 FALSE  var   NA 0.004867504 21.83178</span>
+<span class="co">## 2   V1     2      2 0.0182225 FALSE  var   NA 0.005172881 28.38733</span>
 <span class="co">## SIGMA's:</span>
-<span class="co">##   name index index2     value   fix type</span>
-<span class="co">## 1 PROP     1      1 0.0244587 FALSE  var</span>
-<span class="co">## Variance-covariance matrix:</span>
-<span class="co">##                THETA_CL     THETA_V1     THETA_V2      THETA_Q   SIGMA_PROP</span>
-<span class="co">## THETA_CL    1.35466e-02 -1.09688e-03 -0.034486800 -5.62167e-04  1.49242e-05</span>
-<span class="co">## THETA_V1   -1.09688e-03  3.70832e+00  0.339263000 -2.44854e-01 -3.91518e-05</span>
-<span class="co">## THETA_V2   -3.44868e-02  3.39263e-01  2.366160000 -1.08175e-01  1.92260e-04</span>
-<span class="co">## THETA_Q    -5.62167e-04 -2.44854e-01 -0.108175000  2.23365e-01  4.07924e-05</span>
-<span class="co">## SIGMA_PROP  1.49242e-05 -3.91518e-05  0.000192260  4.07924e-05  6.60412e-07</span>
-<span class="co">## OMEGA_CL    1.76034e-04  1.10661e-04 -0.000612518 -6.66290e-07  1.43299e-07</span>
-<span class="co">## OMEGA_V1    2.60655e-05  1.02673e-03 -0.000965465  1.58447e-04 -7.96979e-07</span>
-<span class="co">##                OMEGA_CL     OMEGA_V1</span>
-<span class="co">## THETA_CL    1.76034e-04  2.60655e-05</span>
-<span class="co">## THETA_V1    1.10661e-04  1.02673e-03</span>
-<span class="co">## THETA_V2   -6.12518e-04 -9.65465e-04</span>
-<span class="co">## THETA_Q    -6.66290e-07  1.58447e-04</span>
-<span class="co">## SIGMA_PROP  1.43299e-07 -7.96979e-07</span>
-<span class="co">## OMEGA_CL    2.36926e-05 -5.09976e-06</span>
-<span class="co">## OMEGA_V1   -5.09976e-06  2.67587e-05</span>
+<span class="co">##   name index index2     value   fix type           se    rse%</span>
+<span class="co">## 1 PROP     1      1 0.0244587 FALSE  var 0.0008126574 3.32257</span>
+<span class="co">## Variance-covariance matrix available (see ?getVarCov)</span>
 <span class="co">## </span>
 <span class="co">## Compartments:</span>
 <span class="co">## A_CENTRAL (CMT=1)</span>

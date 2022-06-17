@@ -116,7 +116,7 @@
 </h3>
 <p>Load 2-compartment PK model from built-in model library:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pk</span><span class="op">$</span><span class="va">`2cpt_fo`</span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="create-dataset">Create dataset<a class="anchor" aria-label="anchor" href="#create-dataset"></a>
@@ -135,28 +135,29 @@ for 3 days and observe every hour.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></code></pre></div>
-<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 17</span></span>
-<span class="co">##      ID  TIME   ARM    KA    CL    V2    V3     Q    S2     F    CP OBS_CP     Y</span>
-<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="co">## <span style="color: #BCBCBC;">1</span>     1     0     0 0.974  6.20  92.5  25.4  3.62  92.5  0     0      0     0   </span>
-<span class="co">## <span style="color: #BCBCBC;">2</span>     1     1     0 0.974  6.20  92.5  25.4  3.62  92.5  6.34  6.34   5.42  5.42</span>
-<span class="co">## <span style="color: #BCBCBC;">3</span>     1     2     0 0.974  6.20  92.5  25.4  3.62  92.5  8.12  8.12   9.14  9.14</span>
-<span class="co">## <span style="color: #BCBCBC;">4</span>     1     3     0 0.974  6.20  92.5  25.4  3.62  92.5  8.28  8.28  10.4  10.4 </span>
-<span class="co">## <span style="color: #BCBCBC;">5</span>     1     4     0 0.974  6.20  92.5  25.4  3.62  92.5  7.89  7.89   8.13  8.13</span>
-<span class="co">## <span style="color: #BCBCBC;">6</span>     1     5     0 0.974  6.20  92.5  25.4  3.62  92.5  7.35  7.35  10.2  10.2 </span>
-<span class="co">## <span style="color: #949494;"># … with 4 more variables: A_DEPOT &lt;dbl&gt;, A_CENTRAL &lt;dbl&gt;, A_PERIPHERAL &lt;dbl&gt;,</span></span>
-<span class="co">## <span style="color: #949494;">#   A_OUTPUT &lt;dbl&gt;</span></span></code></pre>
+<pre><code><span class="co">## <span style="color: #949494;"># A tibble: 6 × 22</span></span>
+<span class="co">##      ID  TIME   ARM  TVKA  TVVC  TVVP   TVQ  TVCL TVPROP_RUV    KA    VC    VP</span>
+<span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="co">## <span style="color: #BCBCBC;">1</span>     1     0     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #BCBCBC;">2</span>     1     1     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #BCBCBC;">3</span>     1     2     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #BCBCBC;">4</span>     1     3     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #BCBCBC;">5</span>     1     4     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #BCBCBC;">6</span>     1     5     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span>
+<span class="co">## <span style="color: #949494;"># … with 10 more variables: Q &lt;dbl&gt;, CL &lt;dbl&gt;, PROP_RUV &lt;dbl&gt;, CONC &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   IPRED &lt;dbl&gt;, W &lt;dbl&gt;, Y &lt;dbl&gt;, A_ABS &lt;dbl&gt;, A_CENTRAL &lt;dbl&gt;,</span></span>
+<span class="co">## <span style="color: #949494;">#   A_PERIPHERAL &lt;dbl&gt;</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="plot-results">Plot results<a class="anchor" aria-label="anchor" href="#plot-results"></a>
 </h3>
 <p>Plot these results:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></code></pre></div>
 <p><img src="campsis_files/figure-html/get_started_spaguetti_plot-1.png" width="768" style="display: block; margin: auto;"></p>
 <p>A shaded plot may also be used:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></code></pre></div>
 <p><img src="campsis_files/figure-html/get_started_shaded_plot-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -179,7 +180,7 @@ as follows:</p>
 <span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span><span class="op">)</span><span class="op">)</span>
 
 <span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
-<span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span>, scenarios<span class="op">=</span><span class="st">"ARM"</span><span class="op">)</span></code></pre></div>
+<span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, scenarios<span class="op">=</span><span class="st">"ARM"</span><span class="op">)</span></code></pre></div>
 <p><img src="campsis_files/figure-html/get_started_2arms_plot-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">

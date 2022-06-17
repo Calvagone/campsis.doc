@@ -121,7 +121,7 @@ the dataset.</p>
 <p>Let’s use a 2-compartment model without absorption compartment to
 illustrate how this can be achieved.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan3_trans4</span></code></pre></div>
+<code class="sourceCode R"><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan3_trans4</span></code></pre></div>
 <p>For this example, we’re going to define a lag time <code>D1</code>
 for this absorption compartment.</p>
 <p>First let’s create a new parameter <code>D1</code>, log-normally
@@ -226,7 +226,7 @@ the doses:</p>
 <span class="co">## <span style="color: #BCBCBC;">6</span>     6     0     0     1     1  <span style="text-decoration: underline;">1</span>000     1  235.      1</span></code></pre>
 <p>Let’s now simulate this dataset using the original model.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">results_d1</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">results_d1</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://rdrr.io/pkg/campsismod/man/grapes-greater-than-grapes.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_d1</span>, <span class="st">"CP"</span><span class="op">)</span></code></pre></div>
 <p><img src="v06_infusions_files/figure-html/infusion_dataset%20-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>

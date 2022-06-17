@@ -110,13 +110,13 @@ the model library that can be linked to an existing PK model.</p>
 models will be linked to our reference 2-compartment PK model from the
 library.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pk</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
+<code class="sourceCode R"><span class="va">pk</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span></code></pre></div>
 <div class="section level3">
 <h3 id="direct-effect-model">Direct-effect model<a class="anchor" aria-label="anchor" href="#direct-effect-model"></a>
 </h3>
 <p>Load the direct-effect model from the model library:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">direct_effect_model</span>
+<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pd</span><span class="op">$</span><span class="va">direct_effect_model</span>
 <span class="va">pd</span></code></pre></div>
 <pre><code><span class="co">## [MAIN]</span>
 <span class="co">## EMAX=THETA_EMAX*exp(ETA_EMAX)</span>
@@ -166,7 +166,7 @@ library.</p>
 </h3>
 <p>Load the effect-compartment model from the model library:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">effect_cmt_model</span>
+<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pd</span><span class="op">$</span><span class="va">effect_cmt_model</span>
 <span class="va">pd</span></code></pre></div>
 <pre><code><span class="co">## [MAIN]</span>
 <span class="co">## KE0=THETA_KE0*exp(ETA_KE0)</span>
@@ -208,7 +208,7 @@ library.</p>
 </h3>
 <p>Load the transit-compartment model from the model library:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">transit_cmt_model</span>
+<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pd</span><span class="op">$</span><span class="va">transit_cmt_model</span>
 <span class="va">pd</span></code></pre></div>
 <pre><code><span class="co">## [MAIN]</span>
 <span class="co">## BASE=THETA_BASE*exp(ETA_BASE)</span>
@@ -277,7 +277,7 @@ library.</p>
 <p>Load one of the 4 indirect-response model (IRM) present in the model
 library:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_library</span><span class="op">$</span><span class="va">irm_kout_inhibition</span>
+<code class="sourceCode R"><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pd</span><span class="op">$</span><span class="va">irm_kout_inhibition</span>
 <span class="va">pd</span></code></pre></div>
 <pre><code><span class="co">## [MAIN]</span>
 <span class="co">## IC50=THETA_IC50*exp(ETA_IC50)</span>
