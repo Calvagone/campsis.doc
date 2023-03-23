@@ -55,6 +55,12 @@
     <loc>https://calvagone.github.io/campsis.doc/articles/v15_pkpd_model_library.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/articles/v16_progress_bar.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/articles/v17_run_simulation_in_parallel.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/authors.html</loc>
   </url>
   <url>
@@ -103,6 +109,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/bootstrap_distribution-class.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/campsis_handler.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/checkIIandADDL.html</loc>
   </url>
   <url>
@@ -146,6 +155,12 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/dataset_config-class.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/Declare.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/declare_settings-class.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/DiscreteDistribution.html</loc>
@@ -226,6 +241,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/generateIIV.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/generateIIV_.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getCovariates.html</loc>
   </url>
   <url>
@@ -239,6 +257,9 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getFixedCovariates.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/getFurrrScheduling.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getInitialConditions.html</loc>
@@ -268,6 +289,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/getSimulationEngineType.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/getSplittingConfiguration.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getTimes.html</loc>
   </url>
   <url>
@@ -275,6 +299,12 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getTimeVaryingVariables.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/Hardware.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/hardware_settings-class.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/importCampsismodToNamespace.html</loc>
@@ -289,10 +319,16 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/Infusion.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/internal_settings-class.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/IOV.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/isEmptyBootstrap.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/leftJoinIIV.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/length-arm-method.html</loc>
@@ -308,6 +344,12 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/mrgsolve_engine-class.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/NOCB.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/nocb_settings-class.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/NormalDistribution.html</loc>
@@ -373,6 +415,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessScenarios.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/preprocessSettings.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/preprocessSlices.html</loc>
   </url>
   <url>
@@ -418,6 +463,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/sampleTimeVaryingCovariates.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/scatterPlot.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/scenario-class.html</loc>
   </url>
   <url>
@@ -437,6 +485,15 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/setSubjects.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/Settings.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/setupPlanDefault.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/setupPlanSequential.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/shadedPlot.html</loc>
@@ -463,7 +520,19 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/simulation_progress-class.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/simulation_settings-class.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/Solver.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/solver_settings-class.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/spaghettiPlot.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/splitDataset.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/TimeVaryingCovariate.html</loc>
