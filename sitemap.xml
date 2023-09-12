@@ -244,6 +244,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/generateIIV_.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/getColumn.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/getCovariates.html</loc>
   </url>
   <url>
@@ -560,6 +563,9 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/UniformDistribution.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/uniteColumns.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/VPC.html</loc>
