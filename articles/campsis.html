@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.2</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,18 +137,17 @@ for 3 days and observe every hour.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 22</span></span></span>
-<span><span class="co">##      ID  TIME   ARM  TVKA  TVVC  TVVP   TVQ  TVCL TVPROP_RUV    KA    VC    VP</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1     0     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>     1     1     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>     1     2     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span>     1     3     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span>     1     4     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">6</span>     1     5     0     1    60    10     2     3        0.1 0.960  83.8  12.5</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 10 more variables: Q &lt;dbl&gt;, CL &lt;dbl&gt;, PROP_RUV &lt;dbl&gt;, CONC &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   IPRED &lt;dbl&gt;, W &lt;dbl&gt;, Y &lt;dbl&gt;, A_ABS &lt;dbl&gt;, A_CENTRAL &lt;dbl&gt;,</span></span></span>
-<span><span class="co">## <span style="color: #949494;">#   A_PERIPHERAL &lt;dbl&gt;</span></span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 20</span></span></span>
+<span><span class="co">##      ID  TIME   ARM TVBIO  TVKA  TVVC  TVVP   TVQ  TVCL   BIO    KA    VC    VP</span></span>
+<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1     0     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span>     1     1     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span>     1     2     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span>     1     3     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span>     1     4     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">6</span>     1     5     0     1     1    10    40    20     3     1 0.960  14.0  50.2</span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 7 more variables: Q &lt;dbl&gt;, CL &lt;dbl&gt;, CONC &lt;dbl&gt;, CONC_ERR &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;">#   A_ABS &lt;dbl&gt;, A_CENTRAL &lt;dbl&gt;, A_PERIPHERAL &lt;dbl&gt;</span></span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="plot-results">Plot results<a class="anchor" aria-label="anchor" href="#plot-results"></a>
@@ -182,7 +181,7 @@ as follows:</p>
 <span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, scenarios<span class="op">=</span><span class="st">"ARM"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, colour<span class="op">=</span><span class="st">"ARM"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="campsis_files/figure-html/get_started_2arms_plot-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">

@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.2</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,20 +132,20 @@ adaptation formula was well applied, we set the argument
 <code>dosing</code> to TRUE. Dosing rows will then be returned.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="st">"IIV"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, dosing<span class="op">=</span><span class="cn">TRUE</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span>, <span class="st">"ID"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"ID"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v09_dose_adaptation_files/figure-html/dose_adaptation_bw%20-1.png" width="768" style="display: block; margin: auto;"></p>
 <p>Let’s now have a look at the dosing information which is
 returned.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/dosingOnly.html">dosingOnly</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4 × 20</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4 × 19</span></span></span>
 <span><span class="co">##      ID  EVID   CMT   AMT  TIME   ARM    KA    CL    V2    V3     Q    S2     F</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>     1     1     1    20     0     0     1     5    80    20     4    80     0</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span>     2     1     1    30     0     0     1     5    80    20     4    80     0</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span>     3     1     1    40     0     0     1     5    80    20     4    80     0</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">4</span>     4     1     1    50     0     0     1     5    80    20     4    80     0</span></span>
-<span><span class="co">## <span style="color: #949494;"># ℹ 7 more variables: CP &lt;dbl&gt;, OBS_CP &lt;dbl&gt;, Y &lt;dbl&gt;, A_DEPOT &lt;dbl&gt;,</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 6 more variables: CONC &lt;dbl&gt;, CONC_ERR &lt;dbl&gt;, A_DEPOT &lt;dbl&gt;,</span></span></span>
 <span><span class="co">## <span style="color: #949494;">#   A_CENTRAL &lt;dbl&gt;, A_PERIPHERAL &lt;dbl&gt;, A_OUTPUT &lt;dbl&gt;</span></span></span></code></pre>
 <p>This looks great! The respective amounts that were given are indeed
 20, 30, 40 and 50 mg!</p>

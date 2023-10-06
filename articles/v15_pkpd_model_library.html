@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.2</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,17 +132,17 @@ library.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## THETA's:</span></span>
-<span><span class="co">##    name index value   fix</span></span>
-<span><span class="co">## 1  EMAX     1 100.0 FALSE</span></span>
-<span><span class="co">## 2  EC50     2  10.0 FALSE</span></span>
-<span><span class="co">## 3 GAMMA     3   1.5 FALSE</span></span>
-<span><span class="co">## 4    E0     4  20.0 FALSE</span></span>
+<span><span class="co">##    name index value   fix                        label  unit</span></span>
+<span><span class="co">## 1  EMAX     1 100.0 FALSE               Maximum effect  &lt;NA&gt;</span></span>
+<span><span class="co">## 2  EC50     2  10.0 FALSE Concentration at 50% of EMAX ng/mL</span></span>
+<span><span class="co">## 3 GAMMA     3   1.5 FALSE             Hill coefficient  &lt;NA&gt;</span></span>
+<span><span class="co">## 4    E0     4  20.0 FALSE                     Baseline  &lt;NA&gt;</span></span>
 <span><span class="co">## OMEGA's:</span></span>
-<span><span class="co">##    name index index2 value   fix type same</span></span>
-<span><span class="co">## 1  EMAX     1      1    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 2  EC50     2      2    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 3 GAMMA     3      3    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 4    E0     4      4    10 FALSE  cv%   NA</span></span>
+<span><span class="co">##    name index index2 value   fix type</span></span>
+<span><span class="co">## 1  EMAX     1      1    10 FALSE  cv%</span></span>
+<span><span class="co">## 2  EC50     2      2    10 FALSE  cv%</span></span>
+<span><span class="co">## 3 GAMMA     3      3    10 FALSE  cv%</span></span>
+<span><span class="co">## 4    E0     4      4    10 FALSE  cv%</span></span>
 <span><span class="co">## SIGMA's:</span></span>
 <span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 0</span></span></span>
 <span><span class="co">## No variance-covariance matrix</span></span>
@@ -160,7 +160,7 @@ library.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">168</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v15_pkpd_model_library_files/figure-html/direct_effect_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -171,25 +171,38 @@ library.</p>
 <code class="sourceCode R"><span><span class="va">pd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pd</span><span class="op">$</span><span class="va">effect_cmt_model</span></span>
 <span><span class="va">pd</span></span></code></pre></div>
 <pre><code><span><span class="co">## [MAIN]</span></span>
+<span><span class="co">## EMAX=THETA_EMAX*exp(ETA_EMAX)</span></span>
+<span><span class="co">## EC50=THETA_EC50*exp(ETA_EC50)</span></span>
+<span><span class="co">## GAMMA=THETA_GAMMA*exp(ETA_GAMMA)</span></span>
+<span><span class="co">## E0=THETA_E0*exp(ETA_E0)</span></span>
 <span><span class="co">## KE0=THETA_KE0*exp(ETA_KE0)</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [ODE]</span></span>
 <span><span class="co">## PK_CONC=10</span></span>
-<span><span class="co">## d/dt(A_EFFECT)=KE0*(PK_CONC - A_EFFECT)</span></span>
+<span><span class="co">## d/dt(A_ECONC)=KE0*(PK_CONC - A_ECONC)</span></span>
+<span><span class="co">## EFFECT=E0 + EMAX*pow(A_ECONC, GAMMA)/(pow(EC50, GAMMA) + pow(A_ECONC, GAMMA))</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## THETA's:</span></span>
-<span><span class="co">##   name index value   fix</span></span>
-<span><span class="co">## 1  KE0     1  0.25 FALSE</span></span>
+<span><span class="co">##    name index value   fix                         label  unit</span></span>
+<span><span class="co">## 1  EMAX     1 100.0 FALSE                Maximum effect  &lt;NA&gt;</span></span>
+<span><span class="co">## 2  EC50     2  10.0 FALSE  Concentration at 50% of EMAX ng/mL</span></span>
+<span><span class="co">## 3 GAMMA     3   1.5 FALSE              Hill coefficient  &lt;NA&gt;</span></span>
+<span><span class="co">## 4    E0     4  20.0 FALSE                      Baseline  &lt;NA&gt;</span></span>
+<span><span class="co">## 5   KE0     5   0.5 FALSE Effect compartment delay rate   1/h</span></span>
 <span><span class="co">## OMEGA's:</span></span>
-<span><span class="co">##   name index index2 value   fix type same</span></span>
-<span><span class="co">## 1  KE0     1      1    15 FALSE  cv%   NA</span></span>
+<span><span class="co">##    name index index2 value   fix type</span></span>
+<span><span class="co">## 1  EMAX     1      1    10 FALSE  cv%</span></span>
+<span><span class="co">## 2  EC50     2      2    10 FALSE  cv%</span></span>
+<span><span class="co">## 3 GAMMA     3      3    10 FALSE  cv%</span></span>
+<span><span class="co">## 4    E0     4      4    10 FALSE  cv%</span></span>
+<span><span class="co">## 5   KE0     5      5    10 FALSE  cv%</span></span>
 <span><span class="co">## SIGMA's:</span></span>
 <span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 0</span></span></span>
 <span><span class="co">## No variance-covariance matrix</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## Compartments:</span></span>
-<span><span class="co">## A_EFFECT (CMT=1)</span></span></code></pre>
+<span><span class="co">## A_ECONC (CMT=1)</span></span></code></pre>
 <p>Link the PD model to the PK model as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pkpd</span> <span class="op">&lt;-</span> <span class="va">pk</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="va">pd</span><span class="op">)</span></span>
@@ -202,7 +215,7 @@ library.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">36</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v15_pkpd_model_library_files/figure-html/effect_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -243,11 +256,11 @@ library.</p>
 <span><span class="co">## 3   MTT     3 1.0e+02 FALSE</span></span>
 <span><span class="co">## 4 SLOPE     4 5.0e-03 FALSE</span></span>
 <span><span class="co">## OMEGA's:</span></span>
-<span><span class="co">##    name index index2 value   fix type same</span></span>
-<span><span class="co">## 1  BASE     1      1    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 2 POWER     2      2    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 3   MTT     3      3    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 4 SLOPE     4      4    10 FALSE  cv%   NA</span></span>
+<span><span class="co">##    name index index2 value   fix type</span></span>
+<span><span class="co">## 1  BASE     1      1    10 FALSE  cv%</span></span>
+<span><span class="co">## 2 POWER     2      2    10 FALSE  cv%</span></span>
+<span><span class="co">## 3   MTT     3      3    10 FALSE  cv%</span></span>
+<span><span class="co">## 4 SLOPE     4      4    10 FALSE  cv%</span></span>
 <span><span class="co">## SIGMA's:</span></span>
 <span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 0</span></span></span>
 <span><span class="co">## No variance-covariance matrix</span></span>
@@ -270,7 +283,7 @@ library.</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_CIRC"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_CIRC"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v15_pkpd_model_library_files/figure-html/transit_compartment_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -283,28 +296,32 @@ library:</p>
 <span><span class="va">pd</span></span></code></pre></div>
 <pre><code><span><span class="co">## [MAIN]</span></span>
 <span><span class="co">## IC50=THETA_IC50*exp(ETA_IC50)</span></span>
-<span><span class="co">## KIN=THETA_KIN*exp(ETA_KIN)</span></span>
+<span><span class="co">## IMAX=THETA_IMAX*exp(ETA_IMAX)</span></span>
+<span><span class="co">## BL=THETA_BL  *exp(ETA_BL)</span></span>
 <span><span class="co">## KOUT=THETA_KOUT*exp(ETA_KOUT)</span></span>
+<span><span class="co">## KIN=BL*KOUT</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [ODE]</span></span>
 <span><span class="co">## PK_CONC=10</span></span>
-<span><span class="co">## COEF=1 - PK_CONC/(IC50 + PK_CONC)</span></span>
+<span><span class="co">## COEF=1 - IMAX*PK_CONC/(IC50 + PK_CONC)</span></span>
 <span><span class="co">## d/dt(A_EFFECT)=KIN - KOUT*COEF*A_EFFECT</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## [INIT]</span></span>
-<span><span class="co">## A_EFFECT=KIN/KOUT</span></span>
+<span><span class="co">## A_EFFECT=BL</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## THETA's:</span></span>
-<span><span class="co">##   name index value   fix</span></span>
-<span><span class="co">## 1 IC50     1 15.00 FALSE</span></span>
-<span><span class="co">## 2  KIN     2  0.05 FALSE</span></span>
-<span><span class="co">## 3 KOUT     3  0.01 FALSE</span></span>
+<span><span class="co">##   name index value   fix                        label  unit</span></span>
+<span><span class="co">## 1 IC50     1  15.0 FALSE Concentration at 50% of IMAX ng/mL</span></span>
+<span><span class="co">## 2 KOUT     2   0.1 FALSE  Rate of decline of response   1/h</span></span>
+<span><span class="co">## 3 IMAX     3   1.0 FALSE           Maximum inhibition  &lt;NA&gt;</span></span>
+<span><span class="co">## 4   BL     4 100.0 FALSE                     Baseline  &lt;NA&gt;</span></span>
 <span><span class="co">## OMEGA's:</span></span>
-<span><span class="co">##   name index index2 value   fix type same</span></span>
-<span><span class="co">## 1 IC50     1      1    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 2  KIN     2      2    10 FALSE  cv%   NA</span></span>
-<span><span class="co">## 3 KOUT     3      3    10 FALSE  cv%   NA</span></span>
+<span><span class="co">##   name index index2 value   fix type</span></span>
+<span><span class="co">## 1 IC50     1      1    25 FALSE  cv%</span></span>
+<span><span class="co">## 2 KOUT     2      2    25 FALSE  cv%</span></span>
+<span><span class="co">## 3 IMAX     3      3     0 FALSE  cv%</span></span>
+<span><span class="co">## 4   BL     4      4    25 FALSE  cv%</span></span>
 <span><span class="co">## SIGMA's:</span></span>
 <span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 0</span></span></span>
 <span><span class="co">## No variance-covariance matrix</span></span>
@@ -323,7 +340,7 @@ library:</p>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/campsismod/man/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fl">0</span><span class="op">:</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">pkpd</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CP"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"A_EFFECT"</span><span class="op">)</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="v15_pkpd_model_library_files/figure-html/indirect_response_model-1.png" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

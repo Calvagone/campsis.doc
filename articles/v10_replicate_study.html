@@ -33,7 +33,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.4.2</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.5.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -114,7 +114,7 @@
 model without absorption compartment which has been fitted on some
 data.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">other</span><span class="op">$</span><span class="va">my_model1</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">testing</span><span class="op">$</span><span class="va">other</span><span class="op">$</span><span class="va">my_model1</span></span></code></pre></div>
 <p>It contains a variance-covariance matrix with the uncertainty on all
 the estimated parameters.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -148,9 +148,9 @@ the estimated parameters.</p>
 <span><span class="co">## 3   V2     3 19.53960 FALSE 1.5382328  7.872386</span></span>
 <span><span class="co">## 4    Q     4  3.81451 FALSE 0.4726151 12.389929</span></span>
 <span><span class="co">## OMEGA's:</span></span>
-<span><span class="co">##   name index index2     value   fix type same          se     rse%</span></span>
-<span><span class="co">## 1   CL     1      1 0.0222955 FALSE  var   NA 0.004867504 21.83178</span></span>
-<span><span class="co">## 2   V1     2      2 0.0182225 FALSE  var   NA 0.005172881 28.38733</span></span>
+<span><span class="co">##   name index index2     value   fix type          se     rse%</span></span>
+<span><span class="co">## 1   CL     1      1 0.0222955 FALSE  var 0.004867504 21.83178</span></span>
+<span><span class="co">## 2   V1     2      2 0.0182225 FALSE  var 0.005172881 28.38733</span></span>
 <span><span class="co">## SIGMA's:</span></span>
 <span><span class="co">##   name index index2     value   fix type           se    rse%</span></span>
 <span><span class="co">## 1 PROP     1      1 0.0244587 FALSE  var 0.0008126574 3.32257</span></span>
@@ -176,6 +176,7 @@ after each simulation on the output data frame.</p>
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, replicates<span class="op">=</span><span class="fl">10</span>, outfun<span class="op">=</span><span class="op">~</span><span class="fu"><a href="../reference/PI.html">PI</a></span><span class="op">(</span><span class="va">.x</span>, output<span class="op">=</span><span class="st">"Y"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 4</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># Groups:   TIME [2]</span></span></span>
 <span><span class="co">##   replicate  TIME metric value</span></span>
 <span><span class="co">##       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span>         1     0 med     0   </span></span>
