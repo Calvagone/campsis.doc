@@ -352,6 +352,9 @@
     <loc>https://calvagone.github.io/campsis.doc/reference/mrgsolve_engine-class.html</loc>
   </url>
   <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/nhanes.html</loc>
+  </url>
+  <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/NOCB.html</loc>
   </url>
   <url>
@@ -440,6 +443,12 @@
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/processTSLDAndTDOSColumn.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/Progress.html</loc>
+  </url>
+  <url>
+    <loc>https://calvagone.github.io/campsis.doc/reference/progress_settings-class.html</loc>
   </url>
   <url>
     <loc>https://calvagone.github.io/campsis.doc/reference/protocol-class.html</loc>
