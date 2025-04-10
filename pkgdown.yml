@@ -1,6 +1,6 @@
-pandoc: '3.2'
-pkgdown: 2.1.1
-pkgdown_sha: ~
+pandoc: 2.9.2.1
+pkgdown: 2.1.1.9000
+pkgdown_sha: 66477c0dbb4f4925ec872cf64d5eaa316cc70bac
 articles:
   campsis: campsis.html
   v01_dataset: v01_dataset.html
@@ -20,7 +20,7 @@ articles:
   v15_pkpd_model_library: v15_pkpd_model_library.html
   v16_progress_bar: v16_progress_bar.html
   v17_run_simulation_in_parallel: v17_run_simulation_in_parallel.html
-last_built: 2024-11-25T13:47Z
+last_built: 2025-04-10T08:17Z
 urls:
   reference: https://calvagone.github.io/campsis.doc/reference
   article: https://calvagone.github.io/campsis.doc/articles
