@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v01_dataset_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Create your dataset</h1>
             
@@ -98,51 +98,71 @@
 <p>See all methods that can be applied on a dataset:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/methods.html" class="external-link">methods</a></span><span class="op">(</span>class<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">ds</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  [1] add                      contains                 delete                  </span></span>
-<span><span class="co">##  [4] export                   find                     getCovariates           </span></span>
-<span><span class="co">##  [7] getEventCovariates       getFixedCovariates       getIOVs                 </span></span>
-<span><span class="co">## [10] getOccasions             getTimes                 getTimeVaryingCovariates</span></span>
-<span><span class="co">## [13] length                   replace                  setSubjects             </span></span>
-<span><span class="co">## [16] show                     simulate                 unwrapTreatment         </span></span>
-<span><span class="co">## [19] updateADDL               updateAmount             updateII                </span></span>
-<span><span class="co">## [22] updateRepeat            </span></span>
+<pre><code><span><span class="co">##  [1] add                      applyAction              contains                </span></span>
+<span><span class="co">##  [4] delete                   export                   find                    </span></span>
+<span><span class="co">##  [7] getCovariates            getEventCovariates       getFixedCovariates      </span></span>
+<span><span class="co">## [10] getIOVs                  getOccasions             getTimes                </span></span>
+<span><span class="co">## [13] getTimeVaryingCovariates length                   loadFromJSON            </span></span>
+<span><span class="co">## [16] replace                  setLabel                 setSubjects             </span></span>
+<span><span class="co">## [19] show                     simulate                 unwrapTreatment         </span></span>
+<span><span class="co">## [22] updateADDL               updateAmount             updateII                </span></span>
+<span><span class="co">## [25] updateRepeat            </span></span>
 <span><span class="co">## see '?methods' for accessing help and source code</span></span></code></pre>
-<p>Oh, this looks cool. There are plenty of functions to play with.<br>
-These functions will be illustrated little by little in the other vignettes.</p>
-<p>In the next sections below, we’ll see how we can add boluses and infusions:</p>
+<p>Oh, this looks cool. There are plenty of functions to play
+with.<br>
+These functions will be illustrated little by little in the other
+vignettes.</p>
+<p>In the next sections below, we’ll see how we can add boluses and
+infusions:</p>
 </div>
 <div class="section level3">
 <h3 id="add-a-bolus">Add a bolus<a class="anchor" aria-label="anchor" href="#add-a-bolus"></a>
 </h3>
-<p>A bolus can be created using the constructor <code>Bolus</code> and added to the dataset:</p>
+<p>A bolus can be created using the constructor <code>Bolus</code> and
+added to the dataset:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>By default, it will be injected into the first compartment (CMT=1). If another compartment needs to be used, the <code>compartment</code> argument may be used as follows:</p>
+<p>By default, it will be injected into the first compartment (CMT=1).
+If another compartment needs to be used, the <code>compartment</code>
+argument may be used as follows:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, compartment<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p>Bioavailabilities (<code>f</code> argument) and lag times (<code>lag</code> argument) can be implemented as well, in the dataset. This will be illustrated in other vignettes.</p>
+<p>Bioavailabilities (<code>f</code> argument) and lag times
+(<code>lag</code> argument) can be implemented as well, in the dataset.
+This will be illustrated in other vignettes.</p>
 </div>
 <div class="section level3">
 <h3 id="add-an-infusion">Add an infusion<a class="anchor" aria-label="anchor" href="#add-an-infusion"></a>
 </h3>
-<p>An infusion can be created using the constructor <code>Infusion</code> and added to the dataset:</p>
+<p>An infusion can be created using the constructor
+<code>Infusion</code> and added to the dataset:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0.5</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>As previously, the default compartment is the first compartment.</p>
-<p>Infusion rate (<code>rate</code> argument) or duration (<code>duration</code> argument), bioavailabilities (<code>f</code> argument) and lag times (<code>lag</code> argument) can be implemented as well, in the dataset. This will be illustrated in other vignettes.</p>
+<p>Infusion rate (<code>rate</code> argument) or duration
+(<code>duration</code> argument), bioavailabilities (<code>f</code>
+argument) and lag times (<code>lag</code> argument) can be implemented
+as well, in the dataset. This will be illustrated in other
+vignettes.</p>
 </div>
 <div class="section level3">
 <h3 id="add-observations">Add observations<a class="anchor" aria-label="anchor" href="#add-observations"></a>
 </h3>
-<p>Observations can be created using the constructor <code>Observations</code> and added to the dataset:</p>
+<p>Observations can be created using the constructor
+<code>Observations</code> and added to the dataset:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>The default compartment is the first one. Although the compartment number is not useful for simulations (as simulation engines are able to look at all <code>DV</code> at once), it can still be useful when exporting a table for a modeling tool.</p>
+<p>The default compartment is the first one. Although the compartment
+number is not useful for simulations (as simulation engines are able to
+look at all <code>DV</code> at once), it can still be useful when
+exporting a table for a modeling tool.</p>
 </div>
 <div class="section level3">
 <h3 id="export-dataset">Export dataset<a class="anchor" aria-label="anchor" href="#export-dataset"></a>
 </h3>
-<p>So far so good! The dataset contains 5 subjects, 1 bolus and 1 infusion. We are going to export it to a 2-dimensional table. This step is implicitly done by CAMPSIS when you simulate your model.</p>
+<p>So far so good! The dataset contains 5 subjects, 1 bolus and 1
+infusion. We are going to export it to a 2-dimensional table. This step
+is implicitly done by CAMPSIS when you simulate your model.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">table</span> <span class="op">&lt;-</span> <span class="va">ds</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/export.html" class="external-link">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span></span>
 <span><span class="va">table</span></span></code></pre></div>
@@ -161,18 +181,25 @@ These functions will be illustrated little by little in the other vignettes.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">10</span>     3     0   0.5     0     0    <span style="color: #BB0000;">NA</span> 1         0     <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">11</span>     3     0   0.5     1     1  <span style="text-decoration: underline;">1</span>000 1        <span style="color: #BB0000;">NA</span>      2</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">12</span>     3     0   1       0     0    <span style="color: #BB0000;">NA</span> 1         0     <span style="color: #BB0000;">NA</span></span></span></code></pre>
-<p>A few explanations need to be given here regarding the following column names:</p>
+<p>A few explanations need to be given here regarding the following
+column names:</p>
 <ul>
-<li>ID: this is the subject ID, it always starts at 1. ID’s are consecutive in CAMPSIS</li>
+<li>ID: this is the subject ID, it always starts at 1. ID’s are
+consecutive in CAMPSIS</li>
 <li>ARM: this is the ARM number. 0 is the default arm.</li>
-<li>RATE: the RATE column (0 for boluses, -1/-2 for a rate/infusion defined in the model, NA when no information is available)</li>
-<li>DOSENO: the dose number. Doses (boluses and infusions) are numbered according to the time they occur.</li>
+<li>RATE: the RATE column (0 for boluses, -1/-2 for a rate/infusion
+defined in the model, NA when no information is available)</li>
+<li>DOSENO: the dose number. Doses (boluses and infusions) are numbered
+according to the time they occur.</li>
 </ul>
 </div>
 <div class="section level3">
 <h3 id="add-several-arms">Add several arms<a class="anchor" aria-label="anchor" href="#add-several-arms"></a>
 </h3>
-<p>Instead of using the default arm (0) in the dataset, several arms can be created and added to the dataset. These arms are independent in the sense the treatment(s) and the observation(s) can be totally different.</p>
+<p>Instead of using the default arm (0) in the dataset, several arms can
+be created and added to the dataset. These arms are independent in the
+sense the treatment(s) and the observation(s) can be totally
+different.</p>
 <p>To illustrate this, let’s create a dataset with two arms.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">arm1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Arm.html">Arm</a></span><span class="op">(</span>subjects<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
@@ -226,7 +253,7 @@ These functions will be illustrated little by little in the other vignettes.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

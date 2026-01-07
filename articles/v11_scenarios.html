@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v11_scenarios_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Scenarios</h1>
             
@@ -104,7 +104,7 @@
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">arm1</span>, <span class="va">arm2</span>, <span class="va">arm3</span><span class="op">)</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"ARM"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">ARM</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v11_scenarios_files/figure-html/several_protocols_with_arms-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v11_scenarios_files/figure-html/several_protocols_with_arms-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 <p>Using scenarios:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span></span>
@@ -119,7 +119,7 @@
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">dataset</span>, scenarios<span class="op">=</span><span class="va">scenarios</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">SCENARIO</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v11_scenarios_files/figure-html/several_protocols_with_scenarios-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v11_scenarios_files/figure-html/several_protocols_with_scenarios-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="make-a-model-parameter-vary">Make a model parameter vary<a class="anchor" aria-label="anchor" href="#make-a-model-parameter-vary"></a>
@@ -139,12 +139,13 @@
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, scenarios<span class="op">=</span><span class="va">scenarios</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v11_scenarios_files/figure-html/scenarios_make_theta_ka_vary-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v11_scenarios_files/figure-html/scenarios_make_theta_ka_vary-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="compare-different-distributions">Compare different distributions<a class="anchor" aria-label="anchor" href="#compare-different-distributions"></a>
 </h3>
-<p>Assume we want to compare different distributions of body weight <code>BW</code>:</p>
+<p>Assume we want to compare different distributions of body weight
+<code>BW</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan1_trans2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/replace.html" class="external-link">replace</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Equation.html" class="external-link">Equation</a></span><span class="op">(</span><span class="st">"CL"</span>, <span class="st">"THETA_CL*exp(ETA_CL)*pow(BW/70, 0.75)"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
@@ -162,7 +163,7 @@
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, scenarios<span class="op">=</span><span class="va">scenarios</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"SCENARIO"</span><span class="op">)</span> <span class="op">+</span> <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">SCENARIO</span>, ncol<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v11_scenarios_files/figure-html/scenarios_compare_bw_distributions%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v11_scenarios_files/figure-html/scenarios_compare_bw_distributions%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -175,7 +176,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

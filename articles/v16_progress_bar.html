@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v16_progress_bar_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Progress bar</h1>
             
@@ -82,21 +82,32 @@
 
     
     
-<p>This vignette explains how you can track the simulation progress thanks to the package <code>progressr</code>.</p>
+<p>This vignette explains how you can track the simulation progress
+thanks to the package <code>progressr</code>.</p>
 <div class="section level3">
 <h3 id="track-the-simulation-progress-in-an-r-script">Track the simulation progress in an R script<a class="anchor" aria-label="anchor" href="#track-the-simulation-progress-in-an-r-script"></a>
 </h3>
 <p>Load package <code>progressr</code> as follows:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://progressr.futureverse.org" class="external-link">progressr</a></span><span class="op">)</span></span></code></pre></div>
-<p>The easiest way to track the progress is to add the following snippet once for all in your script. By doing so, any call to the simulate method of <code>campsis</code> will display the progress bar.</p>
+<p>The easiest way to track the progress is to add the following snippet
+once for all in your script. By doing so, any call to the simulate
+method of <code>campsis</code> will display the progress bar.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span>global<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>By default, the progress bar will only give the progress as a percentage. Any user-custom handler may be provided. Please have a look at the official <a href="https://CRAN.R-project.org/package=progressr" class="external-link">documentation</a> (Vignette <code>progressr</code>: An Introduction / ‘Customizing how progress is reported’).</p>
-<p>If you want to use the default handler from <code>campsis</code>, which gives you more details about what’s being simulated and what’s the remaining time (ETA), you can write:</p>
+<p>By default, the progress bar will only give the progress as a
+percentage. Any user-custom handler may be provided. Please have a look
+at the official <a href="https://CRAN.R-project.org/package=progressr" class="external-link">documentation</a>
+(Vignette <code>progressr</code>: An Introduction / ‘Customizing how
+progress is reported’).</p>
+<p>If you want to use the default handler from <code>campsis</code>,
+which gives you more details about what’s being simulated and what’s the
+remaining time (ETA), you can write:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span><span class="fu"><a href="../reference/campsis_handler.html">campsis_handler</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>If you don’t want your handler(s) to be global, you can also explicitly call the method <code>with_progress</code>. The snippet below is an example of simulation where this method is called.</p>
+<p>If you don’t want your handler(s) to be global, you can also
+explicitly call the method <code>with_progress</code>. The snippet below
+is an example of simulation where this method is called.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">1000</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -105,7 +116,7 @@
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">pk</span><span class="op">$</span><span class="va">`1cpt_fo`</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, dataset<span class="op">=</span><span class="va">dataset</span>, dest<span class="op">=</span><span class="st">"mrgsolve"</span>, seed<span class="op">=</span><span class="fl">1</span>, replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span>, <span class="st">"replicate"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v16_progress_bar_files/figure-html/with_progress_example-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v16_progress_bar_files/figure-html/with_progress_example-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 <p>Any handler may be provided as well:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://progressr.futureverse.org/reference/with_progress.html" class="external-link">with_progress</a></span><span class="op">(</span><span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, dataset<span class="op">=</span><span class="va">dataset</span>, dest<span class="op">=</span><span class="st">"mrgsolve"</span>, seed<span class="op">=</span><span class="fl">1</span>, replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span>, handlers<span class="op">=</span><span class="fu"><a href="../reference/campsis_handler.html">campsis_handler</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -113,8 +124,16 @@
 <div class="section level3">
 <h3 id="track-the-simulation-progress-in-a-targets-project">Track the simulation progress in a targets project<a class="anchor" aria-label="anchor" href="#track-the-simulation-progress-in-a-targets-project"></a>
 </h3>
-<p>The <a href="https://books.ropensci.org/targets/" class="external-link">targets</a> package is a Make-like pipeline tool for Statistics and data science in R. With targets, you can maintain a reproducible workflow without repeating yourself. It is the ideal pipeline tool to use for medium to large simulation projects with Campsis.</p>
-<p>The following script (<code>_targets.R</code>) gives you a brief overview of what you can achieve with targets and how the progress bar can be enabled. It is important to mention that <code>handlers(global=TRUE)</code> can’t be used in such a script. If you try to do so, an error message will pop up.</p>
+<p>The <a href="https://books.ropensci.org/targets/" class="external-link">targets</a> package
+is a Make-like pipeline tool for Statistics and data science in R. With
+targets, you can maintain a reproducible workflow without repeating
+yourself. It is the ideal pipeline tool to use for medium to large
+simulation projects with Campsis.</p>
+<p>The following script (<code>_targets.R</code>) gives you a brief
+overview of what you can achieve with targets and how the progress bar
+can be enabled. It is important to mention that
+<code>handlers(global=TRUE)</code> can’t be used in such a script. If
+you try to do so, an error message will pop up.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/" class="external-link">targets</a></span><span class="op">)</span></span>
 <span></span>
@@ -122,27 +141,31 @@
 <span></span>
 <span><span class="co"># Packages loaded by targets</span></span>
 <span><span class="va">packages</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"campsis"</span>, <span class="st">"progressr"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_option_set.html" class="external-link">tar_option_set</a></span><span class="op">(</span>packages<span class="op">=</span><span class="va">packages</span><span class="op">)</span></span>
+<span><span class="fu">tar_option_set</span><span class="op">(</span>packages<span class="op">=</span><span class="va">packages</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Enable progress bar</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>progressr.enable<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu">progressr</span><span class="fu">::</span><span class="fu"><a href="https://progressr.futureverse.org/reference/handlers.html" class="external-link">handlers</a></span><span class="op">(</span><span class="fu">campsis</span><span class="fu">::</span><span class="fu"><a href="../reference/campsis_handler.html">campsis_handler</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">tar_target</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tar_target</span><span class="op">(</span></span>
 <span>    <span class="va">model</span>,</span>
 <span>    <span class="va">model_suite</span><span class="op">$</span><span class="va">pk</span><span class="op">$</span><span class="va">`1cpt_fo`</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">tar_target</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tar_target</span><span class="op">(</span></span>
 <span>    <span class="va">dataset</span>,</span>
 <span>    <span class="fu">makeDataset</span><span class="op">(</span>subjects<span class="op">=</span><span class="fl">1000</span>, dose<span class="op">=</span><span class="fl">1000</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
-<span>  <span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_target.html" class="external-link">tar_target</a></span><span class="op">(</span></span>
+<span>  <span class="fu">tar_target</span><span class="op">(</span></span>
 <span>    <span class="va">results</span>,</span>
 <span>    <span class="fu">runSimulation</span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, dataset<span class="op">=</span><span class="va">dataset</span>, replicates<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<p>The R folder contains as much as possible of the code (or logic) being executed, in the form of R functions. The snippet below shows the content of <code>my_script.R</code>. An explicit call to <code>with_progress</code> will make the progress bar appear when executing the target <code>results</code>.</p>
+<p>The R folder contains as much as possible of the code (or logic)
+being executed, in the form of R functions. The snippet below shows the
+content of <code>my_script.R</code>. An explicit call to
+<code>with_progress</code> will make the progress bar appear when
+executing the target <code>results</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">makeDataset</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">subjects</span>, <span class="va">dose</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span>subjects<span class="op">=</span><span class="va">subjects</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -157,11 +180,12 @@
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>This small project can be downloaded by clicking the link below.</p>
-<a href="data:application/zip;base64,UEsDBAoAAAAAAEhRiloAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgASFGKWjkI0zvwAAAAuwEAAA0AAABSL215X3NjcmlwdC5ShZC9TgMxEIT7e4pVpEg2MhJEETSYioaKggdAznkTDP45vOtQIN4dO3f5uYqtrNXMtzPugvnEJ8OGkOHhGrYl9uxSFFQ2H9gzKbCJUMJPB2DPuslykunjQ8LycVm1AMZa8Ry3hRqOXUB9o8CEVCLrxlTQpzCYzAHr5laBc3q1Vs3n9Z2cg142hHlvWjQShF+isu6vVmspZdVk5JKjmPLJ7rfrcomvLhR/sMyahWTRq2MZVc2Dd71hpLFlRiqeqXm+Hb+/DTnt6q6eHXk4EvSco088i8R6EfKOkt/jQh06/DeEaNsfnMPoi1wXHad0teMfUEsDBBQAAgAIAEhRilptHFTyEAEAAOkBAAAKAAAAX3RhcmdldHMuUnVQO0/DMBDe/Sus0MGRQknFFpGN7ijA7F6cU2rixJbPHsKvx82jLLB99/ged0a3HvwsAvgeA+WMkY1eociap3GWpLx24dhkafDA30AN0CNxY6HDjrcz33jM7aOXR65EpmB0pCkreOa87T0S+aSRtqV1QdtJEgaxk+odLC7nCVqDfOfxFjxbSSTuYkdctuqP5vOcs3u7qq4wdQY9iS1CVW1AbhORJxejKQjGb/HlesKt4ny0HZriF0qKOuDBDYfLSbkgv62ElqSB/pKW8uIPiQ4CpOM2ERjwdW0Iiu0XqkD1qSzLgneWcIH5f0rpomgCrUo+Tu96jAZujxBLuHpNuzvWu3MiOqMVhPTZ50Wd5ewHUEsBAh4DCgAAAAAASFGKWgAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAO1FAAAAAFIvUEsBAh4DFAACAAgASFGKWjkI0zvwAAAAuwEAAA0AAAAAAAAAAQAAAKSBIAAAAFIvbXlfc2NyaXB0LlJQSwECHgMUAAIACABIUYpabRxU8hABAADpAQAACgAAAAAAAAABAAAApIE7AQAAX3RhcmdldHMuUlBLBQYAAAAAAwADAKMAAABzAgAAAAA=" download="Targets_Squeletton.zip">Download targets squeletton</a>
-<p>To run this project, simply open an R console within your targets folder and type:</p>
+<a href="data:application/zip;base64,UEsDBAoAAAAAAClhd1YAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgAKWF3ViL0jBb1AAAAxwEAAA0AAABSL215X3NjcmlwdC5ShZC9TgMxEIT7k+4dVpEinSMjQRRBE1PRUFHwAMg5b4LBP4d3HQrEu2Nzlz8aXFmjmc8zbhuv3/FBsyZkWF/BNoeebQwd5c0b9kwSTCQU8NU2AOZknDJHnzpcBMzv59UMoI3pHsM2UwWy9aiuJWgfc2BVqRL66Aed2GNRbiRYq5YrWXNO3Yo/pKcNYdrr2o46wo+uwO4Wy5UQopoSck6hmyoW6btt2ibl8Gx9dr+xi4E+GnTyMEmW/OBsrxlpGpuQsmOqoU/Lry9DiruilbdHII4IdQlSR6BBYjXzaUfR7XEmxyX/HUI09StOddRZs/OlU7+69AdQSwMEFAACAAgAKWF3VtZvEykaAQAAAwIAAAoAAABfdGFyZ2V0cy5SfVC7boQwEOyR+AeLXGEkcrlTOhS6XB+RpPYtZsU5GGx5TUG+PubhU4ookovx7s7MzmrVOHAz9+A69JSnSZqQmZxEntVPwyxIOmX9sc7W1gN7A9lDh8S0gRZb1sxs56aJjb2XRyZ5JmGwpCgrWGad6RwSuUUmzAtjvTKjIPQ8sqoIdqfLCI1GFqmsAZcmG4/4XfCI61j1UX9eAvFeL8sbjK1GR3zfoyx3IPYOz1cnrcjzNGFLDrFlWb+MDaZFXfzCgibl8WD7w/UsrRffRkBDQkN3Xaby4k+ZFjyEoFEIenzdKpym5gulp+p8Op0K1hrCFeb/qIV0k/a0q7lpfFfDpGE5C1+XrLa1o20V7QPTaiXBh1M/bw5pEt4PUEsBAh4DCgAAAAAAKWF3VgAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAO1BAAAAAFIvUEsBAh4DFAACAAgAKWF3ViL0jBb1AAAAxwEAAA0AAAAAAAAAAQAAAKSBIAAAAFIvbXlfc2NyaXB0LlJQSwECHgMUAAIACAApYXdW1m8TKRoBAAADAgAACgAAAAAAAAABAAAApIFAAQAAX3RhcmdldHMuUlBLBQYAAAAAAwADAKMAAACCAgAAAAA=" download="Targets_Squeletton.zip">Download targets squeletton</a>
+<p>To run this project, simply open an R console within your targets
+folder and type:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/" class="external-link">targets</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://docs.ropensci.org/targets/reference/tar_make.html" class="external-link">tar_make</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">tar_make</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -174,7 +198,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

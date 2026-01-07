@@ -1,0 +1,45 @@
+# Create a bootstrap object.
+
+Create a bootstrap object.
+
+## Usage
+
+``` r
+Bootstrap(
+  data,
+  id = "BS_ID",
+  replacement = FALSE,
+  random = FALSE,
+  export_id = FALSE
+)
+```
+
+## Arguments
+
+- data:
+
+  data frame to be bootstrapped. It must have a unique identifier column
+  named according to the specified argument 'id' (default value is
+  'BS_ID'). Other columns are covariates to bootstrap. They must all be
+  numeric. Whatever the configuration of the bootstrap, these covariates
+  are always read row by row and belong to a same individual.
+
+- id:
+
+  unique identifier column name in data
+
+- replacement:
+
+  values can be reused or not when drawn, logical
+
+- random:
+
+  values are drawn randomly, logical
+
+- export_id:
+
+  tell CAMPSIS if the identifier 'BS_ID' must be output or not, logical
+
+## Value
+
+a bootstrap object

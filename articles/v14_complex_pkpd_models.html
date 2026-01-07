@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v14_complex_pkpd_models_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Complex PK/PD models from literature</h1>
             
@@ -82,11 +82,17 @@
 
     
     
-<p>This vignette intends to demonstrate that CAMPSIS can be used to implement almost any PK/PD model, including complex ones.</p>
+<p>This vignette intends to demonstrate that CAMPSIS can be used to
+implement almost any PK/PD model, including complex ones.</p>
 <div class="section level3">
 <h3 id="filgrastim-pkpd-model">Filgrastim PK/PD model<a class="anchor" aria-label="anchor" href="#filgrastim-pkpd-model"></a>
 </h3>
-<p>Load the filgrastim PK/PD model from the model library as follows. Please note that this model was translated from NONMEM code. The original model file can be found <a href="http://repository.ddmore.eu/model/DDMODEL00000077" class="external-link">here</a> on the DDMORE repository. Eventually, this model was updated with the final parameters from the corresponding publication (<a href="https://pubmed.ncbi.nlm.nih.gov/20881223/" class="external-link">Krzyzanski et al., 2010</a>).</p>
+<p>Load the filgrastim PK/PD model from the model library as follows.
+Please note that this model was translated from NONMEM code. The
+original model file can be found <a href="http://repository.ddmore.eu/model/DDMODEL00000077" class="external-link">here</a> on the
+DDMORE repository. Eventually, this model was updated with the final
+parameters from the corresponding publication (<a href="https://pubmed.ncbi.nlm.nih.gov/20881223/" class="external-link">Krzyzanski et al.,
+2010</a>).</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pkpd</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">literature</span><span class="op">$</span><span class="va">filgrastim_pkpd_krzyzanski</span></span>
 <span><span class="va">pkpd</span></span></code></pre></div>
@@ -252,7 +258,8 @@
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/DoseAdaptation.html">DoseAdaptation</a></span><span class="op">(</span><span class="st">"WT*AMT"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="co"># per kilo dosing</span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span><span class="fl">0</span><span class="op">:</span><span class="fl">216</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"ROUT"</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span> <span class="co"># subcutaneous route (SC)</span></span></code></pre></div>
-<p>Assume we want to compare the following subcutaneous administrations of filgrastim:</p>
+<p>Assume we want to compare the following subcutaneous administrations
+of filgrastim:</p>
 <ul>
 <li>2.5 μg/kg QD for a week</li>
 <li>5 μg/kg QD for a week</li>
@@ -264,7 +271,8 @@
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"2.5 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">2.5</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"5 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">5</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Scenario.html">Scenario</a></span><span class="op">(</span><span class="st">"10 μg/kg SC"</span>, dataset<span class="op">=</span><span class="op">~</span><span class="va">.x</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">10</span>, compartment<span class="op">=</span><span class="fl">1</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>A quick simulation gives us the plasma concentration of filgrastim, as well as the absolute neutrophil count (ANC):</p>
+<p>A quick simulation gives us the plasma concentration of filgrastim,
+as well as the absolute neutrophil count (ANC):</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
@@ -277,7 +285,7 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"ANC (10^3 cells/μL)"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, nrow<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v14_complex_pkpd_models_files/figure-html/filgrastim_pkpd_model-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v14_complex_pkpd_models_files/figure-html/filgrastim_pkpd_model-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main>
 </div>
@@ -289,7 +297,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><a class="external-link nav-link" href="https://github.com/Calvagone/campsis/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -54,8 +53,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -66,73 +64,85 @@
 
         </dt>
         <dd>Create a treatment arm.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Bolus.html">Bolus()</a></code>
 
         </dt>
         <dd>Create one or several bolus(es).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Bootstrap.html">Bootstrap()</a></code>
 
         </dt>
         <dd>Create a bootstrap object.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Covariate.html">Covariate()</a></code>
 
         </dt>
         <dd>Create a non time-varying (fixed) covariate.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Dataset.html">Dataset()</a></code>
 
         </dt>
         <dd>Create a dataset.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="DatasetConfig.html">DatasetConfig()</a></code>
 
         </dt>
         <dd>Create a dataset configuration. This configuration allows CAMPSIS to know which are the default depot and observed compartments.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="DoseAdaptation.html">DoseAdaptation()</a></code>
 
         </dt>
         <dd>Create a dose adaptation.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="EventCovariate.html">EventCovariate()</a></code>
 
         </dt>
         <dd>Create an event covariate. These covariates can be modified further in interruption events.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Infusion.html">Infusion()</a></code>
 
         </dt>
         <dd>Create one or several infusion(s).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="IOV.html">IOV()</a></code>
 
         </dt>
         <dd>Define inter-occasion variability (IOV) into the dataset. A new variable of name 'colname' will be output into the dataset and will vary at each dose number according to the given distribution.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Observations.html">Observations()</a></code>
 
         </dt>
         <dd>Create an observations list. Please note that the provided 'times' will automatically be sorted. Duplicated times will be removed.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Occasion.html">Occasion()</a></code>
 
         </dt>
         <dd>Define a new occasion. Occasions are defined by mapping occasion values to dose numbers. A new column will automatically be created in the exported dataset.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="TimeVaryingCovariate.html">TimeVaryingCovariate()</a></code>
 
@@ -143,8 +153,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -155,96 +164,126 @@
 
         </dt>
         <dd>Binomial distribution.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="BootstrapDistribution.html">BootstrapDistribution()</a></code>
 
         </dt>
         <dd>Create a bootstrap distribution. During function sampling, CAMPSIS will generate values depending on the given data and arguments.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="ConstantDistribution.html">ConstantDistribution()</a></code>
 
         </dt>
         <dd>Create a constant distribution. Its value will be constant across all generated samples.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="DiscreteDistribution.html">DiscreteDistribution()</a></code>
 
         </dt>
         <dd>Discrete distribution.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="EtaDistribution.html">EtaDistribution()</a></code>
 
         </dt>
         <dd>Create an ETA distribution. The resulting distribution is a normal distribution, with mean=0 and sd=sqrt(OMEGA).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="FixedDistribution.html">FixedDistribution()</a></code>
 
         </dt>
         <dd>Create a fixed distribution. Each sample will be assigned a fixed value coming from vector 'values'.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="FunctionDistribution.html">FunctionDistribution()</a></code>
 
         </dt>
         <dd>Create a function distribution. During distribution sampling, the provided function will be responsible for generating values for each sample. If first argument of this function is not the size (n), please tell which argument corresponds to the size 'n' (e.g. list(size="n")).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="LogNormalDistribution.html">LogNormalDistribution()</a></code>
 
         </dt>
         <dd>Create a log normal distribution.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="NormalDistribution.html">NormalDistribution()</a></code>
 
         </dt>
         <dd>Create a normal distribution.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="ParameterDistribution.html">ParameterDistribution()</a></code>
 
         </dt>
         <dd>Create a parameter distribution. The resulting distribution is a log-normal distribution, with meanlog=log(THETA) and sdlog=sqrt(OMEGA).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="UniformDistribution.html">UniformDistribution()</a></code>
 
         </dt>
         <dd>Create an uniform distribution.</dd>
       </dl></div><div class="section level2">
-      <h2 id="repeated-dosing-schedule">Repeated dosing schedule<a class="anchor" aria-label="anchor" href="#repeated-dosing-schedule"></a></h2>
+      <h2 id="dosing-schedules-and-helpers">Dosing schedules and helpers<a class="anchor" aria-label="anchor" href="#dosing-schedules-and-helpers"></a></h2>
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
 
       <dl><dt>
 
+          <code><a href="DosingSchedule.html">DosingSchedule()</a></code>
+
+        </dt>
+        <dd>Dosing schedule constructor.</dd>
+
+        <dt>
+
           <code><a href="CyclicSchedule.html">CyclicSchedule()</a></code>
 
         </dt>
         <dd>Cyclic schedule constructor.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="RepeatAtSchedule.html">RepeatAtSchedule()</a></code>
 
         </dt>
         <dd>'Repeat at' schedule constructor. Note that the time 0 for the base pattern will be added by default if not provided.</dd>
+
+        <dt>
+
+          <code><a href="TimeSequence.html">TimeSequence()</a></code>
+
+        </dt>
+        <dd>Instantiate a new time sequence.</dd>
+
+        <dt>
+
+          <code><a href="TimeVector.html">TimeVector()</a></code>
+
+        </dt>
+        <dd>Instantiate a new time vector</dd>
       </dl></div><div class="section level2">
       <h2 id="dataset-shortcuts">Dataset shortcuts<a class="anchor" aria-label="anchor" href="#dataset-shortcuts"></a></h2>
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -255,31 +294,36 @@
 
         </dt>
         <dd>Set the label.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="setSubjects.html">setSubjects()</a></code>
 
         </dt>
         <dd>Set the number of subjects.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="updateADDL.html">updateADDL()</a></code>
 
         </dt>
         <dd>Update the number of additional doses (ADDL).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="updateAmount.html">updateAmount()</a></code>
 
         </dt>
         <dd>Update amount.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="updateII.html">updateII()</a></code>
 
         </dt>
         <dd>Update the inter-dose interval (II).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="updateRepeat.html">updateRepeat()</a></code>
 
@@ -290,8 +334,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -302,7 +345,8 @@
 
         </dt>
         <dd>Create an interruption event.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Events.html">Events()</a></code>
 
@@ -313,8 +357,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -325,7 +368,8 @@
 
         </dt>
         <dd>Create an scenario.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Scenarios.html">Scenarios()</a></code>
 
@@ -336,8 +380,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -353,8 +396,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -365,31 +407,36 @@
 
         </dt>
         <dd>Compute the prediction interval summary over time.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="VPC.html">VPC()</a></code>
 
         </dt>
         <dd>Compute the VPC summary. Input data frame must contain the following columns: - replicate: replicate number - low: low percentile value in replicate (and in scenario if present) - med: median value in replicate (and in scenario if present) - up: up percentile value in replicate (and in scenario if present) - any scenario column</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="scatterPlot.html">scatterPlot()</a></code>
 
         </dt>
         <dd>Scatter plot (or X vs Y plot).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="shadedPlot.html">shadedPlot()</a></code>
 
         </dt>
         <dd>Shaded plot (or prediction interval plot).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="spaghettiPlot.html">spaghettiPlot()</a></code>
 
         </dt>
         <dd>Spaghetti plot.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="vpcPlot.html">vpcPlot()</a></code>
 
@@ -400,8 +447,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -417,8 +463,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -429,13 +474,15 @@
 
         </dt>
         <dd>Get seed for dataset export.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getSeedForIteration.html">getSeedForIteration()</a></code>
 
         </dt>
         <dd>Get seed for iteration.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getSeedForParametersSampling.html">getSeedForParametersSampling()</a></code>
 
@@ -446,8 +493,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -458,61 +504,78 @@
 
         </dt>
         <dd>Suggested Campsis handler for showing the progress bar.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="DefaultSettings.html">DefaultSettings()</a></code>
+
+        </dt>
+        <dd>Create default settings.</dd>
+
+        <dt>
 
           <code><a href="Declare.html">Declare()</a></code>
 
         </dt>
         <dd>Create declare settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Hardware.html">Hardware()</a></code>
 
         </dt>
         <dd>Create hardware settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="NOCB.html">NOCB()</a></code>
 
         </dt>
         <dd>Create NOCB settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Outfun.html">Outfun()</a></code>
 
         </dt>
         <dd>Create a new output function</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Progress.html">Progress()</a></code>
 
         </dt>
         <dd>Create progress settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="setupPlanDefault.html">setupPlanDefault()</a></code>
 
         </dt>
         <dd>Setup default plan for the given simulation or hardware settings. This plan will prioritise the distribution of workers in the following order: 1) Replicates (if 'replicate_parallel' is enabled) 2) Scenarios (if 'scenario_parallel' is enabled) 3) Dataset export / slices (if 'dataset_export' or 'slice_parallel' is enabled)</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="setupPlanSequential.html">setupPlanSequential()</a></code>
 
         </dt>
         <dd>Setup plan as sequential (i.e. no parallelisation).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Settings.html">Settings()</a></code>
 
         </dt>
         <dd>Create advanced simulation settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="Solver.html">Solver()</a></code>
 
         </dt>
         <dd>Create solver settings.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="SimulationProgress.html">SimulationProgress()</a></code>
 
@@ -523,8 +586,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -535,55 +597,64 @@
 
         </dt>
         <dd>Convert numeric time vector based on the provided units.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="days.html">days()</a></code>
 
         </dt>
         <dd>Convert days to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getAvailableTimeUnits.html">getAvailableTimeUnits()</a></code>
 
         </dt>
         <dd>Return the list of available time units.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="hours.html">hours()</a></code>
 
         </dt>
         <dd>Convert hours to hours (do nothing).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="minutes.html">minutes()</a></code>
 
         </dt>
         <dd>Convert minutes to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="months.html">months()</a></code>
 
         </dt>
         <dd>Convert pharma months (1 month = 4 weeks) to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="seconds.html">seconds()</a></code>
 
         </dt>
         <dd>Convert seconds to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="standardiseTime.html">standardiseTime()</a></code>
 
         </dt>
         <dd>Standardise time to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="weeks.html">weeks()</a></code>
 
         </dt>
         <dd>Convert weeks to hours.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="years.html">years()</a></code>
 
@@ -594,133 +665,187 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
 
       <dl><dt>
 
+          <code><a href="as.numeric-time_sequence-method.html">as.numeric(<i>&lt;time_sequence&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Time sequence to numeric vector.</dd>
+
+        <dt>
+
+          <code><a href="as.numeric-time_vector-method.html">as.numeric(<i>&lt;time_vector&gt;</i>)</a></code>
+
+        </dt>
+        <dd>Time vector to numeric vector.</dd>
+
+        <dt>
+
+          <code><a href="applyAction.html">applyAction()</a></code>
+
+        </dt>
+        <dd>Apply some action on the given object.</dd>
+
+        <dt>
+
           <code><a href="applyCompartmentCharacteristics.html">applyCompartmentCharacteristics()</a></code>
 
         </dt>
         <dd>Apply compartment characteristics from model. In practice, only compartment infusion duration needs to be applied.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="dosingOnly.html">dosingOnly()</a></code>
 
         </dt>
         <dd>Filter CAMPSIS output on dosing rows.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="generateIIV.html">generateIIV()</a></code>
 
         </dt>
         <dd>Generate IIV matrix for the given Campsis model.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="generateIIV_.html">generateIIV_()</a></code>
 
         </dt>
         <dd>Generate IIV matrix for the given OMEGA matrix.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="getCampsisOption.html">getCampsisOption()</a></code>
+
+        </dt>
+        <dd>Get Campsis option logic.</dd>
+
+        <dt>
 
           <code><a href="getCovariates.html">getCovariates()</a></code>
 
         </dt>
         <dd>Get all covariates (fixed / time-varying / event covariates).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getEventCovariates.html">getEventCovariates()</a></code>
 
         </dt>
         <dd>Get all event-related covariates.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getFixedCovariates.html">getFixedCovariates()</a></code>
 
         </dt>
         <dd>Get all fixed covariates.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getIOVs.html">getIOVs()</a></code>
 
         </dt>
         <dd>Get all IOV objects.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getOccasions.html">getOccasions()</a></code>
 
         </dt>
         <dd>Get all occasions.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getSplittingConfiguration.html">getSplittingConfiguration()</a></code>
 
         </dt>
         <dd>Get splitting configuration for parallel export.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getTimes.html">getTimes()</a></code>
 
         </dt>
         <dd>Get all distinct times for the specified object.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="getTimeVaryingCovariates.html">getTimeVaryingCovariates()</a></code>
 
         </dt>
         <dd>Get all time-varying covariates.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="length-arm-method.html">length(<i>&lt;arm&gt;</i>)</a></code>
 
         </dt>
         <dd>Return the number of subjects contained in this arm.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="length-cyclic_schedule-method.html">length(<i>&lt;cyclic_schedule&gt;</i>)</a></code>
 
         </dt>
         <dd>Return the number of repetition cycles.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="length-dataset-method.html">length(<i>&lt;dataset&gt;</i>)</a></code>
 
         </dt>
         <dd>Return the number of subjects contained in this dataset.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="length-repeat_at_schedule-method.html">length(<i>&lt;repeat_at_schedule&gt;</i>)</a></code>
 
         </dt>
         <dd>Return the number of repetition cycles.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="nhanes.html">nhanes</a></code>
 
         </dt>
         <dd>NHANES database (demographics and body measure data combined, from 2017-2018).</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="obsOnly.html">obsOnly()</a></code>
 
         </dt>
         <dd>Filter CAMPSIS output on observation rows.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="repeatSchedule.html">repeatSchedule()</a></code>
 
         </dt>
         <dd>Repeat schedule.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="ReplaceAction.html">ReplaceAction()</a></code>
+
+        </dt>
+        <dd>Create a replace action.</dd>
+
+        <dt>
 
           <code><a href="retrieveParameterValue.html">retrieveParameterValue()</a></code>
 
         </dt>
         <dd>Retrieve the parameter value (standardized) for the specified parameter name.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="unwrapTreatment.html">unwrapTreatment()</a></code>
 
@@ -731,8 +856,7 @@
 
 
 
-
-    </div><div class="section level2">
+      <dl></dl></div><div class="section level2">
 
 
 
@@ -743,300 +867,433 @@
 
         </dt>
         <dd>Arm class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="arms-class.html">arms-class</a></code>
 
         </dt>
         <dd>Arms class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="binomial_distribution-class.html">binomial_distribution-class</a></code>
+
+        </dt>
+        <dd>Binomial distribution class.</dd>
+
+        <dt>
 
           <code><a href="bolus-class.html">bolus-class</a></code>
 
         </dt>
         <dd>Bolus class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="bolus_wrapper-class.html">bolus_wrapper-class</a></code>
 
         </dt>
         <dd>Bolus wrapper class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="bootstrap-class.html">bootstrap-class</a></code>
 
         </dt>
         <dd>Bootstrap class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="bootstrap_distribution-class.html">bootstrap_distribution-class</a></code>
 
         </dt>
         <dd>Bootstrap distribution class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="constant_distribution-class.html">constant_distribution-class</a></code>
 
         </dt>
         <dd>Constant distribution class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="covariate-class.html">covariate-class</a></code>
 
         </dt>
         <dd>Covariate class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="covariates-class.html">covariates-class</a></code>
 
         </dt>
         <dd>Covariates class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="cyclic_schedule-class.html">cyclic_schedule-class</a></code>
 
         </dt>
         <dd>Cyclic schedule class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="dataset-class.html">dataset-class</a></code>
 
         </dt>
         <dd>Dataset class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="dataset_config-class.html">dataset_config-class</a></code>
 
         </dt>
         <dd>Dataset configuration class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="declare_settings-class.html">declare_settings-class</a></code>
 
         </dt>
         <dd>Declare settings class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="default_settings-class.html">default_settings-class</a></code>
+
+        </dt>
+        <dd>Default settings class.</dd>
+
+        <dt>
+
+          <code><a href="discrete_distribution-class.html">discrete_distribution-class</a></code>
+
+        </dt>
+        <dd>Discrete distribution class.</dd>
+
+        <dt>
 
           <code><a href="distribution-class.html">distribution-class</a></code>
 
         </dt>
         <dd>Distribution class. See this class as an interface.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="dose_adaptation-class.html">dose_adaptation-class</a></code>
 
         </dt>
         <dd>Dose adaptation class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="dose_adaptations-class.html">dose_adaptations-class</a></code>
 
         </dt>
         <dd>Dose adaptations class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="dosing_schedule-class.html">dosing_schedule-class</a></code>
+
+        </dt>
+        <dd>Dosing schedule class.</dd>
+
+        <dt>
 
           <code><a href="event-class.html">event-class</a></code>
 
         </dt>
         <dd>Event class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="event_covariate-class.html">event_covariate-class</a></code>
 
         </dt>
         <dd>Event covariate class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="events-class.html">events-class</a></code>
 
         </dt>
         <dd>Events class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="fixed_covariate-class.html">fixed_covariate-class</a></code>
 
         </dt>
         <dd>Fixed covariate class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="fixed_distribution-class.html">fixed_distribution-class</a></code>
 
         </dt>
         <dd>Fixed distribution class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="function_distribution-class.html">function_distribution-class</a></code>
 
         </dt>
         <dd>Function distribution class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="hardware_settings-class.html">hardware_settings-class</a></code>
 
         </dt>
         <dd>Hardware settings class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="infusion-class.html">infusion-class</a></code>
 
         </dt>
         <dd>Infusion class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="infusion_wrapper-class.html">infusion_wrapper-class</a></code>
 
         </dt>
         <dd>Infusion wrapper class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="internal_settings-class.html">internal_settings-class</a></code>
 
         </dt>
         <dd>Internal settings class (transient object from the simulation settings).</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="lognormal_distribution-class.html">lognormal_distribution-class</a></code>
+
+        </dt>
+        <dd>Log normal distribution class.</dd>
+
+        <dt>
 
           <code><a href="mrgsolve_engine-class.html">mrgsolve_engine-class</a></code>
 
         </dt>
         <dd>mrgsolve engine class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="normal_distribution-class.html">normal_distribution-class</a></code>
+
+        </dt>
+        <dd>Normal distribution class.</dd>
+
+        <dt>
 
           <code><a href="nocb_settings-class.html">nocb_settings-class</a></code>
 
         </dt>
         <dd>NOCB settings class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="protocol-class.html">protocol-class</a></code>
 
         </dt>
         <dd>Protocol class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="observations-class.html">observations-class</a></code>
 
         </dt>
         <dd>Observations class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="observations_set-class.html">observations_set-class</a></code>
 
         </dt>
         <dd>Observations set class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="occasion-class.html">occasion-class</a></code>
 
         </dt>
         <dd>Occasion class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="occasions-class.html">occasions-class</a></code>
 
         </dt>
         <dd>Occasions class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="output_function-class.html">output_function-class</a></code>
 
         </dt>
         <dd>Output function class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="progress_settings-class.html">progress_settings-class</a></code>
 
         </dt>
         <dd>Progress settings class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="repeated_schedule-class.html">repeated_schedule-class</a></code>
 
         </dt>
         <dd>Repeated schedule class. See this class as an interface.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="repeat_at_schedule-class.html">repeat_at_schedule-class</a></code>
 
         </dt>
         <dd>'Repeat at' schedule class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="replace_action-class.html">replace_action-class</a></code>
+
+        </dt>
+        <dd>Replace action class.</dd>
+
+        <dt>
 
           <code><a href="rxode_engine-class.html">rxode_engine-class</a></code>
 
         </dt>
         <dd>RxODE/rxode2 engine class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="scenario-class.html">scenario-class</a></code>
 
         </dt>
         <dd>Scenario class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="scenario_action-class.html">scenario_action-class</a></code>
+
+        </dt>
+        <dd>Scenario action class.</dd>
+
+        <dt>
+
+          <code><a href="scenario_actions-class.html">scenario_actions-class</a></code>
+
+        </dt>
+        <dd>Scenario actions class.</dd>
+
+        <dt>
 
           <code><a href="scenarios-class.html">scenarios-class</a></code>
 
         </dt>
         <dd>Scenarios class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="simulation_engine-class.html">simulation_engine-class</a></code>
 
         </dt>
         <dd>Simulation engine class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="simulation_settings-class.html">simulation_settings-class</a></code>
 
         </dt>
         <dd>Simulation settings class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="simulation_progress-class.html">simulation_progress-class</a></code>
 
         </dt>
         <dd>Simulation progress class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="solver_settings-class.html">solver_settings-class</a></code>
 
         </dt>
         <dd>Solver settings class. See ?mrgsolve::update. See ?rxode2::rxSolve.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="time_sequence-class.html">time_sequence-class</a></code>
+
+        </dt>
+        <dd>Time sequence class.</dd>
+
+        <dt>
 
           <code><a href="time_varying_covariate-class.html">time_varying_covariate-class</a></code>
 
         </dt>
         <dd>Time-varying covariate class.</dd>
-      </dl><dl><dt>
+
+        <dt>
+
+          <code><a href="time_vector-class.html">time_vector-class</a></code>
+
+        </dt>
+        <dd>Time vector class.</dd>
+
+        <dt>
 
           <code><a href="treatment-class.html">treatment-class</a></code>
 
         </dt>
         <dd>Treatment class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="treatment_iov-class.html">treatment_iov-class</a></code>
 
         </dt>
         <dd>Treatment IOV class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="treatment_iovs-class.html">treatment_iovs-class</a></code>
 
         </dt>
         <dd>Treatment IOV's class.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="undefined_distribution-class.html">undefined_distribution-class</a></code>
 
         </dt>
         <dd>Undefined distribution class. This type of object is automatically created in method toExplicitDistribution() when the user does not provide a concrete distribution. This is because S4 objects do not accept NULL values.</dd>
-      </dl><dl><dt>
+
+        <dt>
 
           <code><a href="undefined_schedule-class.html">undefined_schedule-class</a></code>
 
         </dt>
         <dd>Undefined schedule class.</dd>
+
+        <dt>
+
+          <code><a href="uniform_distribution-class.html">uniform_distribution-class</a></code>
+
+        </dt>
+        <dd>Uniform distribution class.</dd>
       </dl></div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
@@ -1047,7 +1304,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>

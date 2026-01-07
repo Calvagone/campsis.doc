@@ -1,0 +1,3 @@
+# Protocol class.
+
+Protocol class.

@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v02_uncertainties_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Variability levels</h1>
             
@@ -85,7 +85,8 @@
 <div class="section level3">
 <h3 id="simulate-with-all-variabilities">Simulate with all variabilities<a class="anchor" aria-label="anchor" href="#simulate-with-all-variabilities"></a>
 </h3>
-<p>Let’s use a simple 1-compartment model with absorption compartment to illustrate the different levels of variabilities.</p>
+<p>Let’s use a simple 1-compartment model with absorption compartment to
+illustrate the different levels of variabilities.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">refModel</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan2_trans2</span></span>
 <span><span class="va">refModel</span></span></code></pre></div>
@@ -125,7 +126,8 @@
 <span><span class="co">## A_DEPOT (CMT=1)</span></span>
 <span><span class="co">## A_CENTRAL (CMT=2)</span></span>
 <span><span class="co">## A_OUTPUT (CMT=3)</span></span></code></pre>
-<p>We’re going to use a very basic dataset. 1000 mg QD shall be administered for a week.</p>
+<p>We’re going to use a very basic dataset. 1000 mg QD shall be
+administered for a week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -134,7 +136,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="simulate-without-ruv">Simulate without RUV<a class="anchor" aria-label="anchor" href="#simulate-without-ruv"></a>
@@ -157,14 +159,15 @@
 <span><span class="co">##   name index index2 value   fix type</span></span>
 <span><span class="co">## 1 PROP     1      1     0 FALSE  var</span></span>
 <span><span class="co">## No variance-covariance matrix</span></span></code></pre>
-<p>In that case, CONC_ERR (the observed concentration) is identical as CONC (the model-simulated plasma concentration).</p>
+<p>In that case, CONC_ERR (the observed concentration) is identical as
+CONC (the model-simulated plasma concentration).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="simulate-without-ruv-and-iiv">Simulate without RUV and IIV<a class="anchor" aria-label="anchor" href="#simulate-without-ruv-and-iiv"></a>
@@ -191,7 +194,7 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -204,7 +207,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v04_bioavailability_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Bioavailability</h1>
             
@@ -85,24 +85,32 @@
 <p>There are 2 ways to implement bioavailability in CAMPSIS:</p>
 <ul>
 <li>in the model: bioavailability is defined for each compartment</li>
-<li>in the dataset: bioavailability is defined for each bolus or infusion</li>
+<li>in the dataset: bioavailability is defined for each bolus or
+infusion</li>
 </ul>
-<p>In the first case, the simulation engine will take care of the bioavailability. In the second case, CAMPSIS will adapt automatically the amount injected through the dataset (AMT column).</p>
+<p>In the first case, the simulation engine will take care of the
+bioavailability. In the second case, CAMPSIS will adapt automatically
+the amount injected through the dataset (AMT column).</p>
 <div class="section level3">
 <h3 id="bioavailability-implemented-in-model">Bioavailability implemented in model<a class="anchor" aria-label="anchor" href="#bioavailability-implemented-in-model"></a>
 </h3>
-<p>Let’s use a 2-compartment model with absorption compartment to illustrate how this can be achieved.</p>
+<p>Let’s use a 2-compartment model with absorption compartment to
+illustrate how this can be achieved.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span></span></code></pre></div>
-<p>For this example, we’re going to define a bioavailability <code>F1</code> for this absorption compartment.</p>
-<p>First let’s create a new parameter <code>F1</code>, log-normally distributed with a median of 0.75 and 10% CV.</p>
+<p>For this example, we’re going to define a bioavailability
+<code>F1</code> for this absorption compartment.</p>
+<p>First let’s create a new parameter <code>F1</code>, log-normally
+distributed with a median of 0.75 and 10% CV.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Theta.html" class="external-link">Theta</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"F1"</span>, value<span class="op">=</span><span class="fl">0.75</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Omega.html" class="external-link">Omega</a></span><span class="op">(</span>name<span class="op">=</span><span class="st">"F1"</span>, value<span class="op">=</span><span class="fl">10</span>, type<span class="op">=</span><span class="st">"cv%"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Now, let’s add an equation to the drug model to define <code>F1</code>.</p>
+<p>Now, let’s add an equation to the drug model to define
+<code>F1</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Equation.html" class="external-link">Equation</a></span><span class="op">(</span><span class="st">"F1"</span>, <span class="st">"THETA_F1*exp(ETA_F1)"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Finally, we need to tell CAMPSIS that <code>F1</code> corresponds to a bioavailability.</p>
+<p>Finally, we need to tell CAMPSIS that <code>F1</code> corresponds to
+a bioavailability.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Bioavailability.html" class="external-link">Bioavailability</a></span><span class="op">(</span>compartment<span class="op">=</span><span class="fl">1</span>, rhs<span class="op">=</span><span class="st">"F1"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Our persisted drug model would look like this:</p>
@@ -158,7 +166,8 @@
 <span><span class="co">## A_CENTRAL (CMT=2)</span></span>
 <span><span class="co">## A_PERIPHERAL (CMT=3)</span></span>
 <span><span class="co">## A_OUTPUT (CMT=4)</span></span></code></pre>
-<p>Now, let’s now give a simple bolus and simulate with and without <code>F1</code>.</p>
+<p>Now, let’s now give a simple bolus and simulate with and without
+<code>F1</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -167,13 +176,15 @@
 <code class="sourceCode R"><span><span class="va">results_f1</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">results_no_f1</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds1</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_f1</span>, <span class="st">"CONC"</span><span class="op">)</span>, <span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_no_f1</span>, <span class="st">"CONC"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v04_bioavailability_files/figure-html/bioavailability_model%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v04_bioavailability_files/figure-html/bioavailability_model%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="bioavailability-implemented-in-dataset">Bioavailability implemented in dataset<a class="anchor" aria-label="anchor" href="#bioavailability-implemented-in-dataset"></a>
 </h3>
-<p>The same simulation can be performed by adapting the column <code>AMT</code> in the dataset.</p>
-<p>First, we need to sample <code>F1</code> values. This can be done as follows:</p>
+<p>The same simulation can be performed by adapting the column
+<code>AMT</code> in the dataset.</p>
+<p>First, we need to sample <code>F1</code> values. This can be done as
+follows:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">distribution</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ParameterDistribution.html">ParameterDistribution</a></span><span class="op">(</span>model<span class="op">=</span><span class="va">model</span>, theta<span class="op">=</span><span class="st">"F1"</span>, omega<span class="op">=</span><span class="st">"F1"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="../reference/sample.html">sample</a></span><span class="op">(</span><span class="fl">50L</span><span class="op">)</span></span></code></pre></div>
@@ -182,7 +193,8 @@
 <code class="sourceCode R"><span><span class="va">ds2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">50</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, f<span class="op">=</span><span class="va">distribution</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Let’s have a look at the dataset, in its table form, and if we look at the doses only:</p>
+<p>Let’s have a look at the dataset, in its table form, and if we look
+at the doses only:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/export.html" class="external-link">export</a></span><span class="op">(</span>dest<span class="op">=</span><span class="st">"RxODE"</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/dosingOnly.html">dosingOnly</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 6 × 9</span></span></span>
@@ -194,11 +206,12 @@
 <span><span class="co">## <span style="color: #BCBCBC;">4</span>     4     0     0     1     1  879. 1         0      1</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span>     5     0     0     1     1  775. 1         0      1</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">6</span>     6     0     0     1     1  691. 1         0      1</span></span></code></pre>
-<p>Finally, we can simulate the original model using this new dataset.</p>
+<p>Finally, we can simulate the original model using this new
+dataset.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results_f1</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan4_trans4</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds2</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/shadedPlot.html">shadedPlot</a></span><span class="op">(</span><span class="va">results_f1</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v04_bioavailability_files/figure-html/bioavailability_dataset%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v04_bioavailability_files/figure-html/bioavailability_dataset%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -211,7 +224,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

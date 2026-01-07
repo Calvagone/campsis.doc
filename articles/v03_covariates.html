@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.7.0</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,6 @@
     <li><a class="dropdown-item" href="../articles/v14_complex_pkpd_models.html">Complex PK/PD models from literature</a></li>
     <li><a class="dropdown-item" href="../articles/v15_pkpd_model_library.html">PK/PD model library</a></li>
     <li><a class="dropdown-item" href="../articles/v16_progress_bar.html">Progress bar</a></li>
-    <li><a class="dropdown-item" href="../articles/v17_run_simulation_in_parallel.html">Run your simulation in parallel</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -71,7 +70,8 @@
 
 
 
-<script src="v03_covariates_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Covariates</h1>
             
@@ -85,10 +85,12 @@
 <div class="section level3">
 <h3 id="add-a-body-weight-covariate-into-the-model">Add a body weight covariate into the model<a class="anchor" aria-label="anchor" href="#add-a-body-weight-covariate-into-the-model"></a>
 </h3>
-<p>Let’s use a simple 1-compartment model to illustrate how covariates are managed by CAMPSIS.</p>
+<p>Let’s use a simple 1-compartment model to illustrate how covariates
+are managed by CAMPSIS.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan1_trans2</span></span></code></pre></div>
-<p>For this example, we’re going to add allometric scaling on the clearance parameter.</p>
+<p>For this example, we’re going to add allometric scaling on the
+clearance parameter.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/replace.html" class="external-link">replace</a></span><span class="op">(</span><span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/Equation.html" class="external-link">Equation</a></span><span class="op">(</span><span class="st">"CL"</span>, <span class="st">"THETA_CL*exp(ETA_CL)*pow(BW/70, 0.75)"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span></span></code></pre></div>
@@ -123,32 +125,38 @@
 <span><span class="co">## Compartments:</span></span>
 <span><span class="co">## A_CENTRAL (CMT=1)</span></span>
 <span><span class="co">## A_OUTPUT (CMT=2)</span></span></code></pre>
-<p>We will infuse 1000 mg with a rate of 200 mg/hour into the central compartment and observe for a day. The corresponding dataset is as follows:</p>
+<p>We will infuse 1000 mg with a rate of 200 mg/hour into the central
+compartment and observe for a day. The corresponding dataset is as
+follows:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dataset</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Infusion.html">Infusion</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, rate<span class="op">=</span><span class="fl">200</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>    <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span>,by<span class="op">=</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>To visualize clearly the effect of the covariates, we will disable the inter-individual variability on the model.</p>
+<p>To visualize clearly the effect of the covariates, we will disable
+the inter-individual variability on the model.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="st">"IIV"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="constant-body-weight">Constant body weight<a class="anchor" aria-label="anchor" href="#constant-body-weight"></a>
 </h3>
-<p>Let’s define a constant covariate into the dataset. This is done as follows.</p>
+<p>Let’s define a constant covariate into the dataset. This is done as
+follows.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fl">70</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>All simulated subjects will be exactly the same, as IIV was removed.</p>
+<p>All simulated subjects will be exactly the same, as IIV was
+removed.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_constant_bw%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_constant_bw%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="fix-body-weight-values-1subject">Fix body weight values (1/subject)<a class="anchor" aria-label="anchor" href="#fix-body-weight-values-1subject"></a>
 </h3>
-<p>Let’s now define 1 body weight per subject. This is done as follows.</p>
+<p>Let’s now define 1 body weight per subject. This is done as
+follows.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">50</span>,<span class="fl">60</span>,<span class="fl">70</span>,<span class="fl">80</span>,<span class="fl">90</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
@@ -156,61 +164,69 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_fixed_bw%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_fixed_bw%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="uniform-distribution">Uniform distribution<a class="anchor" aria-label="anchor" href="#uniform-distribution"></a>
 </h3>
-<p>Let’s say now that the body weight is a uniform distribution. This can be implemented as follows:</p>
+<p>Let’s say now that the body weight is a uniform distribution. This
+can be implemented as follows:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fu"><a href="../reference/UniformDistribution.html">UniformDistribution</a></span><span class="op">(</span>min<span class="op">=</span><span class="fl">50</span>, max<span class="op">=</span><span class="fl">90</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Simulated weights will then be sampled from a uniform distribution with a min value of 50 and a max value of 90.</p>
+<p>Simulated weights will then be sampled from a uniform distribution
+with a min value of 50 and a max value of 90.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, outvars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CONC"</span>, <span class="st">"BW"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"BW"</span><span class="op">)</span>, <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_uniform_distribution%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_uniform_distribution%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="normal-distribution">Normal distribution<a class="anchor" aria-label="anchor" href="#normal-distribution"></a>
 </h3>
-<p>Let’s say now that the body weight is a normal distribution. This can be implemented as follows:</p>
+<p>Let’s say now that the body weight is a normal distribution. This can
+be implemented as follows:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fu"><a href="../reference/NormalDistribution.html">NormalDistribution</a></span><span class="op">(</span>mean<span class="op">=</span><span class="fl">70</span>, sd<span class="op">=</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Simulated weights will then be sampled from a normal distribution with a mean of 70 and a standard deviation of 10.</p>
+<p>Simulated weights will then be sampled from a normal distribution
+with a mean of 70 and a standard deviation of 10.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, outvars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CONC"</span>, <span class="st">"BW"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"BW"</span><span class="op">)</span>, <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_normal_distribution%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_normal_distribution%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="log-normal-distribution">Log-normal distribution<a class="anchor" aria-label="anchor" href="#log-normal-distribution"></a>
 </h3>
-<p>Say now that the body weight is a log-normal distribution. This can be implemented as follows:</p>
+<p>Say now that the body weight is a log-normal distribution. This can
+be implemented as follows:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">40</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fu"><a href="../reference/LogNormalDistribution.html">LogNormalDistribution</a></span><span class="op">(</span>meanlog<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">70</span><span class="op">)</span>, sdlog<span class="op">=</span><span class="fl">0.2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Simulated weights will then be sampled from a log-normal distribution with a median of 70 and a coefficient of variation of 20%.</p>
+<p>Simulated weights will then be sampled from a log-normal distribution
+with a median of 70 and a coefficient of variation of 20%.</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, outvars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CONC"</span>, <span class="st">"BW"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"BW"</span><span class="op">)</span>, <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_lognormal_distribution%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_lognormal_distribution%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="bootstrap">Bootstrap<a class="anchor" aria-label="anchor" href="#bootstrap"></a>
 </h3>
-<p>Body weight can also be bootstrapped from a real dataset. Let’s create a fictive one:</p>
+<p>Body weight can also be bootstrapped from a real dataset. Let’s
+create a fictive one:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bootstrap</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>ID<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span>,<span class="fl">3</span>,<span class="fl">4</span>,<span class="fl">5</span><span class="op">)</span>, BW<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">89</span>,<span class="fl">54</span>,<span class="fl">60</span>,<span class="fl">75</span>,<span class="fl">77</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="va">dataset</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/setSubjects.html">setSubjects</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Covariate.html">Covariate</a></span><span class="op">(</span><span class="st">"BW"</span>, <span class="fu"><a href="../reference/BootstrapDistribution.html">BootstrapDistribution</a></span><span class="op">(</span>data<span class="op">=</span><span class="va">bootstrap</span><span class="op">$</span><span class="va">BW</span>, replacement<span class="op">=</span><span class="cn">TRUE</span>, random<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p>Simulated weights will then be sampled from a log-normal distribution with a median of 70 and a coefficient of variation of 20%.</p>
+<p>Simulated weights will then be sampled from a log-normal distribution
+with a median of 70 and a coefficient of variation of 20%.</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, outvars<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CONC"</span>, <span class="st">"BW"</span><span class="op">)</span>, seed<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu">gridExtra</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/gridExtra/man/arrangeGrob.html" class="external-link">grid.arrange</a></span><span class="op">(</span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"BW"</span><span class="op">)</span>, <span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span>, nrow<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v03_covariates_files/figure-html/covariates_bootstrap%20-1.png" width="768" style="display: block; margin: auto;"></p>
+<p><img src="v03_covariates_files/figure-html/covariates_bootstrap%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -223,7 +239,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>

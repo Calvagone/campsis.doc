@@ -1,0 +1,3 @@
+# Scenarios class.
+
+Scenarios class.
