@@ -32,3 +32,5 @@
   library](https://calvagone.github.io/campsis.doc/articles/v15_pkpd_model_library.md):
 - [Progress
   bar](https://calvagone.github.io/campsis.doc/articles/v16_progress_bar.md):
+- [Run your simulation in
+  parallel](https://calvagone.github.io/campsis.doc/articles/v17_run_simulation_in_parallel.md):

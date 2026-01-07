@@ -1,5 +1,12 @@
 # Changelog
 
+## campsis 1.8.1
+
+- Fix warnings from package ‘future’
+  [\#188](https://github.com/Calvagone/campsis/issues/188)
+- Update pkgdown website
+  [\#191](https://github.com/Calvagone/campsis/issues/191)
+
 ## campsis 1.8.0
 
 - JSON-based interface to import Campsis datasets
