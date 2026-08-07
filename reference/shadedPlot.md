@@ -7,7 +7,7 @@ Shaded plot (or prediction interval plot).
 ``` r
 shadedPlot(
   x,
-  output,
+  variable,
   colour = NULL,
   strat_extra = NULL,
   level = 0.9,
@@ -21,7 +21,7 @@ shadedPlot(
 
   data frame
 
-- output:
+- variable:
 
   variable to show
 

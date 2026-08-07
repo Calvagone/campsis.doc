@@ -3,9 +3,10 @@
 ### Add a body weight covariate into the model
 
 Let’s use a simple 1-compartment model to illustrate how covariates are
-managed by CAMPSIS.
+managed by Campsis.
 
 ``` r
+
 model <- model_suite$nonmem$advan1_trans2
 ```
 
@@ -13,7 +14,9 @@ For this example, we’re going to add allometric scaling on the clearance
 parameter.
 
 ``` r
-model <- model %>% replace(Equation("CL", "THETA_CL*exp(ETA_CL)*pow(BW/70, 0.75)"))
+
+model <- model %>%
+  replace(Equation("CL", "THETA_CL*exp(ETA_CL)*pow(BW/70, 0.75)"))
 model
 ```
 
@@ -54,16 +57,19 @@ compartment and observe for a day. The corresponding dataset is as
 follows:
 
 ``` r
+
 dataset <- Dataset() %>%
-    add(Infusion(time=0, amount=1000, rate=200)) %>%
-    add(Observations(times=seq(0,24,by=0.5)))
+  add(Infusion(time = 0, amount = 1000, rate = 200)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 To visualize clearly the effect of the covariates, we will disable the
 inter-individual variability on the model.
 
 ``` r
-model <- model %>% disable("IIV")
+
+model <- model %>%
+  disable("IIV")
 ```
 
 ### Constant body weight
@@ -72,15 +78,18 @@ Let’s define a constant covariate into the dataset. This is done as
 follows.
 
 ``` r
-ds <- dataset %>% setSubjects(5) %>%
+
+ds <- dataset %>%
+  set_subjects(5) %>%
   add(Covariate("BW", 70))
 ```
 
 All simulated subjects will be exactly the same, as IIV was removed.
 
 ``` r
-results <- model %>% simulate(dataset=ds)
-spaghettiPlot(results, "CONC")
+
+results <- simulate(model = model, dataset = ds)
+spaghetti_plot(results, "CONC")
 ```
 
 ![](v03_covariates_files/figure-html/covariates_constant_bw%20-1.png)
@@ -90,15 +99,18 @@ spaghettiPlot(results, "CONC")
 Let’s now define 1 body weight per subject. This is done as follows.
 
 ``` r
-ds <- dataset %>% setSubjects(5) %>%
-  add(Covariate("BW", c(50,60,70,80,90)))
+
+ds <- dataset %>%
+  set_subjects(5) %>%
+  add(Covariate("BW", c(50, 60, 70, 80, 90)))
 ```
 
 Simulated subjects should now be different.
 
 ``` r
-results <- model %>% simulate(dataset=ds)
-spaghettiPlot(results, "CONC")
+
+results <- simulate(model = model, dataset = ds)
+spaghetti_plot(results, "CONC")
 ```
 
 ![](v03_covariates_files/figure-html/covariates_fixed_bw%20-1.png)
@@ -109,16 +121,28 @@ Let’s say now that the body weight is a uniform distribution. This can
 be implemented as follows:
 
 ``` r
-ds <- dataset %>% setSubjects(40) %>%
-  add(Covariate("BW", UniformDistribution(min=50, max=90)))
+
+ds <- dataset %>%
+  set_subjects(40) %>%
+  add(Covariate("BW", UniformDistribution(min = 50, max = 90)))
 ```
 
 Simulated weights will then be sampled from a uniform distribution with
 a min value of 50 and a max value of 90.
 
 ``` r
-results <- model %>% simulate(dataset=ds, outvars=c("CONC", "BW"), seed=1)
-gridExtra::grid.arrange(spaghettiPlot(results, "BW"), spaghettiPlot(results, "CONC"), nrow=1)
+
+results <- simulate(
+  model = model,
+  dataset = ds,
+  outvars = c("CONC", "BW"),
+  seed = 1
+)
+gridExtra::grid.arrange(
+  spaghetti_plot(results, "BW"),
+  spaghetti_plot(results, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v03_covariates_files/figure-html/covariates_uniform_distribution%20-1.png)
@@ -129,16 +153,28 @@ Let’s say now that the body weight is a normal distribution. This can be
 implemented as follows:
 
 ``` r
-ds <- dataset %>% setSubjects(40) %>%
-  add(Covariate("BW", NormalDistribution(mean=70, sd=10)))
+
+ds <- dataset %>%
+  set_subjects(40) %>%
+  add(Covariate("BW", NormalDistribution(mean = 70, sd = 10)))
 ```
 
 Simulated weights will then be sampled from a normal distribution with a
 mean of 70 and a standard deviation of 10.
 
 ``` r
-results <- model %>% simulate(dataset=ds, outvars=c("CONC", "BW"), seed=1)
-gridExtra::grid.arrange(spaghettiPlot(results, "BW"), spaghettiPlot(results, "CONC"), nrow=1)
+
+results <- simulate(
+  model = model,
+  dataset = ds,
+  outvars = c("CONC", "BW"),
+  seed = 1
+)
+gridExtra::grid.arrange(
+  spaghetti_plot(results, "BW"),
+  spaghetti_plot(results, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v03_covariates_files/figure-html/covariates_normal_distribution%20-1.png)
@@ -149,16 +185,28 @@ Say now that the body weight is a log-normal distribution. This can be
 implemented as follows:
 
 ``` r
-ds <- dataset %>% setSubjects(40) %>%
-  add(Covariate("BW", LogNormalDistribution(meanlog=log(70), sdlog=0.2)))
+
+ds <- dataset %>%
+  set_subjects(40) %>%
+  add(Covariate("BW", LogNormalDistribution(meanlog = log(70), sdlog = 0.2)))
 ```
 
 Simulated weights will then be sampled from a log-normal distribution
 with a median of 70 and a coefficient of variation of 20%.
 
 ``` r
-results <- model %>% simulate(dataset=ds, outvars=c("CONC", "BW"), seed=1)
-gridExtra::grid.arrange(spaghettiPlot(results, "BW"), spaghettiPlot(results, "CONC"), nrow=1)
+
+results <- simulate(
+  model = model,
+  dataset = ds,
+  outvars = c("CONC", "BW"),
+  seed = 1
+)
+gridExtra::grid.arrange(
+  spaghetti_plot(results, "BW"),
+  spaghetti_plot(results, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v03_covariates_files/figure-html/covariates_lognormal_distribution%20-1.png)
@@ -169,20 +217,40 @@ Body weight can also be bootstrapped from a real dataset. Let’s create a
 fictive one:
 
 ``` r
-bootstrap <- data.frame(ID=c(1,2,3,4,5), BW=c(89,54,60,75,77))
+
+bootstrap <- data.frame(ID = c(1, 2, 3, 4, 5), BW = c(89, 54, 60, 75, 77))
 ```
 
 ``` r
-ds <- dataset %>% setSubjects(10) %>%
-  add(Covariate("BW", BootstrapDistribution(data=bootstrap$BW, replacement=TRUE, random=TRUE)))
+
+ds <- dataset %>%
+  set_subjects(10) %>%
+  add(Covariate(
+    "BW",
+    BootstrapDistribution(
+      data = bootstrap$BW,
+      replacement = TRUE,
+      random = TRUE
+    )
+  ))
 ```
 
 Simulated weights will then be sampled from a log-normal distribution
 with a median of 70 and a coefficient of variation of 20%.
 
 ``` r
-results <- model %>% simulate(dataset=ds, outvars=c("CONC", "BW"), seed=2)
-gridExtra::grid.arrange(spaghettiPlot(results, "BW"), spaghettiPlot(results, "CONC"), nrow=1)
+
+results <- simulate(
+  model = model,
+  dataset = ds,
+  outvars = c("CONC", "BW"),
+  seed = 2
+)
+gridExtra::grid.arrange(
+  spaghetti_plot(results, "BW"),
+  spaghetti_plot(results, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v03_covariates_files/figure-html/covariates_bootstrap%20-1.png)

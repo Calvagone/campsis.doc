@@ -1,12 +1,12 @@
 # Bioavailability
 
-There are 2 ways to implement bioavailability in CAMPSIS:
+There are 2 ways to implement bioavailability in Campsis:
 
 - in the model: bioavailability is defined for each compartment
 - in the dataset: bioavailability is defined for each bolus or infusion
 
 In the first case, the simulation engine will take care of the
-bioavailability. In the second case, CAMPSIS will adapt automatically
+bioavailability. In the second case, Campsis will adapt automatically
 the amount injected through the dataset (AMT column).
 
 ### Bioavailability implemented in model
@@ -15,6 +15,7 @@ Let’s use a 2-compartment model with absorption compartment to
 illustrate how this can be achieved.
 
 ``` r
+
 model <- model_suite$nonmem$advan4_trans4
 ```
 
@@ -25,26 +26,33 @@ First let’s create a new parameter `F1`, log-normally distributed with a
 median of 0.75 and 10% CV.
 
 ``` r
-model <- model %>% add(Theta(name="F1", value=0.75))
-model <- model %>% add(Omega(name="F1", value=10, type="cv%"))
+
+model <- model %>%
+  add(Theta(name = "F1", value = 0.75)) %>%
+  add(Omega(name = "F1", value = 10, type = "cv%"))
 ```
 
 Now, let’s add an equation to the drug model to define `F1`.
 
 ``` r
-model <- model %>% add(Equation("F1", "THETA_F1*exp(ETA_F1)"))
+
+model <- model %>%
+  add(Equation("F1", "THETA_F1*exp(ETA_F1)"))
 ```
 
-Finally, we need to tell CAMPSIS that `F1` corresponds to a
+Finally, we need to tell Campsis that `F1` corresponds to a
 bioavailability.
 
 ``` r
-model <- model %>% add(Bioavailability(compartment=1, rhs="F1"))
+
+model <- model %>%
+  add(Bioavailability(compartment = 1, rhs = "F1"))
 ```
 
 Our persisted drug model would look like this:
 
 ``` r
+
 model
 ```
 
@@ -102,15 +110,25 @@ model
 Now, let’s now give a simple bolus and simulate with and without `F1`.
 
 ``` r
+
 ds1 <- Dataset(50) %>%
-  add(Bolus(time=0, amount=1000)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+  add(Bolus(time = 0, amount = 1000)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 ``` r
-results_f1 <- model %>% simulate(dataset=ds1, seed=1)
-results_no_f1 <- model_suite$nonmem$advan4_trans4 %>% simulate(dataset=ds1, seed=1)
-gridExtra::grid.arrange(shadedPlot(results_f1, "CONC"), shadedPlot(results_no_f1, "CONC"), nrow=1)
+
+results_f1 <- simulate(model = model, dataset = ds1, seed = 1)
+results_no_f1 <- simulate(
+  model = model_suite$nonmem$advan4_trans4,
+  dataset = ds1,
+  seed = 1
+)
+gridExtra::grid.arrange(
+  shaded_plot(results_f1, "CONC"),
+  shaded_plot(results_no_f1, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v04_bioavailability_files/figure-html/bioavailability_model%20-1.png)
@@ -123,23 +141,30 @@ dataset.
 First, we need to sample `F1` values. This can be done as follows:
 
 ``` r
-distribution <- ParameterDistribution(model=model, theta="F1", omega="F1") %>%
+
+distribution <- ParameterDistribution(
+  model = model,
+  theta = "F1",
+  omega = "F1"
+) %>%
   sample(50L)
 ```
 
 We can then pass the pre-sampled distribution.
 
 ``` r
+
 ds2 <- Dataset(50) %>%
-  add(Bolus(time=0, amount=1000, f=distribution)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+  add(Bolus(time = 0, amount = 1000, f = distribution)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 Let’s have a look at the dataset, in its table form, and if we look at
 the doses only:
 
 ``` r
-ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
+
+ds2 %>% export(dest = "rxode2") %>% dosing_only() %>% head()
 ```
 
     ## # A tibble: 6 × 9
@@ -155,8 +180,13 @@ ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
 Finally, we can simulate the original model using this new dataset.
 
 ``` r
-results_f1 <- model_suite$nonmem$advan4_trans4 %>% simulate(dataset=ds2, seed=1)
-shadedPlot(results_f1, "CONC")
+
+results_f1 <- simulate(
+  model = model_suite$nonmem$advan4_trans4,
+  dataset = ds2,
+  seed = 1
+)
+shaded_plot(results_f1, "CONC")
 ```
 
 ![](v04_bioavailability_files/figure-html/bioavailability_dataset%20-1.png)

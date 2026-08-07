@@ -5,18 +5,21 @@
 Create a dataset of 3 subjects:
 
 ``` r
-ds <- Dataset(subjects=3)
+
+ds <- Dataset(subjects = 3)
 ```
 
 Or shortly:
 
 ``` r
+
 ds <- Dataset(3)
 ```
 
 Check how many subjects are part of this dataset:
 
 ``` r
+
 ds %>% length()
 ```
 
@@ -25,18 +28,23 @@ ds %>% length()
 See all methods that can be applied on a dataset:
 
 ``` r
-methods(class=class(ds))
+
+methods(class = class(ds))
 ```
 
-    ##  [1] add                      applyAction              contains                
-    ##  [4] delete                   export                   find                    
-    ##  [7] getCovariates            getEventCovariates       getFixedCovariates      
-    ## [10] getIOVs                  getOccasions             getTimes                
-    ## [13] getTimeVaryingCovariates length                   loadFromJSON            
-    ## [16] replace                  setLabel                 setSubjects             
-    ## [19] show                     simulate                 unwrapTreatment         
-    ## [22] updateADDL               updateAmount             updateII                
-    ## [25] updateRepeat            
+    ##  [1] add                         apply_action               
+    ##  [3] contains                    delete                     
+    ##  [5] export                      find                       
+    ##  [7] get_covariates              get_event_covariates       
+    ##  [9] get_fixed_covariates        get_iovs                   
+    ## [11] get_occasions               get_time_varying_covariates
+    ## [13] get_times                   length                     
+    ## [15] load_from_json              replace                    
+    ## [17] set_label                   set_subjects               
+    ## [19] show                        simulate                   
+    ## [21] unwrap_treatment            update_addl                
+    ## [23] update_amount               update_ii                  
+    ## [25] update_repeat              
     ## see '?methods' for accessing help and source code
 
 Oh, this looks cool. There are plenty of functions to play with.  
@@ -52,7 +60,8 @@ A bolus can be created using the constructor `Bolus` and added to the
 dataset:
 
 ``` r
-ds <- ds %>% add(Bolus(time=0, amount=1000))
+
+ds <- ds %>% add(Bolus(time = 0, amount = 1000))
 ```
 
 By default, it will be injected into the first compartment (CMT=1). If
@@ -60,7 +69,8 @@ another compartment needs to be used, the `compartment` argument may be
 used as follows:
 
 ``` r
-Bolus(time=0, amount=1000, compartment=2)
+
+Bolus(time = 0, amount = 1000, compartment = 2)
 ```
 
 Bioavailabilities (`f` argument) and lag times (`lag` argument) can be
@@ -73,7 +83,8 @@ An infusion can be created using the constructor `Infusion` and added to
 the dataset:
 
 ``` r
-ds <- ds %>% add(Infusion(time=0.5, amount=1000))
+
+ds <- ds %>% add(Infusion(time = 0.5, amount = 1000))
 ```
 
 As previously, the default compartment is the first compartment.
@@ -89,7 +100,8 @@ Observations can be created using the constructor `Observations` and
 added to the dataset:
 
 ``` r
-ds <- ds %>% add(Observations(times=c(0.5, 1)))
+
+ds <- ds %>% add(Observations(times = c(0.5, 1)))
 ```
 
 The default compartment is the first one. Although the compartment
@@ -101,10 +113,11 @@ for a modeling tool.
 
 So far so good! The dataset contains 5 subjects, 1 bolus and 1 infusion.
 We are going to export it to a 2-dimensional table. This step is
-implicitly done by CAMPSIS when you simulate your model.
+implicitly done by Campsis when you simulate your model.
 
 ``` r
-table <- ds %>% export(dest="RxODE")
+
+table <- ds %>% export(dest = "rxode2")
 table
 ```
 
@@ -128,7 +141,7 @@ A few explanations need to be given here regarding the following column
 names:
 
 - ID: this is the subject ID, it always starts at 1. ID’s are
-  consecutive in CAMPSIS
+  consecutive in Campsis
 - ARM: this is the ARM number. 0 is the default arm.
 - RATE: the RATE column (0 for boluses, -1/-2 for a rate/infusion
   defined in the model, NA when no information is available)
@@ -144,33 +157,42 @@ sense the treatment(s) and the observation(s) can be totally different.
 To illustrate this, let’s create a dataset with two arms.
 
 ``` r
-arm1 <- Arm(subjects=2)
-arm2 <- Arm(subjects=3)
+
+arm1 <- Arm(subjects = 2)
+arm2 <- Arm(subjects = 3)
 ```
 
 Let’s create 2 different treatments:
 
 ``` r
-arm1 <- arm1 %>% add(Bolus(time=0, amount=1000))
-arm2 <- arm2 %>% add(Bolus(time=0, amount=2000))
+
+arm1 <- arm1 %>%
+  add(Bolus(time = 0, amount = 1000))
+arm2 <- arm2 %>%
+  add(Bolus(time = 0, amount = 2000))
 ```
 
 Observations may also differ:
 
 ``` r
-arm1 <- arm1 %>% add(Observations(times=c(0.5, 1)))
-arm2 <- arm2 %>% add(Observations(times=c(1, 1.5)))
+
+arm1 <- arm1 %>%
+  add(Observations(times = c(0.5, 1)))
+arm2 <- arm2 %>%
+  add(Observations(times = c(1, 1.5)))
 ```
 
 Let’s now add these 2 arms into a fresh dataset:
 
 ``` r
+
 ds <- Dataset() %>% add(c(arm1, arm2))
 ```
 
 We can check how many subjects are part of this dataset:
 
 ``` r
+
 ds %>% length()
 ```
 
@@ -179,7 +201,8 @@ ds %>% length()
 The resulting exported table is as follows:
 
 ``` r
-table <- ds %>% export(dest="RxODE")
+
+table <- ds %>% export(dest = "rxode2")
 table
 ```
 

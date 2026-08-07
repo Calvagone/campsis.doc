@@ -1,11 +1,11 @@
-# Compute the prediction interval summary over time.
+# Compute the prediction interval summary over time (deprecated).
 
-Compute the prediction interval summary over time.
+Compute the prediction interval summary over time (deprecated).
 
 ## Usage
 
 ``` r
-PI(x, output, scenarios = NULL, level = 0.9, gather = TRUE)
+PI(x, variable, strata = get_default_strata(), level = 0.9)
 ```
 
 ## Arguments
@@ -14,21 +14,20 @@ PI(x, output, scenarios = NULL, level = 0.9, gather = TRUE)
 
   data frame
 
-- output:
+- variable:
 
-  variable to show, character value
+  variable(s) used to compute the prediction interval, character vector.
+  When more than one variable is supplied, a `variable` column is added
+  to the output to identify each one.
 
-- scenarios:
+- strata:
 
-  scenarios, character vector, NULL is default
+  named vector with the strata to use, default is c(SCENARIO="all",
+  ARM="all"). Only columns that are actually present in `x` are used.
 
 - level:
 
   PI level, default is 0.9 (90% PI)
-
-- gather:
-
-  FALSE: med, low & up columns, TRUE: metric column
 
 ## Value
 

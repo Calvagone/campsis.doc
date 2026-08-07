@@ -5,7 +5,7 @@ Create a dataset.
 ## Usage
 
 ``` r
-Dataset(subjects = NULL, label = as.character(NA))
+Dataset(subjects = NULL, label = as.character(NA), json = NULL)
 ```
 
 ## Arguments
@@ -17,6 +17,10 @@ Dataset(subjects = NULL, label = as.character(NA))
 - label:
 
   label of the default arm, NA by default
+
+- json:
+
+  path to JSON dataset file or JSON content in string form
 
 ## Value
 

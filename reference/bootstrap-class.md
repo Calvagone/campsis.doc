@@ -21,4 +21,4 @@ Bootstrap class.
 
 - `export_id`:
 
-  tell CAMPSIS if 'BS_ID' must be exported into the dataset, logical
+  tell Campsis if 'BS_ID' must be exported into the dataset, logical

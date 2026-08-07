@@ -38,7 +38,7 @@ Bootstrap(
 
 - export_id:
 
-  tell CAMPSIS if the identifier 'BS_ID' must be output or not, logical
+  tell Campsis if the identifier 'BS_ID' must be output or not, logical
 
 ## Value
 

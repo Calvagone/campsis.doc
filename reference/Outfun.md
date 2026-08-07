@@ -11,7 +11,8 @@ Outfun(
  },
   args = list(),
   packages = NULL,
-  level = "scenario"
+  level = "replicate",
+  name = "custom"
 )
 ```
 
@@ -33,7 +34,12 @@ Outfun(
 
 - level:
 
-  either 'scenario' or 'replicate'. Default is 'scenario'.
+  where to apply the output function, only 'replicate' is allowed since
+  Campsis v1.9.0
+
+- name:
+
+  name of the output function. Default is 'custom'.
 
 ## Value
 

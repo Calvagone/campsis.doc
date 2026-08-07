@@ -5,7 +5,7 @@ Spaghetti plot.
 ## Usage
 
 ``` r
-spaghettiPlot(x, output, colour = NULL)
+spaghettiPlot(x, variable, colour = NULL)
 ```
 
 ## Arguments
@@ -14,7 +14,7 @@ spaghettiPlot(x, output, colour = NULL)
 
   data frame
 
-- output:
+- variable:
 
   variable to show
 

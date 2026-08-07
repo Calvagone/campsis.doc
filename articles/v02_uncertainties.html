@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Variability levels">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">campsis</a>
 
-    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.8.1</small>
+    <small class="nav-text text-warning me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">1.9.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,8 +89,8 @@
 <p>Let’s use a simple 1-compartment model with absorption compartment to
 illustrate the different levels of variabilities.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">refModel</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan2_trans2</span></span>
-<span><span class="va">refModel</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ref_model</span> <span class="op">&lt;-</span> <span class="va">model_suite</span><span class="op">$</span><span class="va">nonmem</span><span class="op">$</span><span class="va">advan2_trans2</span></span>
+<span><span class="va">ref_model</span></span></code></pre></div>
 <pre><code><span><span class="co">## [MAIN]</span></span>
 <span><span class="co">## KA=THETA_KA*exp(ETA_KA)</span></span>
 <span><span class="co">## CL=THETA_CL*exp(ETA_CL)</span></span>
@@ -131,20 +131,21 @@ illustrate the different levels of variabilities.</p>
 administered for a week.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ds</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/Dataset.html">Dataset</a></span><span class="op">(</span><span class="fl">25</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time<span class="op">=</span><span class="fl">0</span>, amount<span class="op">=</span><span class="fl">1000</span>, ii<span class="op">=</span><span class="fl">24</span>, addl<span class="op">=</span><span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">24</span><span class="op">*</span><span class="fl">7</span>,by<span class="op">=</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Bolus.html">Bolus</a></span><span class="op">(</span>time <span class="op">=</span> <span class="fl">0</span>, amount <span class="op">=</span> <span class="fl">1000</span>, ii <span class="op">=</span> <span class="fl">24</span>, addl <span class="op">=</span> <span class="fl">6</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/add.html" class="external-link">add</a></span><span class="op">(</span><span class="fu"><a href="../reference/Observations.html">Observations</a></span><span class="op">(</span>times <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">24</span> <span class="op">*</span> <span class="fl">7</span>, by <span class="op">=</span> <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>All subjects are different due to IIV and RUV.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">ref_model</span>, dataset <span class="op">=</span> <span class="va">ds</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/spaghetti_plot.html">spaghetti_plot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png" class="r-plt" alt="" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="simulate-without-ruv">Simulate without RUV<a class="anchor" aria-label="anchor" href="#simulate-without-ruv"></a>
 </h3>
 <p>Disabling RUV is done as follows:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">ref_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span><span class="op">@</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code><span><span class="co">## THETA's:</span></span>
 <span><span class="co">##   name index value   fix</span></span>
@@ -163,19 +164,20 @@ administered for a week.</p>
 <p>In that case, CONC_ERR (the observed concentration) is identical as
 CONC (the model-simulated plasma concentration).</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>model <span class="op">=</span> <span class="va">model</span>, dataset <span class="op">=</span> <span class="va">ds</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/spaghetti_plot.html">spaghetti_plot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png" class="r-plt" alt="" width="768" style="display: block; margin: auto;"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/spaghetti_plot.html">spaghetti_plot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png" class="r-plt" alt="" width="768" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
 <h3 id="simulate-without-ruv-and-iiv">Simulate without RUV and IIV<a class="anchor" aria-label="anchor" href="#simulate-without-ruv-and-iiv"></a>
 </h3>
 <p>Disabling RUV and IIV is done as follows:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">refModel</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IIV"</span>, <span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="va">ref_model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://calvagone.github.io/campsismod.doc/reference/disable.html" class="external-link">disable</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"IIV"</span>, <span class="st">"RUV"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span><span class="op">@</span><span class="va">parameters</span></span></code></pre></div>
 <pre><code><span><span class="co">## THETA's:</span></span>
 <span><span class="co">##   name index value   fix</span></span>
@@ -193,9 +195,10 @@ CONC (the model-simulated plasma concentration).</p>
 <span><span class="co">## No variance-covariance matrix</span></span></code></pre>
 <p>Now, the typical profile is shown for all subjects.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset<span class="op">=</span><span class="va">ds</span>, seed<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span><span class="fu"><a href="../reference/spaghettiPlot.html">spaghettiPlot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png" class="r-plt" width="768" style="display: block; margin: auto;"></p>
+<code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="va">model</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="../reference/simulate.html">simulate</a></span><span class="op">(</span>dataset <span class="op">=</span> <span class="va">ds</span>, seed <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/spaghetti_plot.html">spaghetti_plot</a></span><span class="op">(</span><span class="va">results</span>, <span class="st">"CONC_ERR"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png" class="r-plt" alt="" width="768" style="display: block; margin: auto;"></p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
@@ -208,7 +211,7 @@ CONC (the model-simulated plasma concentration).</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

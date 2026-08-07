@@ -1,6 +1,6 @@
 # Convert numeric time vector based on the provided units.
 
-Convert numeric time vector based on the provided units.
+\`r lifecycle::badge("deprecated")\`
 
 ## Usage
 
@@ -25,3 +25,7 @@ convertTime(x, from, to)
 ## Value
 
 numeric vector with the converted times
+
+## Details
+
+\`convertTime()\` is deprecated in favor of \`convert_time()\`.

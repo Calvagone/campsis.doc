@@ -5,7 +5,7 @@ Scatter plot (or X vs Y plot).
 ## Usage
 
 ``` r
-scatterPlot(x, output, colour = NULL, time = NULL)
+scatterPlot(x, variable, colour = NULL, time = NULL)
 ```
 
 ## Arguments
@@ -14,7 +14,7 @@ scatterPlot(x, output, colour = NULL, time = NULL)
 
   data frame
 
-- output:
+- variable:
 
   the 2 variables to show, character vector
 

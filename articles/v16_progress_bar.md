@@ -8,6 +8,7 @@ to the package `progressr`.
 Load package `progressr` as follows:
 
 ``` r
+
 library(progressr)
 ```
 
@@ -16,7 +17,8 @@ once for all in your script. By doing so, any call to the simulate
 method of `campsis` will display the progress bar.
 
 ``` r
-handlers(global=TRUE)
+
+handlers(global = TRUE)
 ```
 
 By default, the progress bar will only give the progress as a
@@ -30,6 +32,7 @@ more details about what’s being simulated and what’s the remaining time
 (ETA), you can write:
 
 ``` r
+
 handlers(campsis_handler())
 ```
 
@@ -38,12 +41,19 @@ call the method `with_progress`. The snippet below is an example of
 simulation where this method is called.
 
 ``` r
+
 dataset <- Dataset(1000) %>%
-  add(Infusion(time=0, amount=1000, compartment=1, ii=24, addl=6)) %>%
-  add(Observations(seq(0, 7*24)))
+  add(Infusion(time = 0, amount = 1000, compartment = 1, ii = 24, addl = 6)) %>%
+  add(Observations(seq(0, 7 * 24)))
 
 model <- model_suite$pk$`1cpt_fo`
-results <- with_progress(simulate(model=model, dataset=dataset, dest="mrgsolve", seed=1, replicates=3))
+results <- with_progress(simulate(
+  model = model,
+  dataset = dataset,
+  dest = "mrgsolve",
+  seed = 1,
+  replicates = 3
+))
 shadedPlot(results, "CONC", "replicate")
 ```
 
@@ -52,7 +62,17 @@ shadedPlot(results, "CONC", "replicate")
 Any handler may be provided as well:
 
 ``` r
-results <- with_progress(simulate(model=model, dataset=dataset, dest="mrgsolve", seed=1, replicates=3), handlers=campsis_handler())
+
+results <- with_progress(
+  simulate(
+    model = model,
+    dataset = dataset,
+    dest = "mrgsolve",
+    seed = 1,
+    replicates = 3
+  ),
+  handlers = campsis_handler()
+)
 ```
 
 ### Track the simulation progress in a targets project
@@ -69,16 +89,17 @@ is important to mention that `handlers(global=TRUE)` can’t be used in
 such a script. If you try to do so, an error message will pop up.
 
 ``` r
+
 library(targets)
 
 source("R/my_script.R")
 
 # Packages loaded by targets
 packages <- c("campsis", "progressr")
-tar_option_set(packages=packages)
+tar_option_set(packages = packages)
 
 # Enable progress bar
-options(progressr.enable=TRUE)
+options(progressr.enable = TRUE)
 progressr::handlers(campsis::campsis_handler())
 
 list(
@@ -88,11 +109,11 @@ list(
   ),
   tar_target(
     dataset,
-    makeDataset(subjects=1000, dose=1000)
+    make_dataset(subjects = 1000, dose = 1000)
   ),
   tar_target(
     results,
-    runSimulation(model=model, dataset=dataset, replicates=3)
+    run_simulation(model = model, dataset = dataset, replicates = 3)
   )
 )
 ```
@@ -103,16 +124,28 @@ content of `my_script.R`. An explicit call to `with_progress` will make
 the progress bar appear when executing the target `results`.
 
 ``` r
-makeDataset <- function(subjects, dose) {
-  dataset <- Dataset(subjects=subjects) %>%
-    add(Infusion(time=0, amount=dose, compartment=1, ii=24, addl=6)) %>%
-    add(Observations(seq(0, 7*24)))
+
+make_dataset <- function(subjects, dose) {
+  dataset <- Dataset(subjects = subjects) %>%
+    add(Infusion(
+      time = 0,
+      amount = dose,
+      compartment = 1,
+      ii = 24,
+      addl = 6
+    )) %>%
+    add(Observations(seq(0, 7 * 24)))
   return(dataset)
 }
 
-runSimulation <- function(model, dataset, replicates) {
-  results <- with_progress(simulate(model=model, dataset=dataset, dest="mrgsolve",
-                                    seed=1, replicates=replicates))
+run_simulation <- function(model, dataset, replicates) {
+  results <- with_progress(simulate(
+    model = model,
+    dataset = dataset,
+    dest = "mrgsolve",
+    seed = 1,
+    replicates = replicates
+  ))
   return(results)
 }
 ```
@@ -120,12 +153,13 @@ runSimulation <- function(model, dataset, replicates) {
 This small project can be downloaded by clicking the link below.
 
 [Download targets
-squeletton](data:application/zip;base64,UEsDBAoAAAAAAClhd1YAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgAKWF3ViL0jBb1AAAAxwEAAA0AAABSL215X3NjcmlwdC5ShZC9TgMxEIT7k+4dVpEinSMjQRRBE1PRUFHwAMg5b4LBP4d3HQrEu2Nzlz8aXFmjmc8zbhuv3/FBsyZkWF/BNoeebQwd5c0b9kwSTCQU8NU2AOZknDJHnzpcBMzv59UMoI3pHsM2UwWy9aiuJWgfc2BVqRL66Aed2GNRbiRYq5YrWXNO3Yo/pKcNYdrr2o46wo+uwO4Wy5UQopoSck6hmyoW6btt2ibl8Gx9dr+xi4E+GnTyMEmW/OBsrxlpGpuQsmOqoU/Lry9DiruilbdHII4IdQlSR6BBYjXzaUfR7XEmxyX/HUI09StOddRZs/OlU7+69AdQSwMEFAACAAgAKWF3VtZvEykaAQAAAwIAAAoAAABfdGFyZ2V0cy5SfVC7boQwEOyR+AeLXGEkcrlTOhS6XB+RpPYtZsU5GGx5TUG+PubhU4ookovx7s7MzmrVOHAz9+A69JSnSZqQmZxEntVPwyxIOmX9sc7W1gN7A9lDh8S0gRZb1sxs56aJjb2XRyZ5JmGwpCgrWGad6RwSuUUmzAtjvTKjIPQ8sqoIdqfLCI1GFqmsAZcmG4/4XfCI61j1UX9eAvFeL8sbjK1GR3zfoyx3IPYOz1cnrcjzNGFLDrFlWb+MDaZFXfzCgibl8WD7w/UsrRffRkBDQkN3Xaby4k+ZFjyEoFEIenzdKpym5gulp+p8Op0K1hrCFeb/qIV0k/a0q7lpfFfDpGE5C1+XrLa1o20V7QPTaiXBh1M/bw5pEt4PUEsBAh4DCgAAAAAAKWF3VgAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAO1BAAAAAFIvUEsBAh4DFAACAAgAKWF3ViL0jBb1AAAAxwEAAA0AAAAAAAAAAQAAAKSBIAAAAFIvbXlfc2NyaXB0LlJQSwECHgMUAAIACAApYXdW1m8TKRoBAAADAgAACgAAAAAAAAABAAAApIFAAQAAX3RhcmdldHMuUlBLBQYAAAAAAwADAKMAAACCAgAAAAA=)
+squeletton](data:application/zip;base64,UEsDBAoAAAAAAOCK8FwAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgA0XH9XASvnuMHAQAABAIAAA0AAABSL215X3NjcmlwdC5SXZDPTsMwDMbvk/oO1qRJLSrSQAgujBMXTjxClTXeyMifEifjgHh3nCZtN27xL58/258Rn9hJEQRhgOdbOETbB+VsTXF/wj5QC9IRNvBTrQAuhK/5OetgB9Ozgc3LJskBhJT1mz1ESpYZAQRlkOXbdgLCuGgDozRqpr0zg/DB4Ph1N3OluLx/WLql1Ewec938m/6+J/RnkW6imvCr3rbwBDds0DRNknkM0du6nMbot1pVKx9tR8pEPXZeJWOcRN1OWbRsMGjVi4BUUvJIUXMi3PStwkc3eHdkxuOzIZYkRiPePBtmNiW8m/0LR0pwbfyRnD7junBClBfpLLswXIr0eXVtWTFf+wdQSwMEFAACAAgACXP9XFSsIrsdAQAAEwIAAAoAAABfdGFyZ2V0cy5SfVCxboMwEN2R+IcTzWAkmibqhpoxe4Xa2TnMibgxseUzA/36GjBRh6qSh/O9e+/eO6Nbj34SAX1Pgcs8yzO2o1ckiuZlmCQrr13YN8UCPcE7qhv2xGAsdtRBO0Hi5pnbsLdnUKJQODjWXFRQOG97T8x+lonz0rqg7V0yBfFgnWAr067zHVtDsJGhRZ9nK5PFQ3JP69gJPprPc6Q+kLq+4r0z5FkkL3WdCpkQUS67jOYg8gzmLHLNs3wBBtuRqX7VkkcdaOduu8tRuSC/rcSWpcH+Mk+V1Z8yHQaMYTchvJFMLcFj+0UqzPmPh8Ohgs4ypU/5j2SMOJrASdKP8Zp6GA3O5xGL1Siy2t/Wx8ZmJNKd0QrDcvjXdVGexfcDUEsBAh4DCgAAAAAA4IrwXAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAO1BAAAAAFIvUEsBAh4DFAACAAgA0XH9XASvnuMHAQAABAIAAA0AAAAAAAAAAQAAAKSBIAAAAFIvbXlfc2NyaXB0LlJQSwECHgMUAAIACAAJc/1cVKwiux0BAAATAgAACgAAAAAAAAABAAAApIFSAQAAX3RhcmdldHMuUlBLBQYAAAAAAwADAKMAAACXAgAAAAA=)
 
 To run this project, simply open an R console within your targets folder
 and type:
 
 ``` r
+
 library(targets)
 tar_make()
 ```

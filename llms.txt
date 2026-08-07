@@ -10,6 +10,7 @@
 Install the latest stable release using `devtools`:
 
 ``` r
+
 devtools::install_github("Calvagone/campsis")
 ```
 
@@ -18,20 +19,23 @@ devtools::install_github("Calvagone/campsis")
 Import the `campsis` package:
 
 ``` r
+
 library(campsis)
 ```
 
 Create your dataset:
 
 ``` r
+
 ds <- Dataset(50) %>%
-  add(Bolus(time=0, amount=1000, ii=12, addl=2)) %>%
-  add(Observations(times=seq(0, 36, by=0.5)))
+  add(Bolus(time = 0, amount = 1000, ii = 12, addl = 2)) %>%
+  add(Observations(times = seq(0, 36, by = 0.5)))
 ```
 
 Load your own model or use a built-in model from the library:
 
 ``` r
+
 model <- model_suite$pk$`2cpt_fo`
 ```
 
@@ -39,13 +43,15 @@ Simulate your results with your preferred simulation engine (`rxode2` or
 `mrgsolve`):
 
 ``` r
-results <- model %>% simulate(dataset=ds, dest="rxode2", seed=1)
+
+results <- simulate(model = model, dataset = ds, dest = "mrgsolve", seed = 1)
 ```
 
 Plot your results:
 
 ``` r
-shadedPlot(results, "CONC")
+
+shaded_plot(results, "CONC")
 ```
 
 ![](articles/resources/readme_plot.png)
@@ -65,7 +71,7 @@ shadedPlot(results, "CONC")
 - [`Dataset()`](https://calvagone.github.io/campsis.doc/reference/Dataset.md)
   : Create a dataset.
 - [`DatasetConfig()`](https://calvagone.github.io/campsis.doc/reference/DatasetConfig.md)
-  : Create a dataset configuration. This configuration allows CAMPSIS to
+  : Create a dataset configuration. This configuration allows Campsis to
   know which are the default depot and observed compartments.
 - [`DoseAdaptation()`](https://calvagone.github.io/campsis.doc/reference/DoseAdaptation.md)
   : Create a dose adaptation.
@@ -95,7 +101,7 @@ shadedPlot(results, "CONC")
 - [`BinomialDistribution()`](https://calvagone.github.io/campsis.doc/reference/BinomialDistribution.md)
   : Binomial distribution.
 - [`BootstrapDistribution()`](https://calvagone.github.io/campsis.doc/reference/BootstrapDistribution.md)
-  : Create a bootstrap distribution. During function sampling, CAMPSIS
+  : Create a bootstrap distribution. During function sampling, Campsis
   will generate values depending on the given data and arguments.
 - [`ConstantDistribution()`](https://calvagone.github.io/campsis.doc/reference/ConstantDistribution.md)
   : Create a constant distribution. Its value will be constant across
@@ -140,17 +146,17 @@ shadedPlot(results, "CONC")
 
 ## Dataset shortcuts
 
-- [`setLabel()`](https://calvagone.github.io/campsis.doc/reference/setLabel.md)
+- [`set_label()`](https://calvagone.github.io/campsis.doc/reference/set_label.md)
   : Set the label.
-- [`setSubjects()`](https://calvagone.github.io/campsis.doc/reference/setSubjects.md)
+- [`set_subjects()`](https://calvagone.github.io/campsis.doc/reference/set_subjects.md)
   : Set the number of subjects.
-- [`updateADDL()`](https://calvagone.github.io/campsis.doc/reference/updateADDL.md)
+- [`update_addl()`](https://calvagone.github.io/campsis.doc/reference/update_addl.md)
   : Update the number of additional doses (ADDL).
-- [`updateAmount()`](https://calvagone.github.io/campsis.doc/reference/updateAmount.md)
+- [`update_amount()`](https://calvagone.github.io/campsis.doc/reference/update_amount.md)
   : Update amount.
-- [`updateII()`](https://calvagone.github.io/campsis.doc/reference/updateII.md)
+- [`update_ii()`](https://calvagone.github.io/campsis.doc/reference/update_ii.md)
   : Update the inter-dose interval (II).
-- [`updateRepeat()`](https://calvagone.github.io/campsis.doc/reference/updateRepeat.md)
+- [`update_repeat()`](https://calvagone.github.io/campsis.doc/reference/update_repeat.md)
   : Update the repeat field (argument 'rep' in Bolus and Infusion
   constructors).
 
@@ -167,49 +173,60 @@ shadedPlot(results, "CONC")
   : Create an scenario.
 - [`Scenarios()`](https://calvagone.github.io/campsis.doc/reference/Scenarios.md)
   : Create a list of scenarios.
+- [`ReplaceAction()`](https://calvagone.github.io/campsis.doc/reference/ReplaceAction.md)
+  : Create a replace action.
 
 ## Sample distributions
 
 - [`sample()`](https://calvagone.github.io/campsis.doc/reference/sample.md)
   : Sample generic object.
 
-## Summarise data and plots
+## Predefined output functions
 
-- [`PI()`](https://calvagone.github.io/campsis.doc/reference/PI.md) :
-  Compute the prediction interval summary over time.
-- [`VPC()`](https://calvagone.github.io/campsis.doc/reference/VPC.md) :
-  Compute the VPC summary. Input data frame must contain the following
-  columns: - replicate: replicate number - low: low percentile value in
-  replicate (and in scenario if present) - med: median value in
-  replicate (and in scenario if present) - up: up percentile value in
-  replicate (and in scenario if present) - any scenario column
-- [`scatterPlot()`](https://calvagone.github.io/campsis.doc/reference/scatterPlot.md)
-  : Scatter plot (or X vs Y plot).
-- [`shadedPlot()`](https://calvagone.github.io/campsis.doc/reference/shadedPlot.md)
-  : Shaded plot (or prediction interval plot).
-- [`spaghettiPlot()`](https://calvagone.github.io/campsis.doc/reference/spaghettiPlot.md)
-  : Spaghetti plot.
-- [`vpcPlot()`](https://calvagone.github.io/campsis.doc/reference/vpcPlot.md)
-  : VPC plot.
+- [`DefaultOutfun()`](https://calvagone.github.io/campsis.doc/reference/DefaultOutfun.md)
+  : Default output function (identity function).
+- [`Outfun()`](https://calvagone.github.io/campsis.doc/reference/Outfun.md)
+  : Create a new output function
+- [`Outfuns()`](https://calvagone.github.io/campsis.doc/reference/Outfuns.md)
+  : Create a collection of output functions.
+- [`PIOutfun()`](https://calvagone.github.io/campsis.doc/reference/PIOutfun.md)
+  : Create a prediction interval output function
+- [`StatsOutfun()`](https://calvagone.github.io/campsis.doc/reference/StatsOutfun.md)
+  : Create a statistics output function
+- [`NCATableOutfun()`](https://calvagone.github.io/campsis.doc/reference/NCATableOutfun.md)
+  : Create a NCA table output function
+
+## Plotting utilities (main methods)
+
+- [`scatter_plot()`](https://calvagone.github.io/campsis.doc/reference/scatter_plot.md)
+  : Scatter plot (S3 generic).
+- [`shaded_plot()`](https://calvagone.github.io/campsis.doc/reference/shaded_plot.md)
+  : Shaded plot / prediction interval plot (S3 generic).
+- [`spaghetti_plot()`](https://calvagone.github.io/campsis.doc/reference/spaghetti_plot.md)
+  : Spaghetti plot (S3 generic).
+- [`vpc_plot()`](https://calvagone.github.io/campsis.doc/reference/vpc_plot.md)
+  : VPC plot (S3 generic).
+
+## Plotting utilities (S3 methods)
+
+- [`scatter_plot(`*`<std_campsis_tbl>`*`)`](https://calvagone.github.io/campsis.doc/reference/scatter_plot.std_campsis_tbl.md)
+  : Scatter plot for standard Campsis simulation output.
+- [`shaded_plot(`*`<std_campsis_tbl>`*`)`](https://calvagone.github.io/campsis.doc/reference/shaded_plot.std_campsis_tbl.md)
+  : Shaded plot for standard Campsis simulation output.
+- [`spaghetti_plot(`*`<std_campsis_tbl>`*`)`](https://calvagone.github.io/campsis.doc/reference/spaghetti_plot.std_campsis_tbl.md)
+  : Spaghetti plot for standard Campsis simulation output.
+- [`vpc_plot(`*`<pi_campsis_tbl>`*`)`](https://calvagone.github.io/campsis.doc/reference/vpc_plot.pi_campsis_tbl.md)
+  : VPC plot for prediction-interval Campsis output.
+- [`vpc_plot(`*`<std_campsis_tbl>`*`)`](https://calvagone.github.io/campsis.doc/reference/vpc_plot.std_campsis_tbl.md)
+  : VPC plot for standard Campsis simulation output.
 
 ## Simulate
 
 - [`simulate()`](https://calvagone.github.io/campsis.doc/reference/simulate.md)
   : Simulate function.
 
-## Seed utilities
-
-- [`getSeedForDatasetExport()`](https://calvagone.github.io/campsis.doc/reference/getSeedForDatasetExport.md)
-  : Get seed for dataset export.
-- [`getSeedForIteration()`](https://calvagone.github.io/campsis.doc/reference/getSeedForIteration.md)
-  : Get seed for iteration.
-- [`getSeedForParametersSampling()`](https://calvagone.github.io/campsis.doc/reference/getSeedForParametersSampling.md)
-  : Get seed for parameter uncertainty sampling.
-
 ## Simulation settings
 
-- [`campsis_handler()`](https://calvagone.github.io/campsis.doc/reference/campsis_handler.md)
-  : Suggested Campsis handler for showing the progress bar.
 - [`DefaultSettings()`](https://calvagone.github.io/campsis.doc/reference/DefaultSettings.md)
   : Create default settings.
 - [`Declare()`](https://calvagone.github.io/campsis.doc/reference/Declare.md)
@@ -222,28 +239,30 @@ shadedPlot(results, "CONC")
   : Create a new output function
 - [`Progress()`](https://calvagone.github.io/campsis.doc/reference/Progress.md)
   : Create progress settings.
-- [`setupPlanDefault()`](https://calvagone.github.io/campsis.doc/reference/setupPlanDefault.md)
-  : Setup default plan for the given simulation or hardware settings.
-  This plan will prioritise the distribution of workers in the following
-  order: 1) Replicates (if 'replicate_parallel' is enabled) 2) Scenarios
-  (if 'scenario_parallel' is enabled) 3) Dataset export / slices (if
-  'dataset_export' or 'slice_parallel' is enabled)
-- [`setupPlanSequential()`](https://calvagone.github.io/campsis.doc/reference/setupPlanSequential.md)
-  : Setup plan as sequential (i.e. no parallelisation).
 - [`Settings()`](https://calvagone.github.io/campsis.doc/reference/Settings.md)
   : Create advanced simulation settings.
 - [`Solver()`](https://calvagone.github.io/campsis.doc/reference/Solver.md)
   : Create solver settings.
 - [`SimulationProgress()`](https://calvagone.github.io/campsis.doc/reference/SimulationProgress.md)
   : Create a simulation progress object.
+- [`campsis_handler()`](https://calvagone.github.io/campsis.doc/reference/campsis_handler.md)
+  : Suggested Campsis handler for showing the progress bar.
+- [`setup_plan_default()`](https://calvagone.github.io/campsis.doc/reference/setup_plan_default.md)
+  : Setup default plan for the given simulation or hardware settings.
+  This plan will prioritise the distribution of workers in the following
+  order: 1) Replicates (if 'replicate_parallel' is enabled) 2) Scenarios
+  (if 'scenario_parallel' is enabled) 3) Dataset export / slices (if
+  'dataset_export' or 'slice_parallel' is enabled)
+- [`setup_plan_sequential()`](https://calvagone.github.io/campsis.doc/reference/setup_plan_sequential.md)
+  : Setup plan as sequential (i.e. no parallelisation).
 
 ## Time conversion utilities
 
-- [`convertTime()`](https://calvagone.github.io/campsis.doc/reference/convertTime.md)
+- [`convert_time()`](https://calvagone.github.io/campsis.doc/reference/convert_time.md)
   : Convert numeric time vector based on the provided units.
 - [`days()`](https://calvagone.github.io/campsis.doc/reference/days.md)
   : Convert days to hours.
-- [`getAvailableTimeUnits()`](https://calvagone.github.io/campsis.doc/reference/getAvailableTimeUnits.md)
+- [`get_available_time_units()`](https://calvagone.github.io/campsis.doc/reference/get_available_time_units.md)
   : Return the list of available time units.
 - [`hours()`](https://calvagone.github.io/campsis.doc/reference/hours.md)
   : Convert hours to hours (do nothing).
@@ -253,7 +272,7 @@ shadedPlot(results, "CONC")
   : Convert pharma months (1 month = 4 weeks) to hours.
 - [`seconds()`](https://calvagone.github.io/campsis.doc/reference/seconds.md)
   : Convert seconds to hours.
-- [`standardiseTime()`](https://calvagone.github.io/campsis.doc/reference/standardiseTime.md)
+- [`standardise_time()`](https://calvagone.github.io/campsis.doc/reference/standardise_time.md)
   : Standardise time to hours.
 - [`weeks()`](https://calvagone.github.io/campsis.doc/reference/weeks.md)
   : Convert weeks to hours.
@@ -266,34 +285,40 @@ shadedPlot(results, "CONC")
   : Time sequence to numeric vector.
 - [`as.numeric(`*`<time_vector>`*`)`](https://calvagone.github.io/campsis.doc/reference/as.numeric-time_vector-method.md)
   : Time vector to numeric vector.
-- [`applyAction()`](https://calvagone.github.io/campsis.doc/reference/applyAction.md)
+- [`apply_action()`](https://calvagone.github.io/campsis.doc/reference/apply_action.md)
   : Apply some action on the given object.
-- [`applyCompartmentCharacteristics()`](https://calvagone.github.io/campsis.doc/reference/applyCompartmentCharacteristics.md)
+- [`apply_compartment_characteristics()`](https://calvagone.github.io/campsis.doc/reference/apply_compartment_characteristics.md)
   : Apply compartment characteristics from model. In practice, only
   compartment infusion duration needs to be applied.
-- [`dosingOnly()`](https://calvagone.github.io/campsis.doc/reference/dosingOnly.md)
-  : Filter CAMPSIS output on dosing rows.
-- [`generateIIV()`](https://calvagone.github.io/campsis.doc/reference/generateIIV.md)
+- [`apply_outfun()`](https://calvagone.github.io/campsis.doc/reference/apply_outfun.md)
+  : Apply output function(s) on the given Campsis results.
+- [`compute_pi()`](https://calvagone.github.io/campsis.doc/reference/compute_pi.md)
+  : Compute the prediction interval summary over time.
+- [`compute_stats()`](https://calvagone.github.io/campsis.doc/reference/compute_stats.md)
+  : Compute generic statistics over time.
+- [`dosing_only()`](https://calvagone.github.io/campsis.doc/reference/dosing_only.md)
+  : Filter Campsis output on dosing rows.
+- [`generate_iiv()`](https://calvagone.github.io/campsis.doc/reference/generate_iiv.md)
   : Generate IIV matrix for the given Campsis model.
-- [`generateIIV_()`](https://calvagone.github.io/campsis.doc/reference/generateIIV_.md)
+- [`generate_iiv_()`](https://calvagone.github.io/campsis.doc/reference/generate_iiv_.md)
   : Generate IIV matrix for the given OMEGA matrix.
-- [`getCampsisOption()`](https://calvagone.github.io/campsis.doc/reference/getCampsisOption.md)
+- [`get_campsis_option()`](https://calvagone.github.io/campsis.doc/reference/get_campsis_option.md)
   : Get Campsis option logic.
-- [`getCovariates()`](https://calvagone.github.io/campsis.doc/reference/getCovariates.md)
+- [`get_covariates()`](https://calvagone.github.io/campsis.doc/reference/get_covariates.md)
   : Get all covariates (fixed / time-varying / event covariates).
-- [`getEventCovariates()`](https://calvagone.github.io/campsis.doc/reference/getEventCovariates.md)
+- [`get_event_covariates()`](https://calvagone.github.io/campsis.doc/reference/get_event_covariates.md)
   : Get all event-related covariates.
-- [`getFixedCovariates()`](https://calvagone.github.io/campsis.doc/reference/getFixedCovariates.md)
+- [`get_fixed_covariates()`](https://calvagone.github.io/campsis.doc/reference/get_fixed_covariates.md)
   : Get all fixed covariates.
-- [`getIOVs()`](https://calvagone.github.io/campsis.doc/reference/getIOVs.md)
+- [`get_iovs()`](https://calvagone.github.io/campsis.doc/reference/get_iovs.md)
   : Get all IOV objects.
-- [`getOccasions()`](https://calvagone.github.io/campsis.doc/reference/getOccasions.md)
+- [`get_occasions()`](https://calvagone.github.io/campsis.doc/reference/get_occasions.md)
   : Get all occasions.
-- [`getSplittingConfiguration()`](https://calvagone.github.io/campsis.doc/reference/getSplittingConfiguration.md)
+- [`get_splitting_configuration()`](https://calvagone.github.io/campsis.doc/reference/get_splitting_configuration.md)
   : Get splitting configuration for parallel export.
-- [`getTimes()`](https://calvagone.github.io/campsis.doc/reference/getTimes.md)
+- [`get_times()`](https://calvagone.github.io/campsis.doc/reference/get_times.md)
   : Get all distinct times for the specified object.
-- [`getTimeVaryingCovariates()`](https://calvagone.github.io/campsis.doc/reference/getTimeVaryingCovariates.md)
+- [`get_time_varying_covariates()`](https://calvagone.github.io/campsis.doc/reference/get_time_varying_covariates.md)
   : Get all time-varying covariates.
 - [`length(`*`<arm>`*`)`](https://calvagone.github.io/campsis.doc/reference/length-arm-method.md)
   : Return the number of subjects contained in this arm.
@@ -306,16 +331,14 @@ shadedPlot(results, "CONC")
 - [`nhanes`](https://calvagone.github.io/campsis.doc/reference/nhanes.md)
   : NHANES database (demographics and body measure data combined, from
   2017-2018).
-- [`obsOnly()`](https://calvagone.github.io/campsis.doc/reference/obsOnly.md)
-  : Filter CAMPSIS output on observation rows.
-- [`repeatSchedule()`](https://calvagone.github.io/campsis.doc/reference/repeatSchedule.md)
+- [`obs_only()`](https://calvagone.github.io/campsis.doc/reference/obs_only.md)
+  : Filter Campsis output on observation rows.
+- [`repeat_schedule()`](https://calvagone.github.io/campsis.doc/reference/repeat_schedule.md)
   : Repeat schedule.
-- [`ReplaceAction()`](https://calvagone.github.io/campsis.doc/reference/ReplaceAction.md)
-  : Create a replace action.
-- [`retrieveParameterValue()`](https://calvagone.github.io/campsis.doc/reference/retrieveParameterValue.md)
+- [`retrieve_parameter_value()`](https://calvagone.github.io/campsis.doc/reference/retrieve_parameter_value.md)
   : Retrieve the parameter value (standardized) for the specified
   parameter name.
-- [`unwrapTreatment()`](https://calvagone.github.io/campsis.doc/reference/unwrapTreatment.md)
+- [`unwrap_treatment()`](https://calvagone.github.io/campsis.doc/reference/unwrap_treatment.md)
   : Unwrap treatment.
 
 ## Exported classes
@@ -334,6 +357,11 @@ shadedPlot(results, "CONC")
   : Bootstrap class.
 - [`bootstrap_distribution-class`](https://calvagone.github.io/campsis.doc/reference/bootstrap_distribution-class.md)
   : Bootstrap distribution class.
+- [`campsis_metadata-class`](https://calvagone.github.io/campsis.doc/reference/campsis_metadata-class.md)
+  : Campsis metadata class.
+- [`campsis_tbl-class`](https://calvagone.github.io/campsis.doc/reference/campsis_tbl-class.md)
+  [`campsis_tbl`](https://calvagone.github.io/campsis.doc/reference/campsis_tbl-class.md)
+  : Campsis table class (see this class as an interface)
 - [`constant_distribution-class`](https://calvagone.github.io/campsis.doc/reference/constant_distribution-class.md)
   : Constant distribution class.
 - [`covariate-class`](https://calvagone.github.io/campsis.doc/reference/covariate-class.md)
@@ -348,6 +376,8 @@ shadedPlot(results, "CONC")
   : Dataset configuration class.
 - [`declare_settings-class`](https://calvagone.github.io/campsis.doc/reference/declare_settings-class.md)
   : Declare settings class.
+- [`default_outfun-class`](https://calvagone.github.io/campsis.doc/reference/default_outfun-class.md)
+  : Default output function class.
 - [`default_settings-class`](https://calvagone.github.io/campsis.doc/reference/default_settings-class.md)
   : Default settings class.
 - [`discrete_distribution-class`](https://calvagone.github.io/campsis.doc/reference/discrete_distribution-class.md)
@@ -385,10 +415,17 @@ shadedPlot(results, "CONC")
   : Log normal distribution class.
 - [`mrgsolve_engine-class`](https://calvagone.github.io/campsis.doc/reference/mrgsolve_engine-class.md)
   : mrgsolve engine class.
+- [`nca_table_outfun-class`](https://calvagone.github.io/campsis.doc/reference/nca_table_outfun-class.md)
+  : NCA table output function class.
 - [`normal_distribution-class`](https://calvagone.github.io/campsis.doc/reference/normal_distribution-class.md)
   : Normal distribution class.
 - [`nocb_settings-class`](https://calvagone.github.io/campsis.doc/reference/nocb_settings-class.md)
   : NOCB settings class.
+- [`pi_campsis_tbl-class`](https://calvagone.github.io/campsis.doc/reference/pi_campsis_tbl-class.md)
+  [`pi_campsis_tbl`](https://calvagone.github.io/campsis.doc/reference/pi_campsis_tbl-class.md)
+  : Prediction Interval (PI) Campsis table class
+- [`pi_outfun-class`](https://calvagone.github.io/campsis.doc/reference/pi_outfun-class.md)
+  : Prediction interval output function class.
 - [`protocol-class`](https://calvagone.github.io/campsis.doc/reference/protocol-class.md)
   : Protocol class.
 - [`observations-class`](https://calvagone.github.io/campsis.doc/reference/observations-class.md)
@@ -399,8 +436,10 @@ shadedPlot(results, "CONC")
   : Occasion class.
 - [`occasions-class`](https://calvagone.github.io/campsis.doc/reference/occasions-class.md)
   : Occasions class.
-- [`output_function-class`](https://calvagone.github.io/campsis.doc/reference/output_function-class.md)
+- [`outfun-class`](https://calvagone.github.io/campsis.doc/reference/outfun-class.md)
   : Output function class.
+- [`outfuns-class`](https://calvagone.github.io/campsis.doc/reference/outfuns-class.md)
+  : Output functions class (i.e. a collection of output functions).
 - [`progress_settings-class`](https://calvagone.github.io/campsis.doc/reference/progress_settings-class.md)
   : Progress settings class.
 - [`repeated_schedule-class`](https://calvagone.github.io/campsis.doc/reference/repeated_schedule-class.md)
@@ -410,7 +449,7 @@ shadedPlot(results, "CONC")
 - [`replace_action-class`](https://calvagone.github.io/campsis.doc/reference/replace_action-class.md)
   : Replace action class.
 - [`rxode_engine-class`](https://calvagone.github.io/campsis.doc/reference/rxode_engine-class.md)
-  : RxODE/rxode2 engine class.
+  : rxode2 engine class.
 - [`scenario-class`](https://calvagone.github.io/campsis.doc/reference/scenario-class.md)
   : Scenario class.
 - [`scenario_action-class`](https://calvagone.github.io/campsis.doc/reference/scenario_action-class.md)
@@ -425,8 +464,16 @@ shadedPlot(results, "CONC")
   : Simulation settings class.
 - [`simulation_progress-class`](https://calvagone.github.io/campsis.doc/reference/simulation_progress-class.md)
   : Simulation progress class.
+- [`stats_outfun-class`](https://calvagone.github.io/campsis.doc/reference/stats_outfun-class.md)
+  : Statistics output function class.
+- [`std_campsis_tbl-class`](https://calvagone.github.io/campsis.doc/reference/std_campsis_tbl-class.md)
+  [`std_campsis_tbl`](https://calvagone.github.io/campsis.doc/reference/std_campsis_tbl-class.md)
+  : Standard Campsis table class
 - [`solver_settings-class`](https://calvagone.github.io/campsis.doc/reference/solver_settings-class.md)
   : Solver settings class. See ?mrgsolve::update. See ?rxode2::rxSolve.
+- [`stats_campsis_tbl-class`](https://calvagone.github.io/campsis.doc/reference/stats_campsis_tbl-class.md)
+  [`stats_campsis_tbl`](https://calvagone.github.io/campsis.doc/reference/stats_campsis_tbl-class.md)
+  : Statistics Campsis table class
 - [`time_sequence-class`](https://calvagone.github.io/campsis.doc/reference/time_sequence-class.md)
   : Time sequence class.
 - [`time_varying_covariate-class`](https://calvagone.github.io/campsis.doc/reference/time_varying_covariate-class.md)
@@ -441,7 +488,7 @@ shadedPlot(results, "CONC")
   : Treatment IOV's class.
 - [`undefined_distribution-class`](https://calvagone.github.io/campsis.doc/reference/undefined_distribution-class.md)
   : Undefined distribution class. This type of object is automatically
-  created in method toExplicitDistribution() when the user does not
+  created in method to_explicit_distribution() when the user does not
   provide a concrete distribution. This is because S4 objects do not
   accept NULL values.
 - [`undefined_schedule-class`](https://calvagone.github.io/campsis.doc/reference/undefined_schedule-class.md)
@@ -454,7 +501,7 @@ shadedPlot(results, "CONC")
 ### All vignettes
 
 - [Get started with
-  CAMPSIS](https://calvagone.github.io/campsis.doc/articles/campsis.md):
+  Campsis](https://calvagone.github.io/campsis.doc/articles/campsis.md):
 - [Create your
   dataset](https://calvagone.github.io/campsis.doc/articles/v01_dataset.md):
 - [Variability

@@ -5,7 +5,7 @@ Get list of event iterations.
 ## Usage
 
 ``` r
-getEventIterations(events, maxTime)
+getEventIterations(events, dataset)
 ```
 
 ## Arguments
@@ -14,10 +14,11 @@ getEventIterations(events, maxTime)
 
   events
 
-- maxTime:
+- dataset:
 
-  simulation max time
+  dataset, Campsis dataset or data frame
 
 ## Value
 
-a list of event iterations
+a list of event iterations. Note: start and end slots have the same unit
+as the 'exported' dataset time.

@@ -1,12 +1,12 @@
 # Lag time
 
-There are 2 ways to implement a lag time in CAMPSIS:
+There are 2 ways to implement a lag time in Campsis:
 
 - in the model: lag time is defined for each compartment
 - in the dataset: lag time is defined for each bolus or infusion
 
 In the first case, the simulation engine will take care of the lag time
-In the second case, CAMPSIS will adapt automatically the time of the
+In the second case, Campsis will adapt automatically the time of the
 dose(s)
 
 ### Lag time implemented in model
@@ -15,6 +15,7 @@ Let’s use a 2-compartment model with absorption compartment to
 illustrate how this can be achieved.
 
 ``` r
+
 model <- model_suite$nonmem$advan4_trans4
 ```
 
@@ -25,25 +26,32 @@ First let’s create a new parameter `ALAG1`, log-normally distributed
 with a median of 2 hours and 20% CV.
 
 ``` r
-model <- model %>% add(Theta(name="ALAG1", value=2))
-model <- model %>% add(Omega(name="ALAG1", value=20, type="cv%"))
+
+model <- model %>%
+  add(Theta(name = "ALAG1", value = 2)) %>%
+  add(Omega(name = "ALAG1", value = 20, type = "cv%"))
 ```
 
 Now, let’s add an equation to the drug model to define `ALAG1`.
 
 ``` r
-model <- model %>% add(Equation("ALAG1", "THETA_ALAG1*exp(ETA_ALAG1)"))
+
+model <- model %>%
+  add(Equation("ALAG1", "THETA_ALAG1*exp(ETA_ALAG1)"))
 ```
 
-Finally, we need to tell CAMPSIS that `ALAG1` corresponds to a lag time.
+Finally, we need to tell Campsis that `ALAG1` corresponds to a lag time.
 
 ``` r
-model <- model %>% add(LagTime(compartment=1, rhs="ALAG1"))
+
+model <- model %>%
+  add(LagTime(compartment = 1, rhs = "ALAG1"))
 ```
 
 Our persisted drug model would look like this:
 
 ``` r
+
 model
 ```
 
@@ -102,15 +110,25 @@ Now, let’s now give a simple bolus and simulate with and without
 `ALAG1`.
 
 ``` r
+
 ds1 <- Dataset(50) %>%
-  add(Bolus(time=0, amount=1000)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+  add(Bolus(time = 0, amount = 1000)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 ``` r
-results_alag <- model %>% simulate(dataset=ds1, seed=1)
-results_no_alag <- model_suite$nonmem$advan4_trans4 %>% simulate(dataset=ds1, seed=1)
-gridExtra::grid.arrange(shadedPlot(results_alag, "CONC"), shadedPlot(results_no_alag, "CONC"), nrow=1)
+
+results_alag <- simulate(model = model, dataset = ds1, seed = 1)
+results_no_alag <- simulate(
+  model = model_suite$nonmem$advan4_trans4,
+  dataset = ds1,
+  seed = 1
+)
+gridExtra::grid.arrange(
+  shaded_plot(results_alag, "CONC"),
+  shaded_plot(results_no_alag, "CONC"),
+  nrow = 1
+)
 ```
 
 ![](v05_lag_time_files/figure-html/lag_time_model%20-1.png)
@@ -123,23 +141,30 @@ in the dataset.
 For this, we need to sample `ALAG1` values. This can be done as follows:
 
 ``` r
-distribution <- ParameterDistribution(model=model, theta="ALAG1", omega="ALAG1") %>%
+
+distribution <- ParameterDistribution(
+  model = model,
+  theta = "ALAG1",
+  omega = "ALAG1"
+) %>%
   sample(50L)
 ```
 
 We can then pass the pre-sampled distribution.
 
 ``` r
+
 ds2 <- Dataset(50) %>%
-  add(Bolus(time=0, amount=1000, lag=distribution)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+  add(Bolus(time = 0, amount = 1000, lag = distribution)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 Here is an overview of the dataset in its table form if we filter on the
 doses:
 
 ``` r
-ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
+
+ds2 %>% export(dest = "rxode2") %>% dosing_only() %>% head()
 ```
 
     ## # A tibble: 6 × 9
@@ -155,8 +180,13 @@ ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
 Let’s now simulate this dataset using the original model.
 
 ``` r
-results_alag <- model_suite$nonmem$advan4_trans4 %>% simulate(dataset=ds2, seed=1)
-shadedPlot(results_alag, "CONC")
+
+results_alag <- simulate(
+  model = model_suite$nonmem$advan4_trans4,
+  dataset = ds2,
+  seed = 1
+)
+shaded_plot(results_alag, "CONC")
 ```
 
 ![](v05_lag_time_files/figure-html/lag_time_dataset%20-1.png)

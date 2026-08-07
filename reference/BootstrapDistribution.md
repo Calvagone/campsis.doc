@@ -1,6 +1,6 @@
-# Create a bootstrap distribution. During function sampling, CAMPSIS will generate values depending on the given data and arguments.
+# Create a bootstrap distribution. During function sampling, Campsis will generate values depending on the given data and arguments.
 
-Create a bootstrap distribution. During function sampling, CAMPSIS will
+Create a bootstrap distribution. During function sampling, Campsis will
 generate values depending on the given data and arguments.
 
 ## Usage

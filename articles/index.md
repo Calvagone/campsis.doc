@@ -3,7 +3,7 @@
 ### All vignettes
 
 - [Get started with
-  CAMPSIS](https://calvagone.github.io/campsis.doc/articles/campsis.md):
+  Campsis](https://calvagone.github.io/campsis.doc/articles/campsis.md):
 - [Create your
   dataset](https://calvagone.github.io/campsis.doc/articles/v01_dataset.md):
 - [Variability

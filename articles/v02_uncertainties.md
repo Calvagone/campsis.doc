@@ -6,8 +6,9 @@ Let’s use a simple 1-compartment model with absorption compartment to
 illustrate the different levels of variabilities.
 
 ``` r
-refModel <- model_suite$nonmem$advan2_trans2
-refModel
+
+ref_model <- model_suite$nonmem$advan2_trans2
+ref_model
 ```
 
     ## [MAIN]
@@ -51,16 +52,18 @@ We’re going to use a very basic dataset. 1000 mg QD shall be
 administered for a week.
 
 ``` r
+
 ds <- Dataset(25) %>%
-  add(Bolus(time=0, amount=1000, ii=24, addl=6)) %>%
-  add(Observations(times=seq(0,24*7,by=4)))
+  add(Bolus(time = 0, amount = 1000, ii = 24, addl = 6)) %>%
+  add(Observations(times = seq(0, 24 * 7, by = 4)))
 ```
 
 All subjects are different due to IIV and RUV.
 
 ``` r
-results <- refModel %>% simulate(dataset=ds, seed=1)
-spaghettiPlot(results, "CONC_ERR")
+
+results <- simulate(model = ref_model, dataset = ds, seed = 1)
+spaghetti_plot(results, "CONC_ERR")
 ```
 
 ![](v02_uncertainties_files/figure-html/uncertainties_all_enabled%20-1.png)
@@ -70,7 +73,9 @@ spaghettiPlot(results, "CONC_ERR")
 Disabling RUV is done as follows:
 
 ``` r
-model <- refModel %>% disable(c("RUV"))
+
+model <- ref_model %>%
+  disable(c("RUV"))
 model@parameters
 ```
 
@@ -93,14 +98,16 @@ In that case, CONC_ERR (the observed concentration) is identical as CONC
 (the model-simulated plasma concentration).
 
 ``` r
-results <- model %>% simulate(dataset=ds, seed=1)
-spaghettiPlot(results, "CONC_ERR")
+
+results <- simulate(model = model, dataset = ds, seed = 1)
+spaghetti_plot(results, "CONC_ERR")
 ```
 
 ![](v02_uncertainties_files/figure-html/uncertainties_no_ruv_y%20-1.png)
 
 ``` r
-spaghettiPlot(results, "CONC")
+
+spaghetti_plot(results, "CONC")
 ```
 
 ![](v02_uncertainties_files/figure-html/uncertainties_no_ruv_cp%20-1.png)
@@ -110,7 +117,9 @@ spaghettiPlot(results, "CONC")
 Disabling RUV and IIV is done as follows:
 
 ``` r
-model <- refModel %>% disable(c("IIV", "RUV"))
+
+model <- ref_model %>%
+  disable(c("IIV", "RUV"))
 model@parameters
 ```
 
@@ -132,8 +141,10 @@ model@parameters
 Now, the typical profile is shown for all subjects.
 
 ``` r
-results <- model %>% simulate(dataset=ds, seed=1)
-spaghettiPlot(results, "CONC_ERR")
+
+results <- model %>%
+  simulate(dataset = ds, seed = 1)
+spaghetti_plot(results, "CONC_ERR")
 ```
 
 ![](v02_uncertainties_files/figure-html/uncertainties_no_ruv_no_iiv%20-1.png)

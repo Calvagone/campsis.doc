@@ -1,6 +1,6 @@
-# Create a dataset configuration. This configuration allows CAMPSIS to know which are the default depot and observed compartments.
+# Create a dataset configuration. This configuration allows Campsis to know which are the default depot and observed compartments.
 
-Create a dataset configuration. This configuration allows CAMPSIS to
+Create a dataset configuration. This configuration allows Campsis to
 know which are the default depot and observed compartments.
 
 ## Usage

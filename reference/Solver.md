@@ -35,7 +35,7 @@ Solver(
 
 - method:
 
-  solver method, for RxODE/rxode2 only: 'liblsoda' (default), 'lsoda',
+  solver method, for rxode2 only: 'liblsoda' (default), 'lsoda',
   'dop853', 'indLin'. Mrgsolve's method is always 'lsoda'.
 
 ## Value

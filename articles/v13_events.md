@@ -13,23 +13,39 @@ use the first compartment model with absorption from the model library
 for this purpose.
 
 ``` r
+
 model <- model_suite$nonmem$advan2_trans2
 
 dataset <- Dataset(10) %>%
-  add(Observations(times=0:168)) %>%
+  add(Observations(times = 0:168)) %>%
   add(EventCovariate("DOSE", 1500))
 
 events <- Events()
-event1 <- Event(name="Dose adaptation", times=seq(0, 144, by=24), fun=function(inits) {
-  inits$DOSE <- ifelse(inits$CONC > 5, inits$DOSE*0.75, inits$DOSE)
-  inits$A_DEPOT <- inits$A_DEPOT + inits$DOSE
-  return(inits)
-})
-events <- events %>% add(event1)
+event1 <- Event(
+  name = "Dose adaptation",
+  times = seq(0, 144, by = 24),
+  fun = function(inits) {
+    inits$DOSE <- ifelse(inits$CONC > 5, inits$DOSE * 0.75, inits$DOSE)
+    inits$A_DEPOT <- inits$A_DEPOT + inits$DOSE
+    return(inits)
+  }
+)
+events <- events %>%
+  add(event1)
 
-results <- model %>% simulate(dataset, events=events, seed=1, outvars="DOSE")
+results <- simulate(
+  model = model,
+  dataset = dataset,
+  events = events,
+  seed = 1,
+  outvars = "DOSE"
+)
 
-gridExtra::grid.arrange(spaghettiPlot(results, "CONC"), spaghettiPlot(results, "DOSE"), ncol=1)
+gridExtra::grid.arrange(
+  spaghetti_plot(results, "CONC"),
+  spaghetti_plot(results, "DOSE"),
+  ncol = 1
+)
 ```
 
 ![](v13_events_files/figure-html/event_dose_adaptation_ctrough-1.png)

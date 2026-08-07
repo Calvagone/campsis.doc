@@ -1,6 +1,6 @@
 # Infusions
 
-There are 2 ways to implement infusions in CAMPSIS:
+There are 2 ways to implement infusions in Campsis:
 
 - in the model: infusion duration or rate is defined for each
   compartment
@@ -8,7 +8,7 @@ There are 2 ways to implement infusions in CAMPSIS:
 
 In the first case, the simulation engine will take care of the infusion
 duration or rate (RATE in dataset will be -1 or -2). In the second case,
-CAMPSIS will inject specific values in the RATE column of the dataset.
+Campsis will inject specific values in the RATE column of the dataset.
 
 ### Infusion duration or rate implemented in model
 
@@ -16,6 +16,7 @@ Let’s use a 2-compartment model without absorption compartment to
 illustrate how this can be achieved.
 
 ``` r
+
 model <- model_suite$nonmem$advan3_trans4
 ```
 
@@ -26,26 +27,33 @@ First let’s create a new parameter `D1`, log-normally distributed with a
 median of 5 hours and 20% CV.
 
 ``` r
-model <- model %>% add(Theta(name="D1", value=5))
-model <- model %>% add(Omega(name="D1", value=20, type="cv%"))
+
+model <- model %>%
+  add(Theta(name = "D1", value = 5)) %>%
+  add(Omega(name = "D1", value = 20, type = "cv%"))
 ```
 
 Now, let’s add an equation to the drug model to define `D1`.
 
 ``` r
-model <- model %>% add(Equation("D1", "THETA_D1*exp(ETA_D1)"))
+
+model <- model %>%
+  add(Equation("D1", "THETA_D1*exp(ETA_D1)"))
 ```
 
-Finally, we need to tell CAMPSIS that `D1` corresponds the infusion
+Finally, we need to tell Campsis that `D1` corresponds the infusion
 duration for the first compartment.
 
 ``` r
-model <- model %>% add(InfusionDuration(compartment=1, rhs="D1"))
+
+model <- model %>%
+  add(InfusionDuration(compartment = 1, rhs = "D1"))
 ```
 
 Our persisted drug model would look like this:
 
 ``` r
+
 model
 ```
 
@@ -98,14 +106,16 @@ model
 Now, let’s infuse 1000 mg and run the simulation.
 
 ``` r
-ds1 <- Dataset(50) %>% 
-  add(Infusion(time=0, amount=1000)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+
+ds1 <- Dataset(50) %>%
+  add(Infusion(time = 0, amount = 1000)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 ``` r
-results_d1 <- model %>% simulate(dataset=ds1, seed=1)
-shadedPlot(results_d1, "CONC")
+
+results_d1 <- simulate(model = model, dataset = ds1, seed = 1)
+shaded_plot(results_d1, "CONC")
 ```
 
 ![](v06_infusions_files/figure-html/infusion_model%20-1.png)
@@ -118,23 +128,30 @@ in the dataset.
 For this, we need to sample `D1` values. This can be done as follows:
 
 ``` r
-distribution <- ParameterDistribution(model=model, theta="D1", omega="D1") %>%
+
+distribution <- ParameterDistribution(
+  model = model,
+  theta = "D1",
+  omega = "D1"
+) %>%
   sample(50L)
 ```
 
 We can then pass the pre-sampled distribution.
 
 ``` r
+
 ds2 <- Dataset(50) %>%
-  add(Infusion(time=0, amount=1000, duration=distribution)) %>%
-  add(Observations(times=seq(0,24,by=0.5)))
+  add(Infusion(time = 0, amount = 1000, duration = distribution)) %>%
+  add(Observations(times = seq(0, 24, by = 0.5)))
 ```
 
 Here is an overview of the dataset in its table form if we filter on the
 doses:
 
 ``` r
-ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
+
+ds2 %>% export(dest = "rxode2") %>% dosing_only() %>% head()
 ```
 
     ## # A tibble: 6 × 9
@@ -150,8 +167,13 @@ ds2 %>% export(dest="RxODE") %>% dosingOnly() %>% head()
 Let’s now simulate this dataset using the original model.
 
 ``` r
-results_d1 <- model_suite$nonmem$advan4_trans4 %>% simulate(dataset=ds2, seed=1)
-shadedPlot(results_d1, "CONC")
+
+results_d1 <- simulate(
+  model = model_suite$nonmem$advan4_trans4,
+  dataset = ds2,
+  seed = 1
+)
+shaded_plot(results_d1, "CONC")
 ```
 
 ![](v06_infusions_files/figure-html/infusion_dataset%20-1.png)

@@ -7,6 +7,7 @@ In order to not repeat ourselves, all the below pharmacodynamic models
 will be linked to our reference 2-compartment PK model from the library.
 
 ``` r
+
 pk <- model_suite$nonmem$advan4_trans4
 ```
 
@@ -15,6 +16,7 @@ pk <- model_suite$nonmem$advan4_trans4
 Load the direct-effect model from the model library:
 
 ``` r
+
 pd <- model_suite$pd$direct_effect_model
 pd
 ```
@@ -51,20 +53,27 @@ pd
 Link the PD model to the PK model as follows:
 
 ``` r
-pkpd <- pk %>% add(pd)
-pkpd <- pkpd %>% replace(Equation("PK_CONC", "A_CENTRAL/S2"))
+
+pkpd <- pk %>%
+  add(pd)
+pkpd <- pkpd %>%
+  replace(Equation("PK_CONC", "A_CENTRAL/S2"))
 ```
 
 Simulate the PK/PD model with a basic dataset:
 
 ``` r
-library(campsis)
-dataset <- Dataset(25) %>% 
-  add(Bolus(time=0, amount=1000, compartment=1, ii=12, addl=6)) %>%
-  add(Observations(times=0:168))
-results <- pkpd %>% simulate(dataset=dataset, seed=1)
 
-gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "EFFECT"), ncol=1)
+dataset <- Dataset(25) %>%
+  add(Bolus(time = 0, amount = 1000, compartment = 1, ii = 12, addl = 6)) %>%
+  add(Observations(times = 0:168))
+results <- simulate(model = pkpd, dataset = dataset, outvars = "EFFECT", seed = 1)
+
+gridExtra::grid.arrange(
+  shaded_plot(results, "CONC"),
+  shaded_plot(results, "EFFECT"),
+  ncol = 1
+)
 ```
 
 ![](v15_pkpd_model_library_files/figure-html/direct_effect_model-1.png)
@@ -74,6 +83,7 @@ gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "EFFECT
 Load the effect-compartment model from the model library:
 
 ``` r
+
 pd <- model_suite$pd$effect_cmt_model
 pd
 ```
@@ -115,20 +125,27 @@ pd
 Link the PD model to the PK model as follows:
 
 ``` r
-pkpd <- pk %>% add(pd)
-pkpd <- pkpd %>% replace(Equation("PK_CONC", "A_CENTRAL/S2"))
+
+pkpd <- pk %>%
+  add(pd)
+pkpd <- pkpd %>%
+  replace(Equation("PK_CONC", "A_CENTRAL/S2"))
 ```
 
 Simulate the PK/PD model with a basic dataset:
 
 ``` r
-library(campsis)
-dataset <- Dataset(25) %>% 
-  add(Bolus(time=0, amount=1000, compartment=1, ii=12, addl=2)) %>%
-  add(Observations(times=0:36))
-results <- pkpd %>% simulate(dataset=dataset, seed=1)
 
-gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "EFFECT"), ncol=1)
+dataset <- Dataset(25) %>%
+  add(Bolus(time = 0, amount = 1000, compartment = 1, ii = 12, addl = 2)) %>%
+  add(Observations(times = 0:36))
+results <- simulate(model = pkpd, dataset = dataset, outvars = "EFFECT", seed = 1)
+
+gridExtra::grid.arrange(
+  shaded_plot(results, "CONC"),
+  shaded_plot(results, "EFFECT"),
+  ncol = 1
+)
 ```
 
 ![](v15_pkpd_model_library_files/figure-html/effect_compartment_model-1.png)
@@ -138,6 +155,7 @@ gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "EFFECT
 Load the transit-compartment model from the model library:
 
 ``` r
+
 pd <- model_suite$pd$transit_cmt_model
 pd
 ```
@@ -192,20 +210,27 @@ pd
 Link the PD model to the PK model as follows:
 
 ``` r
-pkpd <- pk %>% add(pd)
-pkpd <- pkpd %>% replace(Equation("PK_CONC", "A_CENTRAL/S2"))
+
+pkpd <- pk %>%
+  add(pd)
+pkpd <- pkpd %>%
+  replace(Equation("PK_CONC", "A_CENTRAL/S2"))
 ```
 
 Simulate the PK/PD model with a basic dataset:
 
 ``` r
-library(campsis)
-dataset <- Dataset(25) %>% 
-  add(Bolus(time=0, amount=1000, compartment=1, ii=12, addl=35)) %>%
-  add(Observations(times=0:1000))
-results <- pkpd %>% simulate(dataset=dataset, seed=1)
 
-gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "A_CIRC"), ncol=1)
+dataset <- Dataset(25) %>%
+  add(Bolus(time = 0, amount = 1000, compartment = 1, ii = 12, addl = 35)) %>%
+  add(Observations(times = 0:1000))
+results <- simulate(model = pkpd, dataset = dataset, seed = 1)
+
+gridExtra::grid.arrange(
+  shaded_plot(results, "CONC"),
+  shaded_plot(results, "A_CIRC"),
+  ncol = 1
+)
 ```
 
 ![](v15_pkpd_model_library_files/figure-html/transit_compartment_model-1.png)
@@ -216,6 +241,7 @@ Load one of the 4 indirect-response model (IRM) present in the model
 library:
 
 ``` r
+
 pd <- model_suite$pd$irm_kout_inhibition
 pd
 ```
@@ -258,20 +284,27 @@ pd
 Link the PD model to the PK model as follows:
 
 ``` r
-pkpd <- pk %>% add(pd)
-pkpd <- pkpd %>% replace(Equation("PK_CONC", "A_CENTRAL/S2"))
+
+pkpd <- pk %>%
+  add(pd)
+pkpd <- pkpd %>%
+  replace(Equation("PK_CONC", "A_CENTRAL/S2"))
 ```
 
 Simulate the PK/PD model with a basic dataset:
 
 ``` r
-library(campsis)
-dataset <- Dataset(25) %>% 
-  add(Bolus(time=0, amount=1000, compartment=1, ii=12, addl=35)) %>%
-  add(Observations(times=0:1000))
-results <- pkpd %>% simulate(dataset=dataset, seed=1)
 
-gridExtra::grid.arrange(shadedPlot(results, "CONC"), shadedPlot(results, "A_EFFECT"), ncol=1)
+dataset <- Dataset(25) %>%
+  add(Bolus(time = 0, amount = 1000, compartment = 1, ii = 12, addl = 35)) %>%
+  add(Observations(times = 0:1000))
+results <- simulate(model = pkpd, dataset = dataset, seed = 1)
+
+gridExtra::grid.arrange(
+  shaded_plot(results, "CONC"),
+  shaded_plot(results, "A_EFFECT"),
+  ncol = 1
+)
 ```
 
 ![](v15_pkpd_model_library_files/figure-html/indirect_response_model-1.png)

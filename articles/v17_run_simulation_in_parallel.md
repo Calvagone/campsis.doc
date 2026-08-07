@@ -6,11 +6,12 @@ for running your simulation efficiently.
 ### Base model and dataset
 
 ``` r
+
 model <- model_suite$pk$`2cpt_fo_mm`
 
 dataset <- Dataset(1000) %>%
-  add(Bolus(time=0, amount=100, ii=12, addl=10)) %>%
-  add(Observations(times=0:(11*12)))
+  add(Bolus(time = 0, amount = 100, ii = 12, addl = 10)) %>%
+  add(Observations(times = 0:(11 * 12)))
 ```
 
 ### Run replicates in parallel
@@ -18,29 +19,48 @@ dataset <- Dataset(1000) %>%
 Sequential run:
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset, dest="mrgsolve", seed=1, outfun=~PI(.x, output="CONC"), replicates=100)
+results <- simulate(
+  model = model,
+  dataset = dataset,
+  dest = "mrgsolve",
+  seed = 1,
+  outfun = PIOutfun(variable = "CONC"),
+  replicates = 100
+)
 toc()
 ```
 
-    ## 166.47 sec elapsed
+    ## 146.73 sec elapsed
 
 Using 6 cores:
 
 ``` r
-settings <- Settings(Hardware(cpu=6, replicate_parallel=TRUE))
+
+settings <- Settings(Hardware(cpu = 6, replicate_parallel = TRUE))
 ```
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset, dest="mrgsolve", seed=1, outfun=~PI(.x, output="CONC"), replicates=10, settings=settings)
+results <- simulate(
+  model = model,
+  dataset = dataset,
+  dest = "mrgsolve",
+  seed = 1,
+  outfun = PIOutfun(variable = "CONC"),
+  replicates = 100,
+  settings = settings
+)
 toc()
 ```
 
-    ## 44.25 sec elapsed
+    ## 70.99 sec elapsed
 
 ``` r
-vpcPlot(results)
+
+vpc_plot(results)
 ```
 
 ![](v17_run_simulation_in_parallel_files/figure-html/replicates_in_parallel-1.png)
@@ -55,6 +75,7 @@ Instead of giving a fixed dose, let’s make the dose dynamic using a
 `DOSE` covariate:
 
 ``` r
+
 dataset_ <- dataset %>%
   add(Covariate("DOSE", 0)) %>%
   add(DoseAdaptation("DOSE"))
@@ -63,128 +84,95 @@ dataset_ <- dataset %>%
 Let’s create one scenario per dose to be tested:
 
 ``` r
+
 scenarios <- Scenarios()
-for (dose in c(0.5,1,5,10,50,100,500,1000,5000,10000,50000,100000)) {
+for (dose in c(0.5, 1, 5, 10, 50, 100, 500, 1000, 5000, 10000, 50000, 100000)) {
   scenarios <- scenarios %>%
-    add(Scenario(name=paste0("DOSE=", dose), dataset=dataset_ %>% replace(Covariate("DOSE", dose))))
+    add(Scenario(
+      name = paste0("DOSE=", dose),
+      dataset = dataset_ %>% replace(Covariate("DOSE", dose))
+    ))
 }
 ```
 
 Sequential run:
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset_, dest="mrgsolve", seed=1, scenarios=scenarios)
+results <- simulate(
+  model = model,
+  dataset = dataset_,
+  seed = 1,
+  scenarios = scenarios
+)
 toc()
 ```
 
-    ## 30.91 sec elapsed
+    ## 22.44 sec elapsed
 
-Using 6 cores (plan is auto-setup):
+Using 6 cores (auto-setup plan):
 
 ``` r
-settings <- Settings(Hardware(cpu=6, scenario_parallel=TRUE))
+
+settings <- Settings(Hardware(cpu = 6, scenario_parallel = TRUE))
 ```
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset_, dest="mrgsolve", seed=1, scenarios=scenarios, settings=settings)
+results <- simulate(
+  model = model,
+  dataset = dataset_,
+  seed = 1,
+  scenarios = scenarios,
+  settings = settings
+)
 toc()
 ```
 
-    ## 18.54 sec elapsed
+    ## 19.83 sec elapsed
 
 Using 6 cores (plan already setup from last execution):
 
 ``` r
-settings <- Settings(Hardware(cpu=6, scenario_parallel=TRUE, auto_setup_plan=FALSE))
+
+settings <- Settings(Hardware(
+  cpu = 6,
+  scenario_parallel = TRUE,
+  auto_setup_plan = FALSE
+))
 ```
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset_, dest="mrgsolve", seed=1, scenarios=scenarios, settings=settings)
+results <- simulate(
+  model = model,
+  dataset = dataset_,
+  seed = 1,
+  scenarios = scenarios,
+  settings = settings
+)
 toc()
 ```
 
-    ## 16.64 sec elapsed
+    ## 18.51 sec elapsed
 
 Plot results:
 
 ``` r
-# Re-arrange scenarios by natural order
-results <- results %>% mutate(SCENARIO=factor(SCENARIO, levels=unique(SCENARIO)))
 
-shadedPlot(results, "CONC", "SCENARIO") +
-  facet_wrap(~SCENARIO, ncol=4, scales="free_y") +
-  guides(colour="none", fill="none")
+# Re-arrange scenarios by natural order
+results <- results %>%
+  mutate(SCENARIO = factor(SCENARIO, levels = unique(SCENARIO)))
+
+shaded_plot(results, "CONC") +
+  facet_wrap(~SCENARIO, ncol = 4, scales = "free_y") +
+  guides(colour = "none", fill = "none")
 ```
 
 ![](v17_run_simulation_in_parallel_files/figure-html/scenarios_in_parallel-1.png)
-
-### Export dataset in parallel
-
-In some particular cases, when the number of subjects is important
-and/or the dataset is complex, it may be interesting to export the
-dataset in parallel. Let’s illustrate this feature using a dataset that
-contains a lot of subjects and treatment IOV (which is costly).
-
-``` r
-dataset_ <- dataset %>%
-  setSubjects(24000) %>%
-  add(IOV("IOV_KA", distribution=NormalDistribution(mean=0, sd=0.1))) # This step is costly
-```
-
-``` r
-model_ <- model %>%
-  replaceAll("ETA_KA", "ETA_KA + IOV_KA")
-```
-
-Sequential run:
-
-``` r
-tic()
-settings <- Settings(Hardware(slice_size=4000))
-results <- simulate(model=model_, dataset=dataset_, dest="mrgsolve", seed=1, settings=settings)
-toc()
-```
-
-    ## 61.42 sec elapsed
-
-Using 6 cores (plan is auto-setup):
-
-``` r
-settings <- Settings(Hardware(cpu=6, dataset_parallel=TRUE, dataset_slice_size=4000, slice_size=4000))
-```
-
-``` r
-tic()
-results <- simulate(model=model_, dataset=dataset_, dest="mrgsolve", seed=1, settings=settings)
-toc()
-```
-
-    ## 54.76 sec elapsed
-
-Using 6 cores (plan already setup from last execution):
-
-``` r
-settings <- Settings(Hardware(cpu=6, dataset_parallel=TRUE, dataset_slice_size=4000, slice_size=4000, auto_setup_plan=FALSE))
-```
-
-``` r
-tic()
-results <- simulate(model=model_, dataset=dataset_, dest="mrgsolve", seed=1, settings=settings)
-toc()
-```
-
-    ## 53.69 sec elapsed
-
-Plot results:
-
-``` r
-shadedPlot(results, "CONC")
-```
-
-![](v17_run_simulation_in_parallel_files/figure-html/dataset_in_parallel-1.png)
 
 ### Run slices in parallel
 
@@ -193,58 +181,47 @@ per individual is high (e.g. long simulation). To illustrate this topic,
 let’s dose and observe a drug over a 6-month period.
 
 ``` r
+
 dataset_ <- Dataset(200) %>%
-  add(Bolus(time=0, amount=100, ii=12, addl=364)) %>%
-  add(Observations(times=0:(365*12)))
+  add(Bolus(time = 0, amount = 100, ii = 12, addl = 364)) %>%
+  add(Observations(times = 0:(365 * 12)))
 ```
 
-Sequential run (`rxode2`) :
+Sequential run:
 
 ``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset_, dest="rxode2", seed=1)
+results <- simulate(
+  model = model,
+  dataset = dataset_,
+  seed = 1
+)
 toc()
 ```
 
-    ## 206.31 sec elapsed
+    ## 8.9 sec elapsed
 
-Sequential run (`mrgsolve`) :
+Using 6 cores (auto-setup plan):
 
 ``` r
+
+settings <- Settings(Hardware(cpu = 6, slice_parallel = TRUE))
+```
+
+``` r
+
 tic()
-results <- simulate(model=model, dataset=dataset_, dest="mrgsolve", seed=1)
+results <- simulate(
+  model = model,
+  dataset = dataset_,
+  seed = 1,
+  settings = settings
+)
 toc()
 ```
 
-    ## 8.56 sec elapsed
-
-Using 6 cores (`rxode2`, plan is auto-setup):
-
-``` r
-settings <- Settings(Hardware(cpu=6, slice_parallel=TRUE))
-```
-
-``` r
-tic()
-results <- simulate(model=model, dataset=dataset_, dest="rxode2", seed=1, settings=settings)
-toc()
-```
-
-    ## 163.75 sec elapsed
-
-Using 6 cores (`mrgsolve`, plan is auto-setup):
-
-``` r
-settings <- Settings(Hardware(cpu=6, slice_parallel=TRUE))
-```
-
-``` r
-tic()
-results <- simulate(model=model, dataset=dataset_, dest="mrgsolve", seed=1, settings=settings)
-toc()
-```
-
-    ## 6.78 sec elapsed
+    ## 7.97 sec elapsed
 
 Please note that the default slice size for `mrgsolve` is 500, which
 means that only 1 core was used in the previous example. For `rxode2`,
@@ -259,12 +236,17 @@ setup your hardware plan every time you call the `simulate` method. This
 comes at a high cost since the setup phase can take some time.
 
 For repeated simulations, it may be useful to setup your plan manually
-once for all. To do so, you can call `setupPlanDefault` on your settings
-or hardware object:
+once for all. To do so, you can call `setup_plan_default` on your
+settings or hardware object:
 
 ``` r
-settings <- Settings(Hardware(cpu=2, replicate_parallel=TRUE, auto_setup_plan=FALSE))
-setupPlanDefault(settings)
+
+settings <- Settings(Hardware(
+  cpu = 2,
+  replicate_parallel = TRUE,
+  auto_setup_plan = FALSE
+))
+setup_plan_default(settings)
 ```
 
 If you do so, please don’t forget to set the argument `auto_setup_plan`
@@ -274,7 +256,8 @@ otherwise your plan is setup again…
 For going back to the sequential execution (1 CPU core), you can call:
 
 ``` r
-setupPlanSequential()
+
+setup_plan_sequential()
 ```
 
 ### Run Campsis in parallel within the pipeline tool targets
@@ -291,42 +274,43 @@ you a brief overview of how you can run several simulation targets in
 parallel.
 
 ``` r
+
 library(targets)
 
 source("R/my_script.R")
 
 # Packages loaded by targets
 packages <- c("campsis", "progressr", "future")
-tar_option_set(packages=packages, storage="worker", retrieval="worker")
+tar_option_set(packages = packages, storage = "worker", retrieval = "worker")
 
 # Prepare 3 workers
-future::plan(future::multisession, workers=3)
+future::plan(future::multisession, workers = 3)
 
 list(
   tar_target(
     model,
     model_suite$pk$`1cpt_zo_abs_lag`,
-    deployment="main"
+    deployment = "main"
   ),
   tar_target(
     dataset,
-    makeDataset(subjects=1000, dose=1000),
-    deployment="main"
+    make_dataset(subjects = 1000, dose = 1000),
+    deployment = "main"
   ),
   tar_target(
     results1,
-    runSimulation(model=model, dataset=dataset, replicates=10, seed=1),
-    deployment="worker"
+    run_simulation(model = model, dataset = dataset, replicates = 10, seed = 1),
+    deployment = "worker"
   ),
   tar_target(
     results2,
-    runSimulation(model=model, dataset=dataset, replicates=10, seed=2),
-    deployment="worker"
+    run_simulation(model = model, dataset = dataset, replicates = 10, seed = 2),
+    deployment = "worker"
   ),
   tar_target(
     results3,
-    runSimulation(model=model, dataset=dataset, replicates=10, seed=3),
-    deployment="worker"
+    run_simulation(model = model, dataset = dataset, replicates = 10, seed = 3),
+    deployment = "worker"
   )
 )
 ```
@@ -334,12 +318,13 @@ list(
 This small project can be downloaded by clicking the link below.
 
 [Download targets
-squeletton](data:application/zip;base64,UEsDBAoAAAAAAClhd1YAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgAKWF3ViuLKrf5AAAA0gEAAA0AAABSL215X3NjcmlwdC5ShY+9TgMxEIT7k+4dVpEinZGRSBRBg6loqCh4AOScN4nBP4d3HQrEu2Mnl4SjwYW1Gs18mmkbr9/xUbMmZLi/hk0OPdsYOsrrN+yZJJhIKOCrbQDMxThmzj51OgTMH+bVDKCN6Z7CJlMFsvWobiRoH3NgVakS+ugHndhjURYSrFXLlaw5p27FH9LzmjDtdW1HHeFHV2B3V8uVEKKaEnJOoRsrFum7bdom5fBifXaH2GSgjwadPE2SJT8422vGMpkQjVqMoxNSdkw1/Gl59zqkuC1a6XAE4xGlpkB1BhskVjOfthTdHmfyuOi/d6hQv9/N1OWcjB4r1tE/UEsDBBQAAgAIAClhd1besZsTTwEAAG8DAAAKAAAAX3RhcmdldHMuUq2Rz07DMAzG75X6DlHYoZMKbOttIjceAI0H6NzUVKFpE8UpqDw96Z8gDpMmwaQcbCef/ftirSoHbsw8uAY9bdMkTcgMTmLGT4/dWJJ0yvqHE5+v7tgLyBYaJKYN1FizamSrNk1svHu6ZzLjEjpLinjOuHWmcUjkpuRt8IPDqWFQlsZ6ZfqS0GdRL2KQM/LGhUjwT+NanOQOvVP4AfqnFskcWnDICrbUA9Ay6Xi0GvosJt2gvaIAE8bm8a0o5i5akc/ShE2eysXXnDLWmRp1/isuaVAeN7bdnPfS+vLLlFBRqaE5r89qtNqMHfZe8A5Uz6fyNr/YvgYP4QviAGjxealkNFTvKD2J/W63y1ltCOdw+4cpYQXBPO1XqRv6VxW+A6YNZLMrsfiMPCJyBanVSoLHCSTsBbEW+0sM61KuUxxuRHH4F0VxI4riGkWahPMNUEsBAh4DCgAAAAAAKWF3VgAAAAAAAAAAAAAAAAIAAAAAAAAAAAAQAO1BAAAAAFIvUEsBAh4DFAACAAgAKWF3ViuLKrf5AAAA0gEAAA0AAAAAAAAAAQAAAKSBIAAAAFIvbXlfc2NyaXB0LlJQSwECHgMUAAIACAApYXdW3rGbE08BAABvAwAACgAAAAAAAAABAAAApIFEAQAAX3RhcmdldHMuUlBLBQYAAAAAAwADAKMAAAC7AgAAAAA=)
+squeletton](data:application/zip;base64,UEsDBAoAAAAAAOCK8FwAAAAAAAAAAAAAAAACAAAAUi9QSwMEFAACAAgAzXH9XJCOv+IMAQAAEQIAAA0AAABSL215X3NjcmlwdC5SXZDPTsMwDMbvlfoO1qRJLSrSQAgujBMXTjxClTXeCORPiZNxQLw7TpO2jFPin+3P9mfEB/ZSBEEY4PEajtEOQTnbUDy84xCoA+kIW/iuK4A/hc/5u9TBHuZvC9unbSoHEFI2L/YYKUlmBBCUQS7fdTMQxkUbGKVRCx2cGYUPBqfUzcKV4vD2bu2WUjO5z3H7b/rrgdCfRbqJGsLPZtfBA1yxQNu2qcxjiN425TRGP3VVVz7anpSJeuq8cMY4ibqbvehYYNRqEAHZK0KUadnil0eKmr3h9i8V3vrRuxMzXiRLY/FkkuS+LJ3Z7PV+mVQ4UoIb40/k9Bk3hZfR6SlkXYz5GqTkxelly3z6L1BLAwQUAAIACADLcf1cOGBaVVIBAAChAwAACgAAAF90YXJnZXRzLlKtks1ugzAMx+9IvEPEeqAS29pyq7Z3mPoCqQEPZQQSxWETe/o5QKYeKlXaKnHwR/z3zzZaVQ7clHtwLXrapkmakBldjXl2eu4nSbVT1j+dsjn1IN6g7qBFEtpAg42oJrHWpomNuZdHUedZDb0lRVkhMutM65DIBed99KPDIMiV0livzCAJff5b/yqiWQjyxrHFsezLuA6DhEPvFH6CvohGPocWHIpSLHHGWvodj1bDkEenH7VXxEjcvIhvWa6cdbQin6eJCLPJZb7ZFaI3DeriwpY0Ko8b223O+9p6+W0kVCQ1tOf1WYNWm6nHwQfcHtSQhcS2uNqgAQ+8jNgCOpRrKKex+sDaB8z9brcrRGMIV2f7p2Z8E94D7ddiN/IhFK8Gwk3yeT6WWWaOZByIjFxvtarB48LE10L+J9i8jrOe6jbQ4d5Ah38ClfcGKm8DpQl/P1BLAQIeAwoAAAAAAOCK8FwAAAAAAAAAAAAAAAACAAAAAAAAAAAAEADtQQAAAABSL1BLAQIeAxQAAgAIAM1x/VyQjr/iDAEAABECAAANAAAAAAAAAAEAAACkgSAAAABSL215X3NjcmlwdC5SUEsBAh4DFAACAAgAy3H9XDhgWlVSAQAAoQMAAAoAAAAAAAAAAQAAAKSBVwEAAF90YXJnZXRzLlJQSwUGAAAAAAMAAwCjAAAA0QIAAAAA)
 
 To run this project, nothing is easier. Open an R console within your
 targets folder and type:
 
 ``` r
+
 library(targets)
-tar_make_future(workers=3)
+tar_make_future(workers = 3)
 ```

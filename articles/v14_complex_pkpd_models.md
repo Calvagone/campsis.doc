@@ -1,19 +1,19 @@
 # Complex PK/PD models from literature
 
-This vignette intends to demonstrate that CAMPSIS can be used to
+This vignette intends to demonstrate that Campsis can be used to
 implement almost any PK/PD model, including complex ones.
 
 ### Filgrastim PK/PD model
 
 Load the filgrastim PK/PD model from the model library as follows.
 Please note that this model was translated from NONMEM code. The
-original model file can be found
-[here](http://repository.ddmore.eu/model/DDMODEL00000077) on the DDMORE
-repository. Eventually, this model was updated with the final parameters
-from the corresponding publication ([Krzyzanski et al.,
+original model file can be found on the DDMORE repository (reference:
+DDMODEL00000077). Eventually, this model was updated with the final
+parameters from the corresponding publication ([Krzyzanski et al.,
 2010](https://pubmed.ncbi.nlm.nih.gov/20881223/)).
 
 ``` r
+
 pkpd <- model_suite$literature$filgrastim_pkpd_krzyzanski
 pkpd
 ```
@@ -176,7 +176,8 @@ pkpd
 Let’s create a simple demonstration dataset of 250 subjects:
 
 ``` r
-baseDataset <- Dataset(250) %>% 
+
+base_dataset <- Dataset(250) %>%
   add(Covariate("BAS", 0.02)) %>%
   add(Covariate("WT", UniformDistribution(50, 100))) %>%
   add(DoseAdaptation("WT*AMT")) %>% # per kilo dosing
@@ -194,27 +195,50 @@ filgrastim:
 We define the following scenarios:
 
 ``` r
-scenarios <- Scenarios() %>% 
-  add(Scenario("2.5 μg/kg SC", dataset=~.x %>% add(Bolus(time=0, amount=2.5, compartment=1, ii=24, addl=6)))) %>%
-  add(Scenario("5 μg/kg SC", dataset=~.x %>% add(Bolus(time=0, amount=5, compartment=1, ii=24, addl=6)))) %>%
-  add(Scenario("10 μg/kg SC", dataset=~.x %>% add(Bolus(time=0, amount=10, compartment=1, ii=24, addl=6))))
+
+scenarios <- Scenarios() %>%
+  add(Scenario(
+    name = "2.5 μg/kg SC",
+    dataset = ~ .x %>%
+      add(Bolus(time = 0, amount = 2.5, compartment = 1, ii = 24, addl = 6))
+  )) %>%
+  add(Scenario(
+    name = "5 μg/kg SC",
+    dataset = ~ .x %>%
+      add(Bolus(time = 0, amount = 5, compartment = 1, ii = 24, addl = 6))
+  )) %>%
+  add(Scenario(
+    name = "10 μg/kg SC",
+    dataset = ~ .x %>%
+      add(Bolus(time = 0, amount = 10, compartment = 1, ii = 24, addl = 6))
+  ))
 ```
 
 A quick simulation gives us the plasma concentration of filgrastim, as
 well as the absolute neutrophil count (ANC):
 
 ``` r
+
 library(ggplot2)
 
-results <- pkpd %>% simulate(dataset=baseDataset, scenarios=scenarios, seed=1)
-results <- results %>% dplyr::mutate(SCENARIO=factor(SCENARIO, levels=unique(SCENARIO)))
+results <- simulate(
+  model = pkpd,
+  dataset = base_dataset,
+  scenarios = scenarios,
+  outvars = "CP",
+  seed = 1
+) %>%
+  dplyr::mutate(SCENARIO = factor(SCENARIO, levels = unique(SCENARIO)))
 
-p1 <- shadedPlot(results, "CP", "SCENARIO") + facet_wrap(~SCENARIO) +
-  scale_y_log10(breaks=c(.01,.1,1,10,100)) + ylab("G-CSF Serum Concentration (ng/mL)")
-p2 <- shadedPlot(results, "A_14", "SCENARIO") + facet_wrap(~SCENARIO) + 
+p1 <- shaded_plot(results, "CP") +
+  facet_wrap(~SCENARIO) +
+  scale_y_log10(breaks = c(.01, .1, 1, 10, 100)) +
+  ylab("G-CSF Serum Concentration (ng/mL)")
+p2 <- shaded_plot(results, "A_14") +
+  facet_wrap(~SCENARIO) +
   ylab("ANC (10^3 cells/μL)")
 
-gridExtra::grid.arrange(p1, p2, nrow=2)
+gridExtra::grid.arrange(p1, p2, nrow = 2)
 ```
 
 ![](v14_complex_pkpd_models_files/figure-html/filgrastim_pkpd_model-1.png)

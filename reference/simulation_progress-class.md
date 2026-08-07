@@ -2,44 +2,44 @@
 
 Simulation progress class.
 
-## Arguments
+## Slots
 
-- replicates:
+- `replicates`:
 
   total number of replicates to simulate
 
-- scenarios:
+- `scenarios`:
 
   total number of scenarios to simulate
 
-- iterations:
+- `iterations`:
 
   total number of iterations to simulate
 
-- slices:
+- `slices`:
 
   total number of slices to simulate
 
-- replicate:
+- `replicate`:
 
   current replicate number being simulated
 
-- scenario:
+- `scenario`:
 
   current scenario number being simulated
 
-- iteration:
+- `iteration`:
 
   current iteration number being simulated
 
-- slice:
+- `slice`:
 
   current slice number being simulated
 
-- progressor:
+- `progressor`:
 
   progressr progressor
 
-- hardware:
+- `hardware`:
 
   hardware settings

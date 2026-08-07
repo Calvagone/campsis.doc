@@ -8,6 +8,7 @@ Assume the following model is used. This model is a 2-compartment model
 without absorption compartment which has been fitted on some data.
 
 ``` r
+
 model <- model_suite$testing$other$my_model1
 ```
 
@@ -15,6 +16,7 @@ It contains a variance-covariance matrix with the uncertainty on all the
 estimated parameters.
 
 ``` r
+
 model
 ```
 
@@ -53,7 +55,7 @@ model
     ## SIGMA's:
     ##   name index index2     value   fix type           se    rse%
     ## 1 PROP     1      1 0.0244587 FALSE  var 0.0008126574 3.32257
-    ## Variance-covariance matrix available (see ?getVarCov)
+    ## Variance-covariance matrix available (see ?get_var_cov)
     ## 
     ## Compartments:
     ## A_CENTRAL (CMT=1)
@@ -65,9 +67,10 @@ percentiles over time. Let’s mimic the protocol that was implemented in
 the study.
 
 ``` r
+
 ds <- Dataset(50) %>%
-  add(Infusion(time=(0:6)*24, amount=1000, compartment=1)) %>%
-  add(Observations(times=seq(0, 7*24)))
+  add(Infusion(time = (0:6) * 24, amount = 1000, compartment = 1)) %>%
+  add(Observations(times = seq(0, 7 * 24)))
 ```
 
 Let’s now simulate this model with parameter uncertainty.  
@@ -77,25 +80,32 @@ Argument `outfun` is a function that is going to be called after each
 simulation on the output data frame.
 
 ``` r
-results <- model %>% simulate(dataset=ds, replicates=10, outfun=~PI(.x, output="Y"), seed=1)
+
+results <- simulate(
+  model = model,
+  dataset = ds,
+  replicates = 10,
+  outfun = PIOutfun(variable = "Y"),
+  seed = 1
+)
 results %>% head()
 ```
 
-    ## # A tibble: 6 × 4
-    ## # Groups:   TIME [2]
-    ##   replicate  TIME metric value
-    ##       <int> <dbl> <chr>  <dbl>
-    ## 1         1     0 med     0   
-    ## 2         1     0 low     0   
-    ## 3         1     0 up      0   
-    ## 4         1     1 med     2.21
-    ## 5         1     1 low     1.51
-    ## 6         1     1 up      3.15
+    ## # A tibble: 6 × 6
+    ##   replicate   ARM variable  TIME metric value
+    ##       <int> <dbl> <chr>    <dbl> <chr>  <dbl>
+    ## 1         1     0 Y            0 low     0   
+    ## 2         1     0 Y            0 med     0   
+    ## 3         1     0 Y            0 up      0   
+    ## 4         1     0 Y            1 low     1.52
+    ## 5         1     0 Y            1 med     2.33
+    ## 6         1     0 Y            1 up      2.99
 
-Function `vpcPlot` allows to quickly visualize such results.
+Function `vpc_plot` allows to quickly visualize such results.
 
 ``` r
-vpcPlot(results)
+
+vpc_plot(results)
 ```
 
 ![](v10_replicate_study_files/figure-html/replicate_your_study_varcov%20-1.png)

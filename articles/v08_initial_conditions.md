@@ -1,12 +1,13 @@
 # Initial conditions
 
-This vignette shows how initial conditions may be used in CAMPSIS.
+This vignette shows how initial conditions may be used in Campsis.
 
 ### Init central compartment
 
 Assume the following 2-compartment model is used.
 
 ``` r
+
 model <- model_suite$nonmem$advan3_trans4
 ```
 
@@ -15,13 +16,16 @@ e.g. 1000.
 This can be achieved as follows.
 
 ``` r
-model <- model %>% add(InitialCondition(compartment=1, rhs="1000"))
+
+model <- model %>%
+  add(InitialCondition(compartment = 1, rhs = "1000"))
 ```
 
 The resulting model has now a new block `[INIT]` which describes the
 initial condition:
 
 ``` r
+
 model
 ```
 
@@ -71,15 +75,17 @@ model
 Let’s now create a dataset with observations-only.
 
 ``` r
+
 ds <- Dataset(50) %>%
-  add(Observations(times=seq(0,72, by=0.5)))
+  add(Observations(times = seq(0, 72, by = 0.5)))
 ```
 
 We can now simulate this model:
 
 ``` r
-results <- model %>% simulate(dataset=ds, seed=1)
-shadedPlot(results, "CONC")
+
+results <- simulate(model = model, dataset = ds, seed = 1)
+shaded_plot(results, "CONC")
 ```
 
 ![](v08_initial_conditions_files/figure-html/initial_condition%20-1.png)

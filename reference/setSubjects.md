@@ -1,16 +1,10 @@
 # Set the number of subjects.
 
-Set the number of subjects.
+\`r lifecycle::badge("deprecated")\`
 
 ## Usage
 
 ``` r
-setSubjects(object, x)
-
-# S4 method for class 'arm,integer'
-setSubjects(object, x)
-
-# S4 method for class 'dataset,integer'
 setSubjects(object, x)
 ```
 
@@ -27,3 +21,7 @@ setSubjects(object, x)
 ## Value
 
 the updated object
+
+## Details
+
+\`setSubjects()\` is deprecated in favor of \`set_subjects()\`.

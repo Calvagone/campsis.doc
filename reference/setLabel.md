@@ -1,16 +1,10 @@
 # Set the label.
 
-Set the label.
+\`r lifecycle::badge("deprecated")\`
 
 ## Usage
 
 ``` r
-setLabel(object, x)
-
-# S4 method for class 'arm,character'
-setLabel(object, x)
-
-# S4 method for class 'dataset,character'
 setLabel(object, x)
 ```
 
@@ -27,3 +21,7 @@ setLabel(object, x)
 ## Value
 
 the updated object
+
+## Details
+
+\`setLabel()\` is deprecated in favor of \`set_label()\`.

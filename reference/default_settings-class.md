@@ -6,15 +6,25 @@ Default settings class.
 
 - `engine`:
 
-  simulation engine, character
+  Simulation engine: `'rxode2'` or `'mrgsolve'`. Default is `NULL`
+  (unspecified). If `NULL`, `'mrgsolve'` is used first (if installed),
+  followed by `'rxode2'` (if installed).
 
 - `seed`:
 
   random seed number, integer
 
+- `replicates`:
+
+  number of replicates, integer
+
 - `outvars`:
 
   output variables, character vector
+
+- `outfuns`:
+
+  output functions, outfuns object
 
 - `disabled_variabilities`:
 
